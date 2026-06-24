@@ -89,30 +89,30 @@ class PLCController(QThread):
     def _ping_watchdog(self):
         try:
             code = self._read_plc_data(self.read_nb, 0, 2)
-            self._write_plc_ushort(0, code[0])
+            self._write_plc_int(self.write_nb, 0, code[0])
         except Exception as e:
             print(e)
             self._stop_timers()
 
     def set_engine_frequency(self, request: float):
-        self._write_plc_float(4, request)
+        self._write_plc_float(self.write_nb, 4, request)
 
     def set_wind_velocity(self, velocity: float):
-        self._write_plc_float(8, velocity)
+        self._write_plc_float(self.write_nb,8, velocity)
 
     def set_ramp_down(self, value: int):
-        self._write_plc_int(50, value)
+        self._write_plc_int(self.param_nb, 50, value)
 
     def set_ramp_up(self, value: int):
-        self._write_plc_int(48, value)
+        self._write_plc_int(self.param_nb, 48, value)
 
     def set_run_dur(self, value: int):
-        self._write_plc_int(52, value)
+        self._write_plc_int(self.param_nb, 52, value)
 
     def set_pid(self, kp: float, ti: float, td: float):
-        self._write_plc_float(2, kp, param=True)
-        self._write_plc_float(6, ti, param=True)
-        self._write_plc_float(10, td, param=True)
+        self._write_plc_float(self.param_nb,2, kp)
+        self._write_plc_float(self.param_nb,6, ti)
+        self._write_plc_float(self.param_nb,10, td)
 
     def switch_pid(self, state: bool):
         self.control_byte["PID"] = state
@@ -130,8 +130,7 @@ class PLCController(QThread):
         self.control_byte["start"] = 1
         self.control_byte["stop"] = 0
         data_short = list_to_ushort(list(self.control_byte.values()), msb_first=False)
-        self._write_plc_ushort(2, data_short)
-        cb = self._read_control_byte()
+        self._write_plc_int(self.write_nb, 2, data_short)
 
     def read_parameter_data(self) -> tuple | None:
         return self._read_plc_data(self.param_nb, 0, 114, '>h4fxB7f3h2B9fhf8h')
@@ -139,50 +138,57 @@ class PLCController(QThread):
     def stop_engine(self):
         self.control_byte["stop"] = 1
         self.control_byte["start"] = 0
+        self.set_engine_frequency(0.0)
+        self.set_wind_velocity(0.0)
         data_short = list_to_ushort(list(self.control_byte.values()), msb_first=False)
-        self._write_plc_ushort(2, data_short)
+        self._write_plc_int(self.write_nb, 2, data_short)
 
     # -------- Helper functions ---------
 
-    def _write_plc_int(self, pos: int, request: int):
+    def _write_plc_int(self, db: int, pos: int, request: int):
+        self._write_plc_data(db, pos, 2, request)
+
+    def _write_plc_float(self,db: int, pos: int, request: float):
+        self._write_plc_data(db, pos, 4, request)
+
+    def _write_plc_data(self, db: int, pos: int, size: int, request: bytes|int|float):
         if not self.connected:
             return None
 
         with self._lock:
             try:
-                buffer = bytearray(2)          # 4 byty
-                util.set_int(buffer, 0, request)  # zapíše float do bufferu na offset 0
-                self.plc.db_write(self.param_nb, pos, buffer)
+                # INT (2 bytes)
+                if isinstance(request, int):
+                    if size != 2:
+                        raise ValueError("INT requires size=2")
+                    buffer = bytearray(2)
+                    util.set_int(buffer, 0, request)
+
+                # FLOAT (4 bytes)
+                elif isinstance(request, float):
+                    if size != 4:
+                        raise ValueError("FLOAT requires size=4")
+                    buffer = bytearray(4)
+                    util.set_real(buffer, 0, request)
+
+                # BYTES / BYTEARRAY
+                elif isinstance(request, (bytes, bytearray)):
+                    if len(request) != size:
+                        raise ValueError(f"Byte request length {len(request)} != size {size}")
+                    buffer = bytearray(request)  # copy
+
+                else:
+                    raise TypeError(f"Unsupported PLC write type: {type(request)}")
+
+                self.plc.db_write(db, pos, buffer)
+
             except Exception as e:
-                print(f"[ERROR] _write_plc_int: {e}")
-
-    def _write_plc_float(self, pos: int, request: float, param: bool = False):
-        if not self.connected:
-            return None
-
-        with self._lock:
-            try:
-                buffer = bytearray(4)          # REAL = 4 byty
-                util.set_real(buffer, 0, request)  # zapíše float do bufferu na offset 0
-                self.plc.db_write(self.write_nb if not param else self.param_nb, pos, buffer)
-            except Exception as e:
-                print(f"[ERROR] _write_plc_float: {e}")
-
-    def _write_plc_ushort(self, pos: int, request: int):
-        if not self.connected:
-            return None
-
-        with self._lock:
-            try:
-                ushort_in_bytes = struct.pack('>H', request)
-                self.plc.db_write(self.write_nb, pos, bytearray(ushort_in_bytes))
-            except Exception as e:
-                print(f"[ERROR] write_logo_ushort: {e}")
+                print(f"[ERROR] _write_plc_data: {e}")
 
     def _switch_bit(self, attribute: str, state: bool):
         self.control_byte[attribute] = state
         data_short = list_to_ushort(list(self.control_byte.values()), msb_first=False)
-        self._write_plc_ushort(2, data_short)
+        self._write_plc_int(self.write_nb, 2, data_short)
 
     def _read_control_byte(self) -> dict:
         data = self._read_plc_data(self.read_nb, 2, 2, '>H')
@@ -191,16 +197,6 @@ class PLCController(QThread):
         value = data[0]
         keys = list(self.control_byte.keys())
         return {key: (value >> i) & 1 for i, key in enumerate(keys)}
-
-    def _write_plc_byte(self, pos: int, request: bytearray):
-        if not self.connected:
-            return None
-
-        with self._lock:
-            try:
-                self.plc.db_write(self.write_nb, pos, request)
-            except Exception as e:
-                print(f"[ERROR] write_logo_ushort: {e}")
 
     def _read_plc_data(self, db:int,  pos: int, size: int, frm: str = '>H'):
         if not self.connected:
@@ -217,19 +213,18 @@ class PLCController(QThread):
     def _stop_timers(self):
         self._watchdog_timer.stop()
 
-    @staticmethod
-    def byte_to_bits(byte):
-        return [(byte >> i) & 1 for i in range(7, -1, -1)]
-
     def disconnect(self):
         try:
             self.connected = False
-            self._write_plc_ushort(4, 0)  # stop engine
             self.stop_engine()
             self.plc.disconnect()
             self.quit()
         except Exception as e:
             print(e)
+
+    @staticmethod
+    def byte_to_bits(byte):
+        return [(byte >> i) & 1 for i in range(7, -1, -1)]
 
 
 if __name__ == '__main__':
