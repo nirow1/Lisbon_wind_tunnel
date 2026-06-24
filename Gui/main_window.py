@@ -1,10 +1,10 @@
 from Device_controllers.papago_controller import PapagoController
 from Gui.Views.configuration_view import ConfigurationView
 from Gui.Views.settings_view import SettingsView
-from Qt_files.Qt_python.ui_Brest_wind_tunnel import Ui_MainWindow
+from Qt_files.Qt_python.ui_wind_tunnel_main_view import Ui_MainWindow
 from Device_controllers.plc_controller import PLCController
 from PySide6.QtWidgets import QMainWindow, QLabel, QTableWidgetItem
-from Gui.Views.info_panel_view import InfoPanel
+from Gui.Views.info_view import InfoPanel
 from Gui.Charts.zoomable_chart import ZoomableChart
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon, QPixmap

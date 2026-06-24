@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'Settings_viewTjInFA.ui'
+## Form generated from reading UI file 'wind_tunnel_settings_viewFaZnSD.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'Brest_wind_tunnelkouIDL.ui'
+## Form generated from reading UI file 'wind_tunnel_main_viewZdHeYW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -151,6 +151,12 @@ class Ui_MainWindow(object):
         self.run_pg_btn.setMaximumSize(QSize(150, 35))
 
         self.horizontalLayout_3.addWidget(self.run_pg_btn)
+
+        self.drivers_pg_btn = QPushButton(self.widget)
+        self.drivers_pg_btn.setObjectName(u"drivers_pg_btn")
+        self.drivers_pg_btn.setMaximumSize(QSize(150, 30))
+
+        self.horizontalLayout_3.addWidget(self.drivers_pg_btn)
 
         self.next_params_pg_btn = QPushButton(self.widget)
         self.next_params_pg_btn.setObjectName(u"next_params_pg_btn")
@@ -1104,7 +1110,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1114,6 +1120,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.config_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.run_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Run", None))
+        self.drivers_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Drivers", None))
         self.next_params_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Next parameters", None))
         self.pid_settings_pg_btn.setText(QCoreApplication.translate("MainWindow", u"PID", None))
         self.restart_chart_btn.setText(QCoreApplication.translate("MainWindow", u"Reset chart axis", None))

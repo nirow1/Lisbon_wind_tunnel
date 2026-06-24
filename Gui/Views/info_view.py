@@ -1,7 +1,7 @@
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget
 from Device_controllers.papago_controller import PapagoController
-from Qt_files.Qt_python.ui_Info_panel import Ui_Form
+from Qt_files.Qt_python.ui_wind_tunnel_Info_view import Ui_Form
 from Device_controllers.plc_controller import PLCController
 
 class InfoPanel(QWidget):

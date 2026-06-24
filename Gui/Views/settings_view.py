@@ -2,7 +2,7 @@ from threading import Thread
 from PySide6.QtCore import Signal, Qt
 from PySide6.QtWidgets import QWidget, QTableWidgetItem
 from Device_controllers.plc_controller import PLCController
-from Qt_files.Qt_python.ui_Settings_view import Ui_Form
+from Qt_files.Qt_python.ui_wind_tunnel_settings_view import Ui_Form
 
 
 class SettingsView(QWidget):

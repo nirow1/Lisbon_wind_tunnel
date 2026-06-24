@@ -4,10 +4,9 @@ from datetime import datetime
 from PySide6.QtCore import Signal, QSize, QTimer
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QWidget, QFileDialog
-
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.plc_controller import PLCController
-from Qt_files.Qt_python.ui_Configuration_view import Ui_Form
+from Qt_files.Qt_python.ui_wind_tunnel_config_view import Ui_Form
 from Utils.number_validator import FloatValidator, IntValidator
 
 

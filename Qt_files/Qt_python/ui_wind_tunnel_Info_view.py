@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'Info_panelRGosED.ui'
+## Form generated from reading UI file 'wind_tunnel_Info_viewekRLYm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##

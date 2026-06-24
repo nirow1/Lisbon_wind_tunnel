@@ -238,6 +238,19 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="drivers_pg_btn">
+                  <property name="maximumSize">
+                   <size>
+                    <width>150</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Drivers</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="next_params_pg_btn">
                   <property name="minimumSize">
                    <size>
@@ -275,7 +288,7 @@ QPushButton:pressed {
              <item>
               <widget class="QStackedWidget" name="stackedWidget">
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="wind_vel_pg">
                 <layout class="QVBoxLayout" name="verticalLayout_12">
