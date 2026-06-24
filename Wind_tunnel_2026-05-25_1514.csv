@@ -1,0 +1,2 @@
+time,P temp [°C],P hum [%],A pressure,Velocity [m/s],Velocity max-min[m/s],Temp [°C],Temp max-min[°C],pressure [Pa],pressure max-min[Pa],frequency [Hz],èas
+00:00:00.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15:
