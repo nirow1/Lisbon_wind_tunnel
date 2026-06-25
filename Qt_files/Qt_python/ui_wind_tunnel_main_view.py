@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_main_viewZdHeYW.ui'
+## Form generated from reading UI file 'wind_tunnel_main_viewXtRVRy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1380, 857)
+        MainWindow.resize(1897, 857)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setMinimumSize(QSize(0, 0))
@@ -157,6 +157,18 @@ class Ui_MainWindow(object):
         self.drivers_pg_btn.setMaximumSize(QSize(150, 30))
 
         self.horizontalLayout_3.addWidget(self.drivers_pg_btn)
+
+        self.scales_pg_btn = QPushButton(self.widget)
+        self.scales_pg_btn.setObjectName(u"scales_pg_btn")
+        self.scales_pg_btn.setMaximumSize(QSize(150, 30))
+
+        self.horizontalLayout_3.addWidget(self.scales_pg_btn)
+
+        self.pressures_pg_btn = QPushButton(self.widget)
+        self.pressures_pg_btn.setObjectName(u"pressures_pg_btn")
+        self.pressures_pg_btn.setMaximumSize(QSize(150, 30))
+
+        self.horizontalLayout_3.addWidget(self.pressures_pg_btn)
 
         self.next_params_pg_btn = QPushButton(self.widget)
         self.next_params_pg_btn.setObjectName(u"next_params_pg_btn")
@@ -1121,6 +1133,8 @@ class Ui_MainWindow(object):
         self.config_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.run_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Run", None))
         self.drivers_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Drivers", None))
+        self.scales_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Scales", None))
+        self.pressures_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Pressures", None))
         self.next_params_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Next parameters", None))
         self.pid_settings_pg_btn.setText(QCoreApplication.translate("MainWindow", u"PID", None))
         self.restart_chart_btn.setText(QCoreApplication.translate("MainWindow", u"Reset chart axis", None))

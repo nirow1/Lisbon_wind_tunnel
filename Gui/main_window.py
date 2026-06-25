@@ -1,6 +1,7 @@
 from Device_controllers.papago_controller import PapagoController
 from Gui.Views.configuration_view import ConfigurationView
 from Gui.Views.settings_view import SettingsView
+from Gui.Views.traverser_view import TraverserView
 from Qt_files.Qt_python.ui_wind_tunnel_main_view import Ui_MainWindow
 from Device_controllers.plc_controller import PLCController
 from PySide6.QtWidgets import QMainWindow, QLabel, QTableWidgetItem
@@ -45,6 +46,9 @@ class MainWindow(QMainWindow):
         self.settings_pg = SettingsView(self.plc)
         self.ui.stackedWidget.addWidget(self.settings_pg)
 
+        self.traverser_view = TraverserView()
+        self.ui.stackedWidget.addWidget(self.traverser_view)
+
         self._handle_emits()
         self._bind_buttons()
 
@@ -77,6 +81,7 @@ class MainWindow(QMainWindow):
         self.ui.config_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.config_panel))
         self.ui.run_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.wind_vel_pg))
         self.ui.next_params_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.next_params_pg))
+        self.ui.drivers_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.traverser_view))
 
         self.ui.log_in_btn.clicked.connect(self._check_login)
         self.ui.password_le.setEchoMode(self.ui.password_le.EchoMode.Password)

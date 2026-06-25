@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1380</width>
+    <width>1897</width>
     <height>857</height>
    </rect>
   </property>
@@ -247,6 +247,32 @@ QPushButton:pressed {
                   </property>
                   <property name="text">
                    <string>Drivers</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="scales_pg_btn">
+                  <property name="maximumSize">
+                   <size>
+                    <width>150</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Scales</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pressures_pg_btn">
+                  <property name="maximumSize">
+                   <size>
+                    <width>150</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Pressures</string>
                   </property>
                  </widget>
                 </item>
