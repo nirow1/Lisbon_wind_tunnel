@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewZWlabZ.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewLjlnBY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QVBoxLayout, QWidget)
+    QLineEdit, QPushButton, QSizePolicy, QStackedWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -427,29 +427,6 @@ class Ui_Form(object):
 
         self.verticalLayout_6.addWidget(self.stackedWidget)
 
-        self.widget_49 = QWidget(self.widget_13)
-        self.widget_49.setObjectName(u"widget_49")
-        self.horizontalLayout_33 = QHBoxLayout(self.widget_49)
-        self.horizontalLayout_33.setObjectName(u"horizontalLayout_33")
-        self.gerlitz_logo_lbl = QLabel(self.widget_49)
-        self.gerlitz_logo_lbl.setObjectName(u"gerlitz_logo_lbl")
-        self.gerlitz_logo_lbl.setMinimumSize(QSize(150, 50))
-
-        self.horizontalLayout_33.addWidget(self.gerlitz_logo_lbl)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_33.addItem(self.horizontalSpacer)
-
-        self.j4_logo_lbl = QLabel(self.widget_49)
-        self.j4_logo_lbl.setObjectName(u"j4_logo_lbl")
-        self.j4_logo_lbl.setMinimumSize(QSize(150, 50))
-
-        self.horizontalLayout_33.addWidget(self.j4_logo_lbl)
-
-
-        self.verticalLayout_6.addWidget(self.widget_49)
-
 
         self.verticalLayout.addWidget(self.widget_13)
 
@@ -490,7 +467,5 @@ class Ui_Form(object):
         self.set_y_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_23.setText(QCoreApplication.translate("Form", u"Z:", None))
         self.set_z_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.gerlitz_logo_lbl.setText("")
-        self.j4_logo_lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
     # retranslateUi
 

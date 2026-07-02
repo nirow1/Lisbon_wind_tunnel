@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_main_viewXtRVRy.ui'
+## Form generated from reading UI file 'wind_tunnel_main_viewwTdbcZ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -15,10 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QStackedWidget, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
+    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -146,12 +145,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.config_pg_btn)
 
-        self.run_pg_btn = QPushButton(self.widget)
-        self.run_pg_btn.setObjectName(u"run_pg_btn")
-        self.run_pg_btn.setMaximumSize(QSize(150, 35))
-
-        self.horizontalLayout_3.addWidget(self.run_pg_btn)
-
         self.drivers_pg_btn = QPushButton(self.widget)
         self.drivers_pg_btn.setObjectName(u"drivers_pg_btn")
         self.drivers_pg_btn.setMaximumSize(QSize(150, 30))
@@ -188,151 +181,6 @@ class Ui_MainWindow(object):
 
         self.stackedWidget = QStackedWidget(self.widget_202)
         self.stackedWidget.setObjectName(u"stackedWidget")
-        self.wind_vel_pg = QWidget()
-        self.wind_vel_pg.setObjectName(u"wind_vel_pg")
-        self.verticalLayout_12 = QVBoxLayout(self.wind_vel_pg)
-        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.verticalLayout_12.setContentsMargins(2, -1, 2, -1)
-        self.widget_18 = QWidget(self.wind_vel_pg)
-        self.widget_18.setObjectName(u"widget_18")
-        sizePolicy1.setHeightForWidth(self.widget_18.sizePolicy().hasHeightForWidth())
-        self.widget_18.setSizePolicy(sizePolicy1)
-        self.horizontalLayout_23 = QHBoxLayout(self.widget_18)
-        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
-        self.horizontalLayout_23.setContentsMargins(1, 1, 1, 1)
-        self.widget_38 = QWidget(self.widget_18)
-        self.widget_38.setObjectName(u"widget_38")
-        self.scale_chart = QGridLayout(self.widget_38)
-        self.scale_chart.setObjectName(u"scale_chart")
-        self.scale_chart.setContentsMargins(0, 0, 0, 0)
-        self.widget_4 = QWidget(self.widget_38)
-        self.widget_4.setObjectName(u"widget_4")
-        self.widget_4.setMinimumSize(QSize(0, 40))
-        self.widget_4.setMaximumSize(QSize(16777215, 40))
-        self.horizontalLayout = QHBoxLayout(self.widget_4)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 5, 0, 0)
-        self.widget_6 = QWidget(self.widget_4)
-        self.widget_6.setObjectName(u"widget_6")
-
-        self.horizontalLayout.addWidget(self.widget_6)
-
-        self.restart_chart_btn = QPushButton(self.widget_4)
-        self.restart_chart_btn.setObjectName(u"restart_chart_btn")
-        self.restart_chart_btn.setMaximumSize(QSize(150, 35))
-
-        self.horizontalLayout.addWidget(self.restart_chart_btn)
-
-        self.widget_8 = QWidget(self.widget_4)
-        self.widget_8.setObjectName(u"widget_8")
-        self.widget_8.setMaximumSize(QSize(16777, 16777215))
-
-        self.horizontalLayout.addWidget(self.widget_8)
-
-
-        self.scale_chart.addWidget(self.widget_4, 1, 0, 1, 1)
-
-        self.widget_2 = QWidget(self.widget_38)
-        self.widget_2.setObjectName(u"widget_2")
-        self.widget_2.setMaximumSize(QSize(16777215, 200))
-        self.verticalLayout_2 = QVBoxLayout(self.widget_2)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.widget_5 = QWidget(self.widget_2)
-        self.widget_5.setObjectName(u"widget_5")
-        self.widget_5.setMinimumSize(QSize(0, 40))
-        self.widget_5.setMaximumSize(QSize(16777215, 50))
-        self.horizontalLayout_8 = QHBoxLayout(self.widget_5)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.widget_5)
-        self.label.setObjectName(u"label")
-
-        self.horizontalLayout_8.addWidget(self.label)
-
-        self.widget_7 = QWidget(self.widget_5)
-        self.widget_7.setObjectName(u"widget_7")
-
-        self.horizontalLayout_8.addWidget(self.widget_7)
-
-
-        self.verticalLayout_2.addWidget(self.widget_5)
-
-        self.tableWidget = QTableWidget(self.widget_2)
-        if (self.tableWidget.columnCount() < 6):
-            self.tableWidget.setColumnCount(6)
-        __qtablewidgetitem = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        __qtablewidgetitem4 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.horizontalHeader().setVisible(True)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(145)
-        self.tableWidget.verticalHeader().setVisible(False)
-        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
-
-        self.verticalLayout_2.addWidget(self.tableWidget)
-
-        self.widget_9 = QWidget(self.widget_2)
-        self.widget_9.setObjectName(u"widget_9")
-        self.horizontalLayout_11 = QHBoxLayout(self.widget_9)
-        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
-        self.start_tunnel_btn = QPushButton(self.widget_9)
-        self.start_tunnel_btn.setObjectName(u"start_tunnel_btn")
-        self.start_tunnel_btn.setMaximumSize(QSize(120, 40))
-
-        self.horizontalLayout_11.addWidget(self.start_tunnel_btn)
-
-        self.widget_27 = QWidget(self.widget_9)
-        self.widget_27.setObjectName(u"widget_27")
-        self.widget_27.setMinimumSize(QSize(0, 44))
-        self.widget_27.setMaximumSize(QSize(125, 16777215))
-        self.widget_27.setStyleSheet(u"QPushButton {\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid #FF3636;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(230, 230, 230);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #FF2626;\n"
-"}")
-        self.horizontalLayout_10 = QHBoxLayout(self.widget_27)
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
-        self.stop_tunnel_btn = QPushButton(self.widget_27)
-        self.stop_tunnel_btn.setObjectName(u"stop_tunnel_btn")
-        self.stop_tunnel_btn.setEnabled(False)
-        self.stop_tunnel_btn.setMaximumSize(QSize(120, 40))
-
-        self.horizontalLayout_10.addWidget(self.stop_tunnel_btn)
-
-
-        self.horizontalLayout_11.addWidget(self.widget_27)
-
-
-        self.verticalLayout_2.addWidget(self.widget_9)
-
-
-        self.scale_chart.addWidget(self.widget_2, 0, 0, 1, 1)
-
-
-        self.horizontalLayout_23.addWidget(self.widget_38)
-
-
-        self.verticalLayout_12.addWidget(self.widget_18)
-
-        self.stackedWidget.addWidget(self.wind_vel_pg)
         self.next_params_pg = QWidget()
         self.next_params_pg.setObjectName(u"next_params_pg")
         self.horizontalLayout_12 = QHBoxLayout(self.next_params_pg)
@@ -1122,7 +970,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1131,28 +979,11 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.config_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.run_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Run", None))
         self.drivers_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Drivers", None))
         self.scales_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Scales", None))
         self.pressures_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Pressures", None))
         self.next_params_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Next parameters", None))
         self.pid_settings_pg_btn.setText(QCoreApplication.translate("MainWindow", u"PID", None))
-        self.restart_chart_btn.setText(QCoreApplication.translate("MainWindow", u"Reset chart axis", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
-        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Velocity [m/s]", None));
-        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Ferequency [Hz]", None));
-        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Ramp on", None));
-        ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Ramp down [s]", None));
-        ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Ramp up [s]", None));
-        ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Run duration [s]", None));
-        self.start_tunnel_btn.setText(QCoreApplication.translate("MainWindow", u"On", None))
-        self.stop_tunnel_btn.setText(QCoreApplication.translate("MainWindow", u"Off", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Measurements", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Temperature input RAW:", None))
         self.temp_in_raw_lbl.setText(QCoreApplication.translate("MainWindow", u"0.00", None))

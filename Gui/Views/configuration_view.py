@@ -2,10 +2,11 @@ import csv
 import os
 from datetime import datetime
 from PySide6.QtCore import Signal, QSize, QTimer
-from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget, QFileDialog
 from Device_controllers.papago_controller import PapagoController
-from Device_controllers.plc_controller import PLCController
+from Device_controllers.tunnel_plc_controller import TunnelPLCController
+from Gui.Charts.zoomable_chart import ZoomableChart
 from Qt_files.Qt_python.ui_wind_tunnel_config_view import Ui_Form
 from Utils.number_validator import FloatValidator, IntValidator
 
@@ -14,18 +15,18 @@ class ConfigurationView(QWidget):
     RETURN_TO_MAIN = Signal()
     SETTINGS_CHANGES = Signal(dict)
 
-    def __init__(self, plc: PLCController, papago: PapagoController):
+    def __init__(self, plc: TunnelPLCController, papago: PapagoController):
         QWidget.__init__(self)
         self.concentric: bool = False
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-        self.data_to_save = {"time": "00:00:00", "P temp [°C]": 0.0, "P hum [%]": 0.0,"A pressure": 0.0,
-                             "Velocity [m/s]": 0.0, "Velocity max-min[m/s]": 0.0,
-                             "Temp [°C]": 0.0, "Temp max-min[°C]":0.0,
-                             "pressure [Pa]": 0.0, "pressure max-min[Pa]": 0.0,
-                             "frequency [Hz]": 0.0}
+        self.data_to_save = {"time": "00:00:00", "Velocity [m/s]": 0.0, "Velocity max-min[m/s]": 0.0,
+                             "Temp [°C]": 0.0, "Temp max-min[°C]":0.0, "pressure [Pa]": 0.0,
+                             "pressure max-min[Pa]": 0.0, "frequency [Hz]": 0.0}
+
         self.configuration_data = {"ramp_up": 0, "ramp_down": 0, "run_duration": 0, "frequency": 0.0, "velocity": 0.0, "pid": False, "control": False}
+
         self.reset_save_file = False
         self.save_timer = QTimer()
         self.save_timer.timeout.connect(self._save_data)
@@ -39,13 +40,10 @@ class ConfigurationView(QWidget):
         # Validators
         self.ui.set_velocity_le.setValidator(self.float_validator)
         self.ui.set_frequency_le.setValidator(self.float_validator)
-        self.ui.ramp_up_le.setValidator(self.int_validator)
-        self.ui.ramp_down_le.setValidator(self.int_validator)
-        self.ui.run_duration_le.setValidator(self.int_validator)
 
         self.regulation: bool = False
 
-        self.plc = plc
+        self.tunnel_plc = plc
         self.papago = papago
 
         self._init_graphical_changes()
@@ -56,19 +54,21 @@ class ConfigurationView(QWidget):
         self.ui.change_dir_btn.setIcon(QIcon("./App_data/dir_icon.png"))
         self.ui.change_dir_btn.setIconSize(QSize(54, 30))
 
-        self.ui.ramp_img_lbl.setFixedSize(QSize(500, 250))
-        self.ui.ramp_img_lbl.setScaledContents(True)
-        self.ui.ramp_img_lbl.setPixmap(QPixmap("./App_data/vykres_rampa.png"))
+        # charts setup block
+        self.chart = ZoomableChart(
+            name="",
+            x_axis_seconds=600,
+            y_axis=(0, 50),
+            line_name=["Wind velocity[m/s]", "Wind temperature [°C]"],
+            line_count=2
+        )
+
+        self.ui.scale_chart.addWidget(self.chart)
 
     def _bind_buttons(self):
         # saving handling
-
         self.ui.change_dir_btn.clicked.connect(self._open_dir_dialog)
         self.ui.set_name_btn.clicked.connect(self._set_save_name)
-
-        self.ui.ramp_up_btn.clicked.connect(self._set_rump_up)
-        self.ui.ramp_down_btn.clicked.connect(self._set_rump_down)
-        self.ui.run_duration_btn.clicked.connect(self._set_run_duration)
 
         self.ui.set_velocity_rb.clicked.connect(self._set_velocity_mode)
         self.ui.set_frequency_rb.clicked.connect(self._set_frequency_mode)
@@ -76,11 +76,15 @@ class ConfigurationView(QWidget):
         self.ui.set_frequency_le.editingFinished.connect(self._set_frequency_value)
         self.ui.set_velocity_le.editingFinished.connect(self._set_velocity_value)
 
-        self.ui.ramp_chb.clicked.connect(self._switch_ramp)
+        self.ui.start_tunnel_btn.clicked.connect(self.start_tunnel)
+        self.ui.stop_tunnel_btn.clicked.connect(self.stop_tunnel)
+
+        self.ui.restart_chart_btn.clicked.connect(self.chart.reset_axis)
 
     def _bind_emits(self):
-        self.plc.PLC_DATA.connect(self._handle_plc_data)
+        self.tunnel_plc.PLC_DATA.connect(self._handle_plc_data)
         self.papago.PAPAGO_DATA.connect(self._handle_papago_data)
+        self.tunnel_plc.PLC_CONNECTED.connect(self.set_available)
 
     # Data allocation block
     def _handle_papago_data(self, papago_data: dict):
@@ -90,6 +94,7 @@ class ConfigurationView(QWidget):
             self.data_to_save["A pressure"] = papago_data.get("pressure")
 
     def _handle_plc_data(self, plc_data: dict):
+        self.chart.update_chart([plc_data.get("wind_velocity"), plc_data.get("average_temp")])
         if self.saving:
             self.data_to_save["Velocity [m/s]"] = plc_data.get("wind_velocity")
             self.data_to_save["Velocity max-min[m/s]"] = plc_data.get("wind_velocity_maxmin")
@@ -99,14 +104,53 @@ class ConfigurationView(QWidget):
             self.data_to_save["pressure max-min[Pa]"] = plc_data.get("pressure_maxmin")
             self.data_to_save["frequency [Hz]"] = plc_data.get("engine_rotations")
 
+    def start_tunnel(self):
+        config = self.configuration_data
+        self.tunnel_plc.switch_pid(config.get("pid"))
+        if not config.get("pid"):
+            self.tunnel_plc.set_wind_velocity(config.get("velocity"))
+        else:
+            self.tunnel_plc.set_engine_frequency(config.get("frequency"))
+
+        self.tunnel_plc.set_ramp_up(config.get("ramp_up"))
+        self.tunnel_plc.set_ramp_down(config.get("ramp_down"))
+        self.tunnel_plc.set_run_dur(config.get("run_duration"))
+        self.start_saving()
+        self.tunnel_plc.switch_control(config.get("control"))
+        self.tunnel_plc.start_engine()
+
+        self.ui.start_tunnel_btn.setEnabled(False)
+        self.ui.stop_tunnel_btn.setEnabled(True)
+
+    def stop_tunnel(self):
+        self.tunnel_plc.switch_pid(False)
+        self.tunnel_plc.set_wind_velocity(0)
+        self.tunnel_plc.set_engine_frequency(0)
+        self.tunnel_plc.switch_control(False)
+        self.tunnel_plc.set_ramp_up(0)
+        self.tunnel_plc.set_ramp_down(0)
+        self.tunnel_plc.set_run_dur(0)
+        self.tunnel_plc.stop_engine()
+        self.stop_saving()
+        self.ui.start_tunnel_btn.setEnabled(True)
+        self.ui.stop_tunnel_btn.setEnabled(False)
+
+    def reset_gui_after_external_stop(self):
+        self.stop_saving()
+        self.ui.start_tunnel_btn.setEnabled(True)
+        self.ui.stop_tunnel_btn.setEnabled(False)
+
+    def set_available(self, state: bool):
+        if self.ui.stop_tunnel_btn.isEnabled():
+            self.stop_tunnel()
+        self.ui.start_tunnel_btn.setEnabled(state)
+
     # Setting block
     def _update_configuration(self, key: str, value):
         self.configuration_data[key] = value
         self.SETTINGS_CHANGES.emit(self.configuration_data)
 
     def _set_velocity_mode(self):
-        self.ui.set_velocity_rb.setChecked(True)
-        self.ui.set_frequency_rb.setChecked(False)
         self._update_configuration("pid", False)
 
     def _set_velocity_value(self):
@@ -114,31 +158,11 @@ class ConfigurationView(QWidget):
         self._update_configuration("velocity", req_velocity)
 
     def _set_frequency_mode(self):
-        self.ui.set_velocity_rb.setChecked(False)
-        self.ui.set_frequency_rb.setChecked(True)
         self._update_configuration("pid", True)
 
     def _set_frequency_value(self):
         req_frequency = float(self.ui.set_frequency_le.text())
         self._update_configuration("frequency", req_frequency)
-
-    def _set_rump_up(self):
-        ramp_up = 0 if self.ui.ramp_up_le.text() == "" else int(self.ui.ramp_up_le.text())
-        self._update_configuration("ramp_up", ramp_up)
-
-    def _set_rump_down(self):
-        ramp_down = 0 if self.ui.ramp_down_le.text() == "" else int(self.ui.ramp_down_le.text())
-        self._update_configuration("ramp_down", ramp_down)
-
-    def _set_run_duration(self):
-        run_dur = 0 if self.ui.run_duration_le.text() == "" else int(self.ui.run_duration_le.text())
-        self._update_configuration("run_duration", run_dur)
-
-    def _switch_ramp(self):
-        self._update_configuration("control", self.ui.ramp_chb.isChecked())
-
-    def get_configuration(self)->dict:
-        return self.configuration_data
 
     def enable_setting_velocity(self, concentric: bool):
         self.ui.set_velocity_le.setEnabled(concentric)
@@ -189,10 +213,6 @@ class ConfigurationView(QWidget):
                 writer.writerow(self.data_to_save.keys())
             writer.writerow(self.data_to_save.values())
         self.save_count += 1
-
-    def switch_ramp_off(self):
-        self.ui.ramp_chb.setChecked(False)
-        self._update_configuration("control", False)
 
     def _set_save_name(self):
         self.save_file_name = self.ui.file_name_le.text()
