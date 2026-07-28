@@ -81,8 +81,6 @@ class MainWindow(QMainWindow):
         self.ui.log_in_btn.clicked.connect(self._check_login)
         self.ui.password_le.setEchoMode(self.ui.password_le.EchoMode.Password)
 
-        self.info_panel.ui.stop_tunnel_btn.clicked.connect(self.config_view.stop_tunnel)
-
     def _handle_emits(self):
         self.settings_pg.RETURN_TO_MAIN.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.config_view))
 
@@ -91,8 +89,6 @@ class MainWindow(QMainWindow):
         self.tunnel_plc.CONTROL_BYTE.connect(self._handle_control_byte_data)
         self.tunnel_plc.DRIVER_DATA.connect(self._handle_driver_data)
         self.tunnel_plc.SAFETY_DIAGNOSTICS.connect(self._handle_safety_diagnostics)
-
-        self.info_panel.STOP_TUNNEL.connect(self.config_view.deselect_radiobuttons)
 
     def _handle_plc_data(self, plc_data: dict):
         self.ui.temp_in_raw_lbl.setText(str(plc_data.get("temp_input_filtered")))
@@ -106,7 +102,7 @@ class MainWindow(QMainWindow):
         self.change_led(self.ui.led_3, "red", status_data.get("e-stop"))
         self.change_led(self.ui.led_4, "red", status_data.get("drive_error"))
 
-        self.config_view.set_available(status_data.get("rdy"))
+        self.info_panel.set_available(status_data.get("rdy"))
 
     def _handle_control_byte_data(self, control_byte_data: dict):
         if control_byte_data == self.control_byte:
@@ -124,7 +120,7 @@ class MainWindow(QMainWindow):
         self.tunnel_plc.control_byte.update(control_byte_data)
 
         if "start" in turned_off:
-            self.config_view.reset_gui_after_external_stop()
+            self.info_panel.reset_gui_after_external_stop()
 
     def _handle_driver_data(self, fan_params: dict):
         self.ui.driver_status_lbl.setText(str(fan_params.get("driver_status")))
@@ -144,9 +140,6 @@ class MainWindow(QMainWindow):
             self.ui.user_name_le.setText("")
             self.ui.password_le.setText("")
             self.ui.stackedWidget.setCurrentWidget(self.settings_pg)
-
-    def _zero_values_of_all_measurements(self):
-        pass
 
     def on_app_exit(self):
         self.tunnel_plc.disconnect()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_Info_viewHoPdeM.ui'
+## Form generated from reading UI file 'wind_tunnel_Info_viewbWpZoA.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -381,7 +381,7 @@ class Ui_Form(object):
         self.wind_velocity_lbl = QLabel(self.widget_13)
         self.wind_velocity_lbl.setObjectName(u"wind_velocity_lbl")
         self.wind_velocity_lbl.setMinimumSize(QSize(140, 0))
-        self.wind_velocity_lbl.setMaximumSize(QSize(16777215, 16777215))
+        self.wind_velocity_lbl.setMaximumSize(QSize(16777215, 70))
         self.wind_velocity_lbl.setStyleSheet(u"")
         self.wind_velocity_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -396,7 +396,7 @@ class Ui_Form(object):
         self.average_temp_lbl = QLabel(self.widget_13)
         self.average_temp_lbl.setObjectName(u"average_temp_lbl")
         self.average_temp_lbl.setMinimumSize(QSize(140, 0))
-        self.average_temp_lbl.setMaximumSize(QSize(16777215, 16777215))
+        self.average_temp_lbl.setMaximumSize(QSize(16777215, 70))
         self.average_temp_lbl.setStyleSheet(u"")
         self.average_temp_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -450,7 +450,7 @@ class Ui_Form(object):
         self.frequency_lbl = QLabel(self.widget_3)
         self.frequency_lbl.setObjectName(u"frequency_lbl")
         self.frequency_lbl.setMinimumSize(QSize(140, 40))
-        self.frequency_lbl.setMaximumSize(QSize(16777215, 16777215))
+        self.frequency_lbl.setMaximumSize(QSize(16777215, 70))
         self.frequency_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_4.addWidget(self.frequency_lbl)
@@ -464,7 +464,7 @@ class Ui_Form(object):
         self.pressure_lbl = QLabel(self.widget_3)
         self.pressure_lbl.setObjectName(u"pressure_lbl")
         self.pressure_lbl.setMinimumSize(QSize(140, 0))
-        self.pressure_lbl.setMaximumSize(QSize(16777215, 16777215))
+        self.pressure_lbl.setMaximumSize(QSize(16777215, 70))
         self.pressure_lbl.setStyleSheet(u"")
         self.pressure_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -526,11 +526,11 @@ class Ui_Form(object):
         self.widget_19.setObjectName(u"widget_19")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_19)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.pushButton = QPushButton(self.widget_19)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMaximumSize(QSize(125, 40))
+        self.start_tunnel_btn = QPushButton(self.widget_19)
+        self.start_tunnel_btn.setObjectName(u"start_tunnel_btn")
+        self.start_tunnel_btn.setMaximumSize(QSize(125, 40))
 
-        self.horizontalLayout_6.addWidget(self.pushButton)
+        self.horizontalLayout_6.addWidget(self.start_tunnel_btn)
 
         self.widget_16 = QWidget(self.widget_19)
         self.widget_16.setObjectName(u"widget_16")
@@ -638,7 +638,7 @@ class Ui_Form(object):
         self.set_frequency_le.setInputMask("")
         self.set_frequency_le.setText("")
         self.set_frequency_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-100", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"Start", None))
+        self.start_tunnel_btn.setText(QCoreApplication.translate("Form", u"Start", None))
         self.stop_tunnel_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
     # retranslateUi
 
