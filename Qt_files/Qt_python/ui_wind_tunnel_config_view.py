@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_config_viewJRFsSj.ui'
+## Form generated from reading UI file 'wind_tunnel_config_viewClKKYt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -15,11 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QRadioButton, QSizePolicy, QVBoxLayout,
-    QWidget)
-
-from Gui.Custom_widgets.toggle import AnimatedToggle
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
+    QPushButton, QSizePolicy, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -88,235 +86,151 @@ class Ui_Form(object):
         self.widget_2.setObjectName(u"widget_2")
         self.verticalLayout_2 = QVBoxLayout(self.widget_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.widget_3 = QWidget(self.widget_2)
-        self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setMaximumSize(QSize(16777215, 117))
-        self.horizontalLayout_6 = QHBoxLayout(self.widget_3)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(5, 5, 5, 5)
-        self.widget_8 = QWidget(self.widget_3)
-        self.widget_8.setObjectName(u"widget_8")
-        self.widget_8.setMinimumSize(QSize(0, 100))
-        self.widget_8.setMaximumSize(QSize(16777215, 120))
-        self.widget_8.setStyleSheet(u"")
-        self.verticalLayout_5 = QVBoxLayout(self.widget_8)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.widget_9 = QWidget(self.widget_8)
-        self.widget_9.setObjectName(u"widget_9")
-        self.horizontalLayout_8 = QHBoxLayout(self.widget_9)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.dir_path_line = QLineEdit(self.widget_9)
-        self.dir_path_line.setObjectName(u"dir_path_line")
-        self.dir_path_line.setMinimumSize(QSize(0, 30))
-        self.dir_path_line.setReadOnly(True)
-
-        self.horizontalLayout_8.addWidget(self.dir_path_line)
-
-        self.change_dir_btn = QPushButton(self.widget_9)
-        self.change_dir_btn.setObjectName(u"change_dir_btn")
-        self.change_dir_btn.setMaximumSize(QSize(30, 30))
-        self.change_dir_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_8.addWidget(self.change_dir_btn)
-
-
-        self.verticalLayout_5.addWidget(self.widget_9)
-
-        self.widget_10 = QWidget(self.widget_8)
-        self.widget_10.setObjectName(u"widget_10")
-        self.horizontalLayout_5 = QHBoxLayout(self.widget_10)
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.file_name_le = QLineEdit(self.widget_10)
-        self.file_name_le.setObjectName(u"file_name_le")
-        self.file_name_le.setEnabled(True)
-        self.file_name_le.setMinimumSize(QSize(0, 30))
-        self.file_name_le.setMaximumSize(QSize(200, 16777215))
-        self.file_name_le.setReadOnly(False)
-
-        self.horizontalLayout_5.addWidget(self.file_name_le)
-
-        self.set_name_btn = QPushButton(self.widget_10)
-        self.set_name_btn.setObjectName(u"set_name_btn")
-        self.set_name_btn.setMinimumSize(QSize(115, 30))
-        self.set_name_btn.setMaximumSize(QSize(115, 30))
-
-        self.horizontalLayout_5.addWidget(self.set_name_btn)
-
-        self.widget_11 = QWidget(self.widget_10)
-        self.widget_11.setObjectName(u"widget_11")
-
-        self.horizontalLayout_5.addWidget(self.widget_11)
-
-        self.save_timer_le = QLineEdit(self.widget_10)
-        self.save_timer_le.setObjectName(u"save_timer_le")
-        self.save_timer_le.setMinimumSize(QSize(0, 30))
-        self.save_timer_le.setMaximumSize(QSize(80, 16777215))
-
-        self.horizontalLayout_5.addWidget(self.save_timer_le)
-
-        self.save_timer_chb = AnimatedToggle(self.widget_10)
-        self.save_timer_chb.setObjectName(u"save_timer_chb")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.save_timer_chb.sizePolicy().hasHeightForWidth())
-        self.save_timer_chb.setSizePolicy(sizePolicy)
-        self.save_timer_chb.setMinimumSize(QSize(60, 0))
-        self.save_timer_chb.setMaximumSize(QSize(60, 16777215))
-
-        self.horizontalLayout_5.addWidget(self.save_timer_chb)
-
-        self.label_2 = QLabel(self.widget_10)
-        self.label_2.setObjectName(u"label_2")
-
-        self.horizontalLayout_5.addWidget(self.label_2)
-
-
-        self.verticalLayout_5.addWidget(self.widget_10)
-
-
-        self.horizontalLayout_6.addWidget(self.widget_8)
-
-
-        self.verticalLayout_2.addWidget(self.widget_3)
-
-        self.widget = QWidget(self.widget_2)
-        self.widget.setObjectName(u"widget")
-        self.widget.setMaximumSize(QSize(16777215, 50))
-        self.horizontalLayout = QHBoxLayout(self.widget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(1, 1, 1, 1)
-        self.widget_20 = QWidget(self.widget)
-        self.widget_20.setObjectName(u"widget_20")
-
-        self.horizontalLayout.addWidget(self.widget_20)
-
-        self.set_frequency_rb = QRadioButton(self.widget)
-        self.set_frequency_rb.setObjectName(u"set_frequency_rb")
-        self.set_frequency_rb.setMinimumSize(QSize(200, 0))
-        self.set_frequency_rb.setCheckable(True)
-
-        self.horizontalLayout.addWidget(self.set_frequency_rb)
-
-        self.set_frequency_le = QLineEdit(self.widget)
-        self.set_frequency_le.setObjectName(u"set_frequency_le")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.set_frequency_le.sizePolicy().hasHeightForWidth())
-        self.set_frequency_le.setSizePolicy(sizePolicy1)
-        self.set_frequency_le.setMaximumSize(QSize(200, 30))
-        self.set_frequency_le.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout.addWidget(self.set_frequency_le)
-
-        self.widget_12 = QWidget(self.widget)
-        self.widget_12.setObjectName(u"widget_12")
-
-        self.horizontalLayout.addWidget(self.widget_12)
-
-        self.set_velocity_rb = QRadioButton(self.widget)
-        self.set_velocity_rb.setObjectName(u"set_velocity_rb")
-        self.set_velocity_rb.setMinimumSize(QSize(200, 0))
-        self.set_velocity_rb.setCheckable(True)
-
-        self.horizontalLayout.addWidget(self.set_velocity_rb)
-
-        self.set_velocity_le = QLineEdit(self.widget)
-        self.set_velocity_le.setObjectName(u"set_velocity_le")
-        sizePolicy1.setHeightForWidth(self.set_velocity_le.sizePolicy().hasHeightForWidth())
-        self.set_velocity_le.setSizePolicy(sizePolicy1)
-        self.set_velocity_le.setMaximumSize(QSize(200, 30))
-        self.set_velocity_le.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout.addWidget(self.set_velocity_le)
-
-        self.widget_16 = QWidget(self.widget)
-        self.widget_16.setObjectName(u"widget_16")
-
-        self.horizontalLayout.addWidget(self.widget_16)
-
-
-        self.verticalLayout_2.addWidget(self.widget)
-
-        self.widget_14 = QWidget(self.widget_2)
-        self.widget_14.setObjectName(u"widget_14")
-        self.widget_14.setMaximumSize(QSize(16777215, 50))
-        self.horizontalLayout_11 = QHBoxLayout(self.widget_14)
-        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
-        self.horizontalLayout_11.setContentsMargins(1, 1, 1, 1)
-        self.start_tunnel_btn = QPushButton(self.widget_14)
-        self.start_tunnel_btn.setObjectName(u"start_tunnel_btn")
-        self.start_tunnel_btn.setMaximumSize(QSize(120, 40))
-
-        self.horizontalLayout_11.addWidget(self.start_tunnel_btn)
-
-        self.widget_27 = QWidget(self.widget_14)
-        self.widget_27.setObjectName(u"widget_27")
-        self.widget_27.setMinimumSize(QSize(0, 44))
-        self.widget_27.setMaximumSize(QSize(125, 16777215))
-        self.widget_27.setStyleSheet(u"QPushButton {\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid #FF3636;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(230, 230, 230);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #FF2626;\n"
-"}")
-        self.horizontalLayout_10 = QHBoxLayout(self.widget_27)
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
-        self.stop_tunnel_btn = QPushButton(self.widget_27)
-        self.stop_tunnel_btn.setObjectName(u"stop_tunnel_btn")
-        self.stop_tunnel_btn.setEnabled(False)
-        self.stop_tunnel_btn.setMaximumSize(QSize(120, 40))
-
-        self.horizontalLayout_10.addWidget(self.stop_tunnel_btn)
-
-
-        self.horizontalLayout_11.addWidget(self.widget_27)
-
-
-        self.verticalLayout_2.addWidget(self.widget_14)
-
         self.widget_4 = QWidget(self.widget_2)
         self.widget_4.setObjectName(u"widget_4")
-        self.scale_chart = QVBoxLayout(self.widget_4)
+        self.vertical_shit = QVBoxLayout(self.widget_4)
+        self.vertical_shit.setObjectName(u"vertical_shit")
+        self.vertical_shit.setContentsMargins(3, 3, 3, 3)
+        self.widget = QWidget(self.widget_4)
+        self.widget.setObjectName(u"widget")
+        self.widget.setMinimumSize(QSize(0, 40))
+        self.widget.setMaximumSize(QSize(16777215, 40))
+        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.chart_pg_btn = QPushButton(self.widget)
+        self.chart_pg_btn.setObjectName(u"chart_pg_btn")
+        self.chart_pg_btn.setMaximumSize(QSize(100, 35))
+
+        self.horizontalLayout.addWidget(self.chart_pg_btn)
+
+        self.test_plan_pg_btn = QPushButton(self.widget)
+        self.test_plan_pg_btn.setObjectName(u"test_plan_pg_btn")
+        self.test_plan_pg_btn.setMaximumSize(QSize(100, 35))
+
+        self.horizontalLayout.addWidget(self.test_plan_pg_btn)
+
+
+        self.vertical_shit.addWidget(self.widget)
+
+        self.stackedWidget = QStackedWidget(self.widget_4)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.chart_pg = QWidget()
+        self.chart_pg.setObjectName(u"chart_pg")
+        self.scale_chart = QVBoxLayout(self.chart_pg)
         self.scale_chart.setObjectName(u"scale_chart")
         self.scale_chart.setContentsMargins(3, 3, 3, 3)
-        self.widget_5 = QWidget(self.widget_4)
+        self.widget_5 = QWidget(self.chart_pg)
         self.widget_5.setObjectName(u"widget_5")
         self.widget_5.setMinimumSize(QSize(0, 40))
         self.widget_5.setMaximumSize(QSize(16777215, 40))
         self.horizontalLayout_2 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.widget_6 = QWidget(self.widget_5)
-        self.widget_6.setObjectName(u"widget_6")
-
-        self.horizontalLayout_2.addWidget(self.widget_6)
-
         self.restart_chart_btn = QPushButton(self.widget_5)
         self.restart_chart_btn.setObjectName(u"restart_chart_btn")
         self.restart_chart_btn.setMaximumSize(QSize(150, 35))
 
         self.horizontalLayout_2.addWidget(self.restart_chart_btn)
 
-        self.widget_13 = QWidget(self.widget_5)
-        self.widget_13.setObjectName(u"widget_13")
-        self.widget_13.setMaximumSize(QSize(16777, 16777215))
-
-        self.horizontalLayout_2.addWidget(self.widget_13)
-
 
         self.scale_chart.addWidget(self.widget_5)
+
+        self.stackedWidget.addWidget(self.chart_pg)
+        self.test_plan_pg = QWidget()
+        self.test_plan_pg.setObjectName(u"test_plan_pg")
+        self.horizontalLayout_3 = QHBoxLayout(self.test_plan_pg)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.widget_205 = QWidget(self.test_plan_pg)
+        self.widget_205.setObjectName(u"widget_205")
+        self.verticalLayout_3 = QVBoxLayout(self.widget_205)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.test_running_wg_2 = QWidget(self.widget_205)
+        self.test_running_wg_2.setObjectName(u"test_running_wg_2")
+        self.test_running_wg_2.setMinimumSize(QSize(0, 25))
+        self.test_running_wg_2.setStyleSheet(u"QLabel {\n"
+"    background-color: #4CAF50;\n"
+"    border-radius: 7px;\n"
+"    color: white; /* Optional: makes the text readable on red */\n"
+"}")
+        self.horizontalLayout_5 = QHBoxLayout(self.test_running_wg_2)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_8 = QLabel(self.test_running_wg_2)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setMaximumSize(QSize(150, 16777215))
+        self.label_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_5.addWidget(self.label_8)
+
+
+        self.verticalLayout_3.addWidget(self.test_running_wg_2)
+
+        self.tableWidget_3d = QTableWidget(self.widget_205)
+        if (self.tableWidget_3d.columnCount() < 4):
+            self.tableWidget_3d.setColumnCount(4)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        self.tableWidget_3d.setObjectName(u"tableWidget_3d")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tableWidget_3d.sizePolicy().hasHeightForWidth())
+        self.tableWidget_3d.setSizePolicy(sizePolicy)
+        self.tableWidget_3d.setAutoScrollMargin(16)
+        self.tableWidget_3d.horizontalHeader().setMinimumSectionSize(36)
+        self.tableWidget_3d.horizontalHeader().setDefaultSectionSize(140)
+        self.tableWidget_3d.verticalHeader().setDefaultSectionSize(30)
+
+        self.verticalLayout_3.addWidget(self.tableWidget_3d)
+
+        self.widget_10 = QWidget(self.widget_205)
+        self.widget_10.setObjectName(u"widget_10")
+        self.widget_10.setMinimumSize(QSize(0, 50))
+        self.widget_10.setMaximumSize(QSize(16777215, 50))
+        self.horizontalLayout_6 = QHBoxLayout(self.widget_10)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.add_3d_row_btn = QPushButton(self.widget_10)
+        self.add_3d_row_btn.setObjectName(u"add_3d_row_btn")
+        self.add_3d_row_btn.setMinimumSize(QSize(0, 0))
+        self.add_3d_row_btn.setMaximumSize(QSize(34, 34))
+
+        self.horizontalLayout_6.addWidget(self.add_3d_row_btn)
+
+        self.start_3d_test_plan_btn = QPushButton(self.widget_10)
+        self.start_3d_test_plan_btn.setObjectName(u"start_3d_test_plan_btn")
+        self.start_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
+
+        self.horizontalLayout_6.addWidget(self.start_3d_test_plan_btn)
+
+        self.stop_3d_test_plan_btn = QPushButton(self.widget_10)
+        self.stop_3d_test_plan_btn.setObjectName(u"stop_3d_test_plan_btn")
+        self.stop_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
+
+        self.horizontalLayout_6.addWidget(self.stop_3d_test_plan_btn)
+
+        self.delete_3d_row_btn = QPushButton(self.widget_10)
+        self.delete_3d_row_btn.setObjectName(u"delete_3d_row_btn")
+        self.delete_3d_row_btn.setMaximumSize(QSize(34, 34))
+
+        self.horizontalLayout_6.addWidget(self.delete_3d_row_btn)
+
+
+        self.verticalLayout_3.addWidget(self.widget_10)
+
+
+        self.horizontalLayout_3.addWidget(self.widget_205)
+
+        self.stackedWidget.addWidget(self.test_plan_pg)
+
+        self.vertical_shit.addWidget(self.stackedWidget)
 
 
         self.verticalLayout_2.addWidget(self.widget_4)
@@ -327,23 +241,29 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
+        self.stackedWidget.setCurrentIndex(1)
+
+
         QMetaObject.connectSlotsByName(Form)
     # setupUi
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.change_dir_btn.setText("")
-        self.set_name_btn.setText(QCoreApplication.translate("Form", u"Set name", None))
-        self.save_timer_chb.setText("")
-        self.label_2.setText(QCoreApplication.translate("Form", u"Timer", None))
-        self.set_frequency_rb.setText(QCoreApplication.translate("Form", u"Imposed frequency (Hz):", None))
-        self.set_frequency_le.setInputMask("")
-        self.set_frequency_le.setText("")
-        self.set_frequency_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-100", None))
-        self.set_velocity_rb.setText(QCoreApplication.translate("Form", u"Imposed velocity (m/s):", None))
-        self.set_velocity_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-100", None))
-        self.start_tunnel_btn.setText(QCoreApplication.translate("Form", u"On", None))
-        self.stop_tunnel_btn.setText(QCoreApplication.translate("Form", u"Off", None))
+        self.chart_pg_btn.setText(QCoreApplication.translate("Form", u"Chart", None))
+        self.test_plan_pg_btn.setText(QCoreApplication.translate("Form", u"Test Plan", None))
         self.restart_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart axis", None))
+        self.label_8.setText(QCoreApplication.translate("Form", u"test running", None))
+        ___qtablewidgetitem = self.tableWidget_3d.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Min", None));
+        ___qtablewidgetitem1 = self.tableWidget_3d.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sek", None));
+        ___qtablewidgetitem2 = self.tableWidget_3d.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"wind velocity [m/s]", None));
+        ___qtablewidgetitem3 = self.tableWidget_3d.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Frequency [Hz]", None));
+        self.add_3d_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
+        self.start_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
+        self.stop_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))
+        self.delete_3d_row_btn.setText(QCoreApplication.translate("Form", u"-", None))
     # retranslateUi
 

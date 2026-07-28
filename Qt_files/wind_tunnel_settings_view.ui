@@ -79,27 +79,12 @@ QPushButton:pressed {
      </row>
      <row>
       <property name="text">
-       <string>PID Kp parameter</string>
+       <string>Kalman Q parameter</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>PID Ti parameter</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>PID Td parameter</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>D‑term filter coefficient</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>PID deadband</string>
+       <string>Kalman R parameter</string>
       </property>
      </row>
      <row>
@@ -129,27 +114,37 @@ QPushButton:pressed {
      </row>
      <row>
       <property name="text">
+       <string>PID Kp parameter</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>PID Ti parameter</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>PID Td parameter</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>PID deadband</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>D‑term filter coefficient</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
        <string>Enable D‑term calculation from Process Value</string>
       </property>
      </row>
      <row>
       <property name="text">
        <string>Enable P‑term calculation from Process Value</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Enable Kalman filter from pressure</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Kalman R parameter</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Kalman Q parameter</string>
       </property>
      </row>
      <row>
@@ -162,26 +157,11 @@ QPushButton:pressed {
        <string>Feed Forward for step change</string>
       </property>
      </row>
-     <row>
+     <column>
       <property name="text">
-       <string>New Row</string>
+       <string>Default</string>
       </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Upper speed tolerance for hold transition (SP + Tol) </string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Lower speed tolerance for hold transition (SP – Tol)</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Time the speed must remain within tolerance for hold transition</string>
-      </property>
-     </row>
+     </column>
      <column>
       <property name="text">
        <string>Current</string>
@@ -217,6 +197,19 @@ QPushButton:pressed {
       </property>
       <item>
        <widget class="QWidget" name="widget_2" native="true"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="default_settings_btn">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Default </string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="set_changes_btn">

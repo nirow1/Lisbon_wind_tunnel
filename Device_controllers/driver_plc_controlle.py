@@ -7,7 +7,7 @@ from Device_controllers.plc_controller import PLCController
 class DriverPLCController(PLCController):
     DRIVERS_POS = Signal(dict)
 
-    def __init__(self, ip_address="192.168.1.1"):
+    def __init__(self, ip_address="192.168.10.2"):
         super().__init__(ip_address, read_nb=2, write_nb=3, param_nb=4)
         self.PLC_CONNECTED.connect(self._start_reading_plc_data)
 
@@ -19,7 +19,6 @@ class DriverPLCController(PLCController):
         while self.connected:
             try:
                 main_data_dict = self._read_main_data()
-
 
             except Exception as e:
                 main_data_dict = {}
@@ -39,10 +38,13 @@ class DriverPLCController(PLCController):
             return None
 
     def set_2d_pos(self, x: int, y: int):
-        ...
+        self.set_2d_x(x)
+        self.set_2d_y(y)
 
     def set_3d_pos(self, x: int, y: int, z: int):
-        ...
+        self.set_3d_x(x)
+        self.set_3d_y(y)
+        self.set_3d_z(z)
 
     def set_2d_x(self, x: int):
         ...

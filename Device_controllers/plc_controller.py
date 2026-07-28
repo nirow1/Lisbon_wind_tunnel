@@ -18,6 +18,9 @@ class PLCController(QThread):
         self.connected = False
         self.sending = False
 
+        self._watchdog_timer = QTimer()
+        self.watchdog_count = 0
+
         self.averaging_window = []
 
         self._lock = Lock()
@@ -40,15 +43,13 @@ class PLCController(QThread):
 
     # -------- Write functions ---------
     def _start_watchdog(self):
-        self._watchdog_timer = QTimer()  # instance proměnná, ne lokální!
         self._watchdog_timer.setInterval(1000)
         self._watchdog_timer.timeout.connect(self._ping_watchdog)
         self._watchdog_timer.start()
 
     def _ping_watchdog(self):
         try:
-            code = self._read_plc_data(self.read_nb, 0, 2)
-            self._write_plc_int(self.write_nb, 0, code[0])
+            self._write_plc_int(self.write_nb, 0, self.watchdog_count)
         except Exception as e:
             print(e)
             self._stop_timers()
@@ -69,15 +70,11 @@ class PLCController(QThread):
             try:
                 # INT (2 bytes)
                 if isinstance(request, int):
-                    if size != 2:
-                        raise ValueError("INT requires size=2")
                     buffer = bytearray(2)
                     util.set_int(buffer, 0, request)
 
                 # FLOAT (4 bytes)
                 elif isinstance(request, float):
-                    if size != 4:
-                        raise ValueError("FLOAT requires size=4")
                     buffer = bytearray(4)
                     util.set_real(buffer, 0, request)
 
@@ -94,6 +91,23 @@ class PLCController(QThread):
 
             except Exception as e:
                 print(f"[ERROR] _write_plc_data: {e}")
+
+    def _write_plc_bool_byte(self, db: int, offset: int, state: int):
+        """Write a single-bit boolean as a full byte (only bit 0 used)."""
+        with self._lock:
+            self.plc.db_write(db, offset, bytearray([1 if state else 0]))
+
+    def _write_plc_bits(self, db: int, offset: int, bit_states: dict):
+        """Read-modify-write multiple bits in a single byte. bit_states: {bit_index: 0|1}"""
+        with self._lock:
+            byte_val = self.plc.db_read(db, offset, 1)[0]
+        for bit, state in bit_states.items():
+            if state:
+                byte_val |= (1 << bit)
+            else:
+                byte_val &= ~(1 << bit)
+        with self._lock:
+            self.plc.db_write(db, offset, bytearray([byte_val]))
 
     def _read_plc_data(self, db:int,  pos: int, size: int, frm: str = '>H'):
         if not self.connected:
@@ -121,8 +135,3 @@ class PLCController(QThread):
     @staticmethod
     def byte_to_bits(byte):
         return [(byte >> i) & 1 for i in range(7, -1, -1)]
-
-
-if __name__ == '__main__':
-    plc = PLCController()
-    plc.run()

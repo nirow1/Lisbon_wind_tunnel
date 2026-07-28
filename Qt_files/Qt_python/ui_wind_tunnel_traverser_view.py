@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_traverser_viewQtGjsI.ui'
+## Form generated from reading UI file 'wind_tunnel_traverser_viewzwWuZz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -411,24 +411,24 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.test_running_wg_2)
 
-        self.tableWidget_2 = QTableWidget(self.widget_205)
-        if (self.tableWidget_2.columnCount() < 5):
-            self.tableWidget_2.setColumnCount(5)
+        self.tableWidget_3d = QTableWidget(self.widget_205)
+        if (self.tableWidget_3d.columnCount() < 5):
+            self.tableWidget_3d.setColumnCount(5)
         __qtablewidgetitem4 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(0, __qtablewidgetitem4)
+        self.tableWidget_3d.setHorizontalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(1, __qtablewidgetitem5)
+        self.tableWidget_3d.setHorizontalHeaderItem(1, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(2, __qtablewidgetitem6)
+        self.tableWidget_3d.setHorizontalHeaderItem(2, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(3, __qtablewidgetitem7)
+        self.tableWidget_3d.setHorizontalHeaderItem(3, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(4, __qtablewidgetitem8)
-        self.tableWidget_2.setObjectName(u"tableWidget_2")
-        sizePolicy1.setHeightForWidth(self.tableWidget_2.sizePolicy().hasHeightForWidth())
-        self.tableWidget_2.setSizePolicy(sizePolicy1)
+        self.tableWidget_3d.setHorizontalHeaderItem(4, __qtablewidgetitem8)
+        self.tableWidget_3d.setObjectName(u"tableWidget_3d")
+        sizePolicy1.setHeightForWidth(self.tableWidget_3d.sizePolicy().hasHeightForWidth())
+        self.tableWidget_3d.setSizePolicy(sizePolicy1)
 
-        self.verticalLayout_2.addWidget(self.tableWidget_2)
+        self.verticalLayout_2.addWidget(self.tableWidget_3d)
 
         self.widget_10 = QWidget(self.widget_205)
         self.widget_10.setObjectName(u"widget_10")
@@ -437,30 +437,30 @@ class Ui_Form(object):
         self.horizontalLayout_6 = QHBoxLayout(self.widget_10)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.add_row_btn_2 = QPushButton(self.widget_10)
-        self.add_row_btn_2.setObjectName(u"add_row_btn_2")
-        self.add_row_btn_2.setMinimumSize(QSize(0, 0))
-        self.add_row_btn_2.setMaximumSize(QSize(34, 34))
+        self.add_3d_row_btn = QPushButton(self.widget_10)
+        self.add_3d_row_btn.setObjectName(u"add_3d_row_btn")
+        self.add_3d_row_btn.setMinimumSize(QSize(0, 0))
+        self.add_3d_row_btn.setMaximumSize(QSize(34, 34))
 
-        self.horizontalLayout_6.addWidget(self.add_row_btn_2)
+        self.horizontalLayout_6.addWidget(self.add_3d_row_btn)
 
-        self.start_test_plan_btn_2 = QPushButton(self.widget_10)
-        self.start_test_plan_btn_2.setObjectName(u"start_test_plan_btn_2")
-        self.start_test_plan_btn_2.setMaximumSize(QSize(100, 40))
+        self.start_3d_test_plan_btn = QPushButton(self.widget_10)
+        self.start_3d_test_plan_btn.setObjectName(u"start_3d_test_plan_btn")
+        self.start_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
 
-        self.horizontalLayout_6.addWidget(self.start_test_plan_btn_2)
+        self.horizontalLayout_6.addWidget(self.start_3d_test_plan_btn)
 
-        self.stop_test_plan_btn_2 = QPushButton(self.widget_10)
-        self.stop_test_plan_btn_2.setObjectName(u"stop_test_plan_btn_2")
-        self.stop_test_plan_btn_2.setMaximumSize(QSize(100, 40))
+        self.stop_3d_test_plan_btn = QPushButton(self.widget_10)
+        self.stop_3d_test_plan_btn.setObjectName(u"stop_3d_test_plan_btn")
+        self.stop_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
 
-        self.horizontalLayout_6.addWidget(self.stop_test_plan_btn_2)
+        self.horizontalLayout_6.addWidget(self.stop_3d_test_plan_btn)
 
-        self.delete_row_btn_2 = QPushButton(self.widget_10)
-        self.delete_row_btn_2.setObjectName(u"delete_row_btn_2")
-        self.delete_row_btn_2.setMaximumSize(QSize(34, 34))
+        self.delete_3d_row_btn = QPushButton(self.widget_10)
+        self.delete_3d_row_btn.setObjectName(u"delete_3d_row_btn")
+        self.delete_3d_row_btn.setMaximumSize(QSize(34, 34))
 
-        self.horizontalLayout_6.addWidget(self.delete_row_btn_2)
+        self.horizontalLayout_6.addWidget(self.delete_3d_row_btn)
 
 
         self.verticalLayout_2.addWidget(self.widget_10)
@@ -651,20 +651,20 @@ class Ui_Form(object):
         self.label_19.setText(QCoreApplication.translate("Form", u"Field X Y:", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"Field X Z:", None))
         self.label_8.setText(QCoreApplication.translate("Form", u"test running", None))
-        ___qtablewidgetitem4 = self.tableWidget_2.horizontalHeaderItem(0)
+        ___qtablewidgetitem4 = self.tableWidget_3d.horizontalHeaderItem(0)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Min", None));
-        ___qtablewidgetitem5 = self.tableWidget_2.horizontalHeaderItem(1)
+        ___qtablewidgetitem5 = self.tableWidget_3d.horizontalHeaderItem(1)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Sek", None));
-        ___qtablewidgetitem6 = self.tableWidget_2.horizontalHeaderItem(2)
+        ___qtablewidgetitem6 = self.tableWidget_3d.horizontalHeaderItem(2)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Pos X", None));
-        ___qtablewidgetitem7 = self.tableWidget_2.horizontalHeaderItem(3)
+        ___qtablewidgetitem7 = self.tableWidget_3d.horizontalHeaderItem(3)
         ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Pos Y", None));
-        ___qtablewidgetitem8 = self.tableWidget_2.horizontalHeaderItem(4)
+        ___qtablewidgetitem8 = self.tableWidget_3d.horizontalHeaderItem(4)
         ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"Pos Z", None));
-        self.add_row_btn_2.setText(QCoreApplication.translate("Form", u"+", None))
-        self.start_test_plan_btn_2.setText(QCoreApplication.translate("Form", u"Start plan", None))
-        self.stop_test_plan_btn_2.setText(QCoreApplication.translate("Form", u"End plan", None))
-        self.delete_row_btn_2.setText(QCoreApplication.translate("Form", u"-", None))
+        self.add_3d_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
+        self.start_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
+        self.stop_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))
+        self.delete_3d_row_btn.setText(QCoreApplication.translate("Form", u"-", None))
         self.set_pos_x_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.set_pos_y_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_15.setText(QCoreApplication.translate("Form", u"Pos Z:", None))

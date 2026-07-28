@@ -25,9 +25,9 @@ class MainWindow(QMainWindow):
         # device communication
         self.tunnel_plc = TunnelPLCController()
         self.driver_plc = DriverPLCController()
-        self.scale_plc = ScalePLCController()
-        self.tlaskan = TlaskanController("192.168.1.91")
-        self.tlaskan_2 = TlaskanController("192.168.1.90")
+        #self.scale_plc = ScalePLCController()
+        self.tlaskan = TlaskanController("192.168.10.91")
+        self.tlaskan_2 = TlaskanController("192.168.10.90")
         self.papago = PapagoController()
 
         self.control_byte = {}
@@ -59,17 +59,12 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.config_view)
         self.ui.j4_logo_lbl.setPixmap(QPixmap('./App_data/4j_logo_150x50.png'))
 
-        for i in range(1,8):
+        for i in range(1,4):
             led: QLabel = self.ui.widget_203.findChild(QLabel, "led_" + str(i))
             led.setPixmap(QPixmap('./App_data/grey_led_15.png'))
 
         self.change_led(self.ui.est_converter_ld, "red", False)
         self.change_led(self.ui.est_service_ld, "red", False)
-        self.change_led(self.ui.est_measure_space_ld, "red", False)
-        self.change_led(self.ui.est_entry_doors_ld, "red", False)
-        self.change_led(self.ui.est_hexapod_ld, "red", False)
-        self.change_led(self.ui.est_doors_meas_space_ld, "red", False)
-        self.change_led(self.ui.est_doors_meas_space_ld_2, "red", False)
 
         self.setWindowIcon(QIcon("./App_data/ico.png"))
         self.setWindowTitle("Wind Tunnel")
@@ -91,33 +86,27 @@ class MainWindow(QMainWindow):
     def _handle_emits(self):
         self.settings_pg.RETURN_TO_MAIN.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.config_view))
 
-        self.tunnel_plc.TUNNEL_DATA.connect(self._handle_plc_data)
+        self.tunnel_plc.SENSOR_VALUES.connect(self._handle_plc_data)
         self.tunnel_plc.STATUS_DATA.connect(self._handle_status_data)
         self.tunnel_plc.CONTROL_BYTE.connect(self._handle_control_byte_data)
-        self.tunnel_plc.PARAM_DATA_FAN.connect(self._handle_fan_params)
-        self.tunnel_plc.PARAM_DATA_STATUS.connect(self._handle_status_params)
+        self.tunnel_plc.DRIVER_DATA.connect(self._handle_driver_data)
+        self.tunnel_plc.SAFETY_DIAGNOSTICS.connect(self._handle_safety_diagnostics)
 
         self.info_panel.STOP_TUNNEL.connect(self.config_view.deselect_radiobuttons)
 
     def _handle_plc_data(self, plc_data: dict):
-        self.ui.temp_in_raw_lbl.setText(str(plc_data.get("temp_entry")))
-        self.ui.temp_out_raw_lbl.setText(str(plc_data.get("temp_exit")))
-        self.ui.diff_pres_raw_lbl.setText(str(plc_data.get("diff_pressure_raw")))
-        self.ui.diff_pres_fltr_lbl.setText(str(plc_data.get("diff_pressure")))
+        self.ui.temp_in_raw_lbl.setText(str(plc_data.get("temp_input_filtered")))
+        self.ui.temp_out_raw_lbl.setText(str(plc_data.get("temp_output_filtered")))
+        self.ui.diff_pres_raw_lbl.setText(str(plc_data.get("pressure_raw")))
+        self.ui.diff_pres_fltr_lbl.setText(str(plc_data.get("pressure_filtered")))
 
     def _handle_status_data(self, status_data: dict):
         self.change_led(self.ui.led_1, "green", status_data.get("rdy"))
-        self.change_led(self.ui.led_2, "red", status_data.get("e-stop"))
-        self.change_led(self.ui.led_3, "red", status_data.get("doors"))
-        self.change_led(self.ui.led_4, "red", status_data.get("surge_protection"))
-        self.change_led(self.ui.led_5, "red", status_data.get("driver_error"))
-        self.change_led(self.ui.led_6, "blue", not status_data.get("safety"))
-        self.change_led(self.ui.led_7, "green", status_data.get("concetrc"))
+        self.change_led(self.ui.led_2, "blue", not status_data.get("safety"))
+        self.change_led(self.ui.led_3, "red", status_data.get("e-stop"))
+        self.change_led(self.ui.led_4, "red", status_data.get("drive_error"))
 
-        self.info_panel.set_button_state(status_data.get("rdy"))
         self.config_view.set_available(status_data.get("rdy"))
-
-        self.config_view.enable_setting_velocity(status_data.get("concetrc"))
 
     def _handle_control_byte_data(self, control_byte_data: dict):
         if control_byte_data == self.control_byte:
@@ -134,32 +123,21 @@ class MainWindow(QMainWindow):
 
         self.tunnel_plc.control_byte.update(control_byte_data)
 
-        if "pump" in turned_off:
-            self.info_panel.switch_off_pump()
-
-        if "cooling" in turned_off:
-            self.info_panel.switch_off_cooling()
-
         if "start" in turned_off:
             self.config_view.reset_gui_after_external_stop()
 
-    def _handle_fan_params(self, fan_params: dict):
+    def _handle_driver_data(self, fan_params: dict):
         self.ui.driver_status_lbl.setText(str(fan_params.get("driver_status")))
         self.ui.error_code_lbl.setText(str(fan_params.get("error_code")))
-        self.ui.output_lbl.setText(str(fan_params.get("output")))
+        self.ui.output_lbl.setText(str(fan_params.get("power")))
         self.ui.current_lbl.setText(str(fan_params.get("current")))
-        self.ui.moment_lbl.setText(str(fan_params.get("moment")))
-        self.ui.engine_temp_lbl.setText(str(fan_params.get("engine_temp")))
-        self.ui.converter_temp_lbl.setText(str(fan_params.get("converter_temp")))
+        self.ui.moment_lbl.setText(str(fan_params.get("torque")))
+        self.ui.engine_temp_lbl.setText(str(fan_params.get("motor_temp")))
+        self.ui.converter_temp_lbl.setText(str(fan_params.get("drive_temp")))
 
-    def _handle_status_params(self, status_params: dict):
-        self.change_led(self.ui.est_converter_ld, "red", not status_params.get("est_converter"))
-        self.change_led(self.ui.est_service_ld, "red", not status_params.get("est_service"))
-        self.change_led(self.ui.est_measure_space_ld, "red", not status_params.get("est_measure_space"))
-        self.change_led(self.ui.est_entry_doors_ld, "red", not status_params.get("est_entry_doors"))
-        self.change_led(self.ui.est_hexapod_ld, "red", not status_params.get("est_hexapod"))
-        self.change_led(self.ui.est_doors_meas_space_ld, "red", not status_params.get("est_doors_meas_space"))
-        self.change_led(self.ui.est_doors_meas_space_ld_2, "red", not status_params.get("est_doors_meas_space_2"))
+    def _handle_safety_diagnostics(self, status_params: dict):
+        self.change_led(self.ui.est_converter_ld, "red", not status_params.get("estop_main"))
+        self.change_led(self.ui.est_service_ld, "red", not status_params.get("estop_panel"))
 
     def _check_login(self):
         if self.ui.user_name_le.text() == "admin" and self.ui.password_le.text() == "admin":
@@ -173,7 +151,7 @@ class MainWindow(QMainWindow):
     def on_app_exit(self):
         self.tunnel_plc.disconnect()
         self.driver_plc.disconnect()
-        self.scale_plc.disconnect()
+        #self.scale_plc.disconnect()
         self.tlaskan.disconnect()
         self.tlaskan_2.disconnect()
         self.info_panel.disconnect_tunnel()

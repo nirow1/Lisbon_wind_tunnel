@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_pressure_viewXRAcgU.ui'
+## Form generated from reading UI file 'wind_tunnel_pressure_viewXuFPNn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -541,7 +541,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget_3.setCurrentIndex(0)
+        self.stackedWidget_3.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -549,8 +549,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.page_1_btn.setText(QCoreApplication.translate("Form", u"Page 1", None))
-        self.page_2_btn.setText(QCoreApplication.translate("Form", u"Page 2", None))
+        self.page_1_btn.setText(QCoreApplication.translate("Form", u"Device 1", None))
+        self.page_2_btn.setText(QCoreApplication.translate("Form", u"Device 2", None))
         self.lbl_1_p_3.setText(QCoreApplication.translate("Form", u"0.0", None))
         self.lbl_1_p_8.setText(QCoreApplication.translate("Form", u"0.0", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"P13:", None))
@@ -583,7 +583,7 @@ class Ui_Form(object):
         self.label_7.setText(QCoreApplication.translate("Form", u"P8:", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"P3:", None))
         self.label_10.setText(QCoreApplication.translate("Form", u"P9:", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"Pressures 1", None))
+        self.label_2.setText(QCoreApplication.translate("Form", u"Device 1", None))
         self.reset_pressure_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart", None))
         self.lbl_2_p_3.setText(QCoreApplication.translate("Form", u"0.0", None))
         self.lbl_2_p_8.setText(QCoreApplication.translate("Form", u"0.0", None))
@@ -617,7 +617,7 @@ class Ui_Form(object):
         self.label_32.setText(QCoreApplication.translate("Form", u"P8:", None))
         self.label_33.setText(QCoreApplication.translate("Form", u"P3:", None))
         self.label_34.setText(QCoreApplication.translate("Form", u"P9:", None))
-        self.label_14.setText(QCoreApplication.translate("Form", u"Pressures 2", None))
+        self.label_14.setText(QCoreApplication.translate("Form", u"Device 2", None))
         self.reset_pressure_chart_btn_2.setText(QCoreApplication.translate("Form", u"Reset chart", None))
     # retranslateUi
 

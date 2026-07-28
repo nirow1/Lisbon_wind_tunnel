@@ -246,7 +246,7 @@ QPushButton:pressed {
                    </size>
                   </property>
                   <property name="text">
-                   <string>Scales</string>
+                   <string>Balances</string>
                   </property>
                  </widget>
                 </item>
@@ -278,7 +278,7 @@ QPushButton:pressed {
                    </size>
                   </property>
                   <property name="text">
-                   <string>Next parameters</string>
+                   <string>System params</string>
                   </property>
                  </widget>
                 </item>
@@ -995,6 +995,37 @@ QPushButton:pressed {
                     <item>
                      <widget class="QWidget" name="widget_207" native="true">
                       <layout class="QGridLayout" name="gridLayout_2">
+                       <item row="0" column="2">
+                        <widget class="QWidget" name="widget_44" native="true">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_40">
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_88">
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
                        <item row="0" column="0">
                         <widget class="QWidget" name="widget_40" native="true">
                          <property name="maximumSize">
@@ -1031,7 +1062,7 @@ QPushButton:pressed {
                              </size>
                             </property>
                             <property name="text">
-                             <string>E-stop switchboard:</string>
+                             <string>E-stop main:</string>
                             </property>
                            </widget>
                           </item>
@@ -1059,63 +1090,6 @@ QPushButton:pressed {
                         </widget>
                        </item>
                        <item row="0" column="1">
-                        <widget class="QWidget" name="widget_44" native="true">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_40">
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_86">
-                            <property name="maximumSize">
-                             <size>
-                              <width>250</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>E-stop hexapod:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="est_hexapod_ld">
-                            <property name="maximumSize">
-                             <size>
-                              <width>25</width>
-                              <height>25</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>0</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="label_88">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item row="1" column="0">
                         <widget class="QWidget" name="widget_35" native="true">
                          <property name="maximumSize">
                           <size>
@@ -1151,7 +1125,7 @@ QPushButton:pressed {
                              </size>
                             </property>
                             <property name="text">
-                             <string>E-stop service:</string>
+                             <string>E-stop panel:</string>
                             </property>
                            </widget>
                           </item>
@@ -1170,246 +1144,6 @@ QPushButton:pressed {
                           </item>
                           <item>
                            <widget class="QLabel" name="label_73">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item row="1" column="1">
-                        <widget class="QWidget" name="widget_43" native="true">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_39">
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_83">
-                            <property name="maximumSize">
-                             <size>
-                              <width>250</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>Doors test section:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="est_doors_meas_space_ld">
-                            <property name="maximumSize">
-                             <size>
-                              <width>25</width>
-                              <height>26</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>0</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="label_85">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item row="2" column="0">
-                        <widget class="QWidget" name="widget_42" native="true">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_38">
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_80">
-                            <property name="minimumSize">
-                             <size>
-                              <width>170</width>
-                              <height>0</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>250</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>E-stop test section:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="est_measure_space_ld">
-                            <property name="maximumSize">
-                             <size>
-                              <width>25</width>
-                              <height>25</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>0</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="label_82">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item row="2" column="1">
-                        <widget class="QWidget" name="widget_46" native="true">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_42">
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_92">
-                            <property name="maximumSize">
-                             <size>
-                              <width>250</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>Doors test section:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="est_doors_meas_space_ld_2">
-                            <property name="maximumSize">
-                             <size>
-                              <width>25</width>
-                              <height>25</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>0</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="label_94">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item row="3" column="0">
-                        <widget class="QWidget" name="widget_41" native="true">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_37">
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_77">
-                            <property name="minimumSize">
-                             <size>
-                              <width>170</width>
-                              <height>0</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>250</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>E-stop entry doors</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="est_entry_doors_ld">
-                            <property name="maximumSize">
-                             <size>
-                              <width>25</width>
-                              <height>25</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>0</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="label_79">
                             <property name="text">
                              <string/>
                             </property>
@@ -1679,6 +1413,9 @@ QPushButton:pressed {
          <property name="text">
           <string>ready</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
         </widget>
        </item>
        <item>
@@ -1702,28 +1439,8 @@ QPushButton:pressed {
          <property name="text">
           <string>e-reset</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="led_6">
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>L6</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_12" native="true"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>e-stop</string>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -1741,12 +1458,15 @@ QPushButton:pressed {
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_15" native="true"/>
+        <widget class="QWidget" name="widget_12" native="true"/>
        </item>
        <item>
-        <widget class="QLabel" name="label_6">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>doors</string>
+          <string>e-stop</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -1764,58 +1484,15 @@ QPushButton:pressed {
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_17" native="true"/>
+        <widget class="QWidget" name="widget_15" native="true"/>
        </item>
        <item>
         <widget class="QLabel" name="label_10">
          <property name="text">
           <string>drive error</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="led_5">
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>L5</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_21" native="true"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>concetrc</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="led_7">
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>L7</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_16" native="true"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>surge protection</string>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -1833,7 +1510,7 @@ QPushButton:pressed {
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget_14" native="true"/>
+        <widget class="QWidget" name="widget_21" native="true"/>
        </item>
       </layout>
      </widget>

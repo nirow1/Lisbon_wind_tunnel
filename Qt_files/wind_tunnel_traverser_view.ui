@@ -779,7 +779,7 @@ QPushButton:pressed {
               </widget>
              </item>
              <item>
-              <widget class="QTableWidget" name="tableWidget_2">
+              <widget class="QTableWidget" name="tableWidget_3d">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -841,7 +841,7 @@ QPushButton:pressed {
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="add_row_btn_2">
+                 <widget class="QPushButton" name="add_3d_row_btn">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -860,7 +860,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="start_test_plan_btn_2">
+                 <widget class="QPushButton" name="start_3d_test_plan_btn">
                   <property name="maximumSize">
                    <size>
                     <width>100</width>
@@ -873,7 +873,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="stop_test_plan_btn_2">
+                 <widget class="QPushButton" name="stop_3d_test_plan_btn">
                   <property name="maximumSize">
                    <size>
                     <width>100</width>
@@ -886,7 +886,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="delete_row_btn_2">
+                 <widget class="QPushButton" name="delete_3d_row_btn">
                   <property name="maximumSize">
                    <size>
                     <width>34</width>

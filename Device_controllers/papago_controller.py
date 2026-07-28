@@ -9,7 +9,7 @@ class PapagoController(QThread):
 
     def __init__(self):
         super().__init__()
-        self.ip = "192.168.1.250"
+        self.ip = "192.168.10.13"
         self.port = 502
         self.client: ModbusClient | None = None
         self.connected: bool= False
@@ -32,10 +32,10 @@ class PapagoController(QThread):
 
     def _read_papago_data(self):
         while self.connected:
-            temp = self.client.read_input_registers(12, count=2, slave=1)
-            hum = self.client.read_input_registers(22, count=2, slave=1)
-            atmo_press = self.client.read_input_registers(32, count=2, slave=1)
-            if not temp.isError() and not hum.isError():
+            temp = self.client.read_input_registers(12, count=2)
+            hum = self.client.read_input_registers(22, count=2)
+            atmo_press = self.client.read_input_registers(32, count=2)
+            if not temp.isError() and not hum.isError() and not atmo_press.isError():
                 temp_float = round(combine_to_float(temp.registers), 1)
                 hum_float = round(combine_to_float(hum.registers), 1)
                 press_float = round(combine_to_float(atmo_press.registers), 1)

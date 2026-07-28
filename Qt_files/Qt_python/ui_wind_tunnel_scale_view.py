@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewLjlnBY.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewluXRJB.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -15,15 +15,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QStackedWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(839, 477)
+        Form.resize(1065, 678)
         Form.setMaximumSize(QSize(16777215, 16777215))
         Form.setStyleSheet(u"QSlider{ margin: 0px;}\n"
 "QSlider::groove:horizontal{\n"
@@ -94,45 +95,35 @@ class Ui_Form(object):
         self.verticalLayout_6 = QVBoxLayout(self.widget_13)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(1, -1, 1, 1)
-        self.stackedWidget = QStackedWidget(self.widget_13)
-        self.stackedWidget.setObjectName(u"stackedWidget")
-        self.tlaskan_view_pg = QWidget()
-        self.tlaskan_view_pg.setObjectName(u"tlaskan_view_pg")
-        self.tlaskan_view_pg.setEnabled(True)
-        self.verticalLayout_7 = QVBoxLayout(self.tlaskan_view_pg)
-        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.verticalLayout_7.setContentsMargins(2, -1, 2, -1)
-        self.widget_56 = QWidget(self.tlaskan_view_pg)
-        self.widget_56.setObjectName(u"widget_56")
-        self.widget_56.setMinimumSize(QSize(0, 35))
-        self.widget_56.setMaximumSize(QSize(16777215, 35))
-        self.horizontalLayout_32 = QHBoxLayout(self.widget_56)
-        self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
-        self.horizontalLayout_32.setContentsMargins(1, 1, 1, 1)
-        self.reset_pressure_chart_btn = QPushButton(self.widget_56)
-        self.reset_pressure_chart_btn.setObjectName(u"reset_pressure_chart_btn")
-        self.reset_pressure_chart_btn.setMaximumSize(QSize(100, 30))
+        self.widget = QWidget(self.widget_13)
+        self.widget.setObjectName(u"widget")
+        self.widget.setMinimumSize(QSize(0, 40))
+        self.widget.setMaximumSize(QSize(16777215, 40))
+        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(3, 3, 3, 3)
+        self.chart_pg_btn = QPushButton(self.widget)
+        self.chart_pg_btn.setObjectName(u"chart_pg_btn")
+        self.chart_pg_btn.setMaximumSize(QSize(100, 35))
 
-        self.horizontalLayout_32.addWidget(self.reset_pressure_chart_btn)
+        self.horizontalLayout.addWidget(self.chart_pg_btn)
+
+        self.test_plan_pg_btn = QPushButton(self.widget)
+        self.test_plan_pg_btn.setObjectName(u"test_plan_pg_btn")
+        self.test_plan_pg_btn.setMaximumSize(QSize(100, 35))
+
+        self.horizontalLayout.addWidget(self.test_plan_pg_btn)
 
 
-        self.verticalLayout_7.addWidget(self.widget_56)
+        self.verticalLayout_6.addWidget(self.widget)
 
-        self.widget_34 = QWidget(self.tlaskan_view_pg)
-        self.widget_34.setObjectName(u"widget_34")
-        self.tlaskan_chart = QHBoxLayout(self.widget_34)
-        self.tlaskan_chart.setObjectName(u"tlaskan_chart")
-        self.tlaskan_chart.setContentsMargins(0, 0, 0, 0)
-
-        self.verticalLayout_7.addWidget(self.widget_34)
-
-        self.stackedWidget.addWidget(self.tlaskan_view_pg)
-        self.scale_view_pg = QWidget()
-        self.scale_view_pg.setObjectName(u"scale_view_pg")
-        self.verticalLayout_12 = QVBoxLayout(self.scale_view_pg)
-        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.verticalLayout_12.setContentsMargins(2, -1, 2, -1)
-        self.widget_45 = QWidget(self.scale_view_pg)
+        self.stackedWidget_2 = QStackedWidget(self.widget_13)
+        self.stackedWidget_2.setObjectName(u"stackedWidget_2")
+        self.chart_pg = QWidget()
+        self.chart_pg.setObjectName(u"chart_pg")
+        self.verticalLayout_2 = QVBoxLayout(self.chart_pg)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.widget_45 = QWidget(self.chart_pg)
         self.widget_45.setObjectName(u"widget_45")
         self.widget_45.setMinimumSize(QSize(0, 35))
         self.widget_45.setMaximumSize(QSize(16777215, 35))
@@ -226,29 +217,20 @@ class Ui_Form(object):
         self.horizontalLayout_21.addWidget(self.reset_scale_chart_btn)
 
 
-        self.verticalLayout_12.addWidget(self.widget_45)
+        self.verticalLayout_2.addWidget(self.widget_45)
 
-        self.widget_18 = QWidget(self.scale_view_pg)
-        self.widget_18.setObjectName(u"widget_18")
-        sizePolicy.setHeightForWidth(self.widget_18.sizePolicy().hasHeightForWidth())
-        self.widget_18.setSizePolicy(sizePolicy)
-        self.horizontalLayout_23 = QHBoxLayout(self.widget_18)
-        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
-        self.horizontalLayout_23.setContentsMargins(1, 1, 1, 1)
-        self.widget_38 = QWidget(self.widget_18)
+        self.widget_38 = QWidget(self.chart_pg)
         self.widget_38.setObjectName(u"widget_38")
         self.scale_chart = QGridLayout(self.widget_38)
         self.scale_chart.setObjectName(u"scale_chart")
         self.scale_chart.setContentsMargins(0, 0, 0, 0)
 
-        self.horizontalLayout_23.addWidget(self.widget_38)
+        self.verticalLayout_2.addWidget(self.widget_38)
 
-
-        self.verticalLayout_12.addWidget(self.widget_18)
-
-        self.widget_50 = QWidget(self.scale_view_pg)
+        self.widget_50 = QWidget(self.chart_pg)
         self.widget_50.setObjectName(u"widget_50")
         self.widget_50.setMinimumSize(QSize(0, 35))
+        self.widget_50.setMaximumSize(QSize(16777215, 35))
         self.horizontalLayout_26 = QHBoxLayout(self.widget_50)
         self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
         self.horizontalLayout_26.setContentsMargins(1, 1, 1, 1)
@@ -313,11 +295,12 @@ class Ui_Form(object):
         self.horizontalLayout_26.addWidget(self.widget_55)
 
 
-        self.verticalLayout_12.addWidget(self.widget_50)
+        self.verticalLayout_2.addWidget(self.widget_50)
 
-        self.widget_24 = QWidget(self.scale_view_pg)
+        self.widget_24 = QWidget(self.chart_pg)
         self.widget_24.setObjectName(u"widget_24")
         self.widget_24.setMinimumSize(QSize(0, 35))
+        self.widget_24.setMaximumSize(QSize(16777215, 35))
         self.horizontalLayout_17 = QHBoxLayout(self.widget_24)
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
         self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
@@ -421,11 +404,98 @@ class Ui_Form(object):
         self.horizontalLayout_17.addWidget(self.widget_52)
 
 
-        self.verticalLayout_12.addWidget(self.widget_24)
+        self.verticalLayout_2.addWidget(self.widget_24)
 
-        self.stackedWidget.addWidget(self.scale_view_pg)
+        self.stackedWidget_2.addWidget(self.chart_pg)
+        self.test_plan_pg = QWidget()
+        self.test_plan_pg.setObjectName(u"test_plan_pg")
+        self.verticalLayout_4 = QVBoxLayout(self.test_plan_pg)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.widget_205 = QWidget(self.test_plan_pg)
+        self.widget_205.setObjectName(u"widget_205")
+        self.verticalLayout_3 = QVBoxLayout(self.widget_205)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.test_running_wg_2 = QWidget(self.widget_205)
+        self.test_running_wg_2.setObjectName(u"test_running_wg_2")
+        self.test_running_wg_2.setMinimumSize(QSize(0, 25))
+        self.test_running_wg_2.setStyleSheet(u"QLabel {\n"
+"    background-color: #4CAF50;\n"
+"    border-radius: 7px;\n"
+"    color: white; /* Optional: makes the text readable on red */\n"
+"}")
+        self.horizontalLayout_5 = QHBoxLayout(self.test_running_wg_2)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_8 = QLabel(self.test_running_wg_2)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setMaximumSize(QSize(150, 16777215))
+        self.label_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.verticalLayout_6.addWidget(self.stackedWidget)
+        self.horizontalLayout_5.addWidget(self.label_8)
+
+
+        self.verticalLayout_3.addWidget(self.test_running_wg_2)
+
+        self.tableWidget_3d = QTableWidget(self.widget_205)
+        if (self.tableWidget_3d.columnCount() < 5):
+            self.tableWidget_3d.setColumnCount(5)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tableWidget_3d.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        self.tableWidget_3d.setObjectName(u"tableWidget_3d")
+        sizePolicy.setHeightForWidth(self.tableWidget_3d.sizePolicy().hasHeightForWidth())
+        self.tableWidget_3d.setSizePolicy(sizePolicy)
+
+        self.verticalLayout_3.addWidget(self.tableWidget_3d)
+
+        self.widget_10 = QWidget(self.widget_205)
+        self.widget_10.setObjectName(u"widget_10")
+        self.widget_10.setMinimumSize(QSize(0, 50))
+        self.widget_10.setMaximumSize(QSize(16777215, 50))
+        self.horizontalLayout_6 = QHBoxLayout(self.widget_10)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.add_3d_row_btn = QPushButton(self.widget_10)
+        self.add_3d_row_btn.setObjectName(u"add_3d_row_btn")
+        self.add_3d_row_btn.setMinimumSize(QSize(0, 0))
+        self.add_3d_row_btn.setMaximumSize(QSize(34, 34))
+
+        self.horizontalLayout_6.addWidget(self.add_3d_row_btn)
+
+        self.start_3d_test_plan_btn = QPushButton(self.widget_10)
+        self.start_3d_test_plan_btn.setObjectName(u"start_3d_test_plan_btn")
+        self.start_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
+
+        self.horizontalLayout_6.addWidget(self.start_3d_test_plan_btn)
+
+        self.stop_3d_test_plan_btn = QPushButton(self.widget_10)
+        self.stop_3d_test_plan_btn.setObjectName(u"stop_3d_test_plan_btn")
+        self.stop_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
+
+        self.horizontalLayout_6.addWidget(self.stop_3d_test_plan_btn)
+
+        self.delete_3d_row_btn = QPushButton(self.widget_10)
+        self.delete_3d_row_btn.setObjectName(u"delete_3d_row_btn")
+        self.delete_3d_row_btn.setMaximumSize(QSize(34, 34))
+
+        self.horizontalLayout_6.addWidget(self.delete_3d_row_btn)
+
+
+        self.verticalLayout_3.addWidget(self.widget_10)
+
+
+        self.verticalLayout_4.addWidget(self.widget_205)
+
+        self.stackedWidget_2.addWidget(self.test_plan_pg)
+
+        self.verticalLayout_6.addWidget(self.stackedWidget_2)
 
 
         self.verticalLayout.addWidget(self.widget_13)
@@ -433,7 +503,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -441,7 +511,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.reset_pressure_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart", None))
+        self.chart_pg_btn.setText(QCoreApplication.translate("Form", u"Chart", None))
+        self.test_plan_pg_btn.setText(QCoreApplication.translate("Form", u"Test plan", None))
         self.label_16.setText(QCoreApplication.translate("Form", u"Fx:", None))
         self.fx_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
         self.label_18.setText(QCoreApplication.translate("Form", u"Fy:", None))
@@ -455,17 +526,32 @@ class Ui_Form(object):
         self.label_22.setText(QCoreApplication.translate("Form", u"Mz:", None))
         self.mz_lbl.setText(QCoreApplication.translate("Form", u"00.0", None))
         self.reset_scale_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart", None))
-        self.label_24.setText(QCoreApplication.translate("Form", u"Current X:", None))
+        self.label_24.setText(QCoreApplication.translate("Form", u"Current Pitch:", None))
         self.currnet_x_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
-        self.label_26.setText(QCoreApplication.translate("Form", u"Current Y:", None))
+        self.label_26.setText(QCoreApplication.translate("Form", u"Current Roll:", None))
         self.currnet_y_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
-        self.label_28.setText(QCoreApplication.translate("Form", u"Current Z:", None))
+        self.label_28.setText(QCoreApplication.translate("Form", u"Current Yaw:", None))
         self.currnet_z_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
-        self.label_14.setText(QCoreApplication.translate("Form", u"X:", None))
+        self.label_14.setText(QCoreApplication.translate("Form", u"Pitch:", None))
         self.set_x_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.label_21.setText(QCoreApplication.translate("Form", u"Y:", None))
+        self.label_21.setText(QCoreApplication.translate("Form", u"Roll:", None))
         self.set_y_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.label_23.setText(QCoreApplication.translate("Form", u"Z:", None))
+        self.label_23.setText(QCoreApplication.translate("Form", u"Yaw:", None))
         self.set_z_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.label_8.setText(QCoreApplication.translate("Form", u"test running", None))
+        ___qtablewidgetitem = self.tableWidget_3d.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Min", None));
+        ___qtablewidgetitem1 = self.tableWidget_3d.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sek", None));
+        ___qtablewidgetitem2 = self.tableWidget_3d.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Pitch", None));
+        ___qtablewidgetitem3 = self.tableWidget_3d.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Roll", None));
+        ___qtablewidgetitem4 = self.tableWidget_3d.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Yaw", None));
+        self.add_3d_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
+        self.start_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
+        self.stop_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))
+        self.delete_3d_row_btn.setText(QCoreApplication.translate("Form", u"-", None))
     # retranslateUi
 

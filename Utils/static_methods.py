@@ -15,6 +15,11 @@ def dict_to_bytearray(dictionary) -> bytearray:
     bytes_list = [np.packbits(chunk[::-1])[0] for chunk in chunks]
     return bytearray(bytes_list)
 
+def add_sec_to_current_time(seconds: int):
+    from datetime import datetime, timedelta
+    current_time = datetime.now()
+    new_time = current_time + timedelta(seconds=seconds)
+    return new_time
 
 def combine_to_float( float_list ):
     # Combine the high and low 16-bit numbers into a 32-bit integer

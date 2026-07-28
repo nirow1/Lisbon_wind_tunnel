@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_settings_viewFaZnSD.ui'
+## Form generated from reading UI file 'wind_tunnel_settings_viewaDrcxl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -82,58 +82,50 @@ class Ui_Form(object):
         self.verticalLayout = QVBoxLayout(Form)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tableWidget = QTableWidget(Form)
-        if (self.tableWidget.columnCount() < 2):
-            self.tableWidget.setColumnCount(2)
+        if (self.tableWidget.columnCount() < 3):
+            self.tableWidget.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        if (self.tableWidget.rowCount() < 22):
-            self.tableWidget.setRowCount(22)
         __qtablewidgetitem2 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem2)
+        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        if (self.tableWidget.rowCount() < 17):
+            self.tableWidget.setRowCount(17)
         __qtablewidgetitem3 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem3)
+        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem4)
+        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem5)
+        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem6)
+        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem7)
+        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem8)
+        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem8)
         __qtablewidgetitem9 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem9)
+        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem10)
+        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem10)
         __qtablewidgetitem11 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem11)
+        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem11)
         __qtablewidgetitem12 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(10, __qtablewidgetitem12)
+        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem12)
         __qtablewidgetitem13 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(11, __qtablewidgetitem13)
+        self.tableWidget.setVerticalHeaderItem(10, __qtablewidgetitem13)
         __qtablewidgetitem14 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(12, __qtablewidgetitem14)
+        self.tableWidget.setVerticalHeaderItem(11, __qtablewidgetitem14)
         __qtablewidgetitem15 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(13, __qtablewidgetitem15)
+        self.tableWidget.setVerticalHeaderItem(12, __qtablewidgetitem15)
         __qtablewidgetitem16 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(14, __qtablewidgetitem16)
+        self.tableWidget.setVerticalHeaderItem(13, __qtablewidgetitem16)
         __qtablewidgetitem17 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(15, __qtablewidgetitem17)
+        self.tableWidget.setVerticalHeaderItem(14, __qtablewidgetitem17)
         __qtablewidgetitem18 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(16, __qtablewidgetitem18)
+        self.tableWidget.setVerticalHeaderItem(15, __qtablewidgetitem18)
         __qtablewidgetitem19 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(17, __qtablewidgetitem19)
-        __qtablewidgetitem20 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(18, __qtablewidgetitem20)
-        __qtablewidgetitem21 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(19, __qtablewidgetitem21)
-        __qtablewidgetitem22 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(20, __qtablewidgetitem22)
-        __qtablewidgetitem23 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(21, __qtablewidgetitem23)
+        self.tableWidget.setVerticalHeaderItem(16, __qtablewidgetitem19)
         self.tableWidget.setObjectName(u"tableWidget")
 
         self.verticalLayout.addWidget(self.tableWidget)
@@ -148,6 +140,12 @@ class Ui_Form(object):
         self.widget_2.setObjectName(u"widget_2")
 
         self.horizontalLayout.addWidget(self.widget_2)
+
+        self.default_settings_btn = QPushButton(self.widget)
+        self.default_settings_btn.setObjectName(u"default_settings_btn")
+        self.default_settings_btn.setMaximumSize(QSize(100, 35))
+
+        self.horizontalLayout.addWidget(self.default_settings_btn)
 
         self.set_changes_btn = QPushButton(self.widget)
         self.set_changes_btn.setObjectName(u"set_changes_btn")
@@ -167,53 +165,46 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Current", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Default", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Requested", None));
-        ___qtablewidgetitem2 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Quantization noise clipping", None));
-        ___qtablewidgetitem3 = self.tableWidget.verticalHeaderItem(1)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"PID Kp parameter", None));
-        ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(2)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"PID Ti parameter", None));
-        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(3)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"PID Td parameter", None));
-        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(4)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"D\u2011term filter coefficient", None));
-        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(5)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"PID deadband", None));
-        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(6)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"Enable adaptive Kp for PID", None));
-        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(7)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 low speed", None));
-        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(8)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 value for low speed", None));
-        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(9)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 high speed", None));
-        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(10)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 value for high speed", None));
-        ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(11)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("Form", u"Enable D\u2011term calculation from Process Value", None));
-        ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(12)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("Form", u"Enable P\u2011term calculation from Process Value", None));
-        ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(13)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("Form", u"Enable Kalman filter from pressure", None));
-        ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(14)
-        ___qtablewidgetitem16.setText(QCoreApplication.translate("Form", u"Kalman R parameter", None));
-        ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(15)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("Form", u"Kalman Q parameter", None));
-        ___qtablewidgetitem18 = self.tableWidget.verticalHeaderItem(16)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Current", None));
+        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Requested", None));
+        ___qtablewidgetitem3 = self.tableWidget.verticalHeaderItem(0)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Quantization noise clipping", None));
+        ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(1)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Kalman Q parameter", None));
+        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Kalman R parameter", None));
+        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(3)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Enable adaptive Kp for PID", None));
+        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(4)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 low speed", None));
+        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(5)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 value for low speed", None));
+        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(6)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 high speed", None));
+        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(7)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"Adaptive Kp PID \u2013 value for high speed", None));
+        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(8)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"PID Kp parameter", None));
+        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(9)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"PID Ti parameter", None));
+        ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(10)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("Form", u"PID Td parameter", None));
+        ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(11)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("Form", u"PID deadband", None));
+        ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(12)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("Form", u"D\u2011term filter coefficient", None));
+        ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(13)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("Form", u"Enable D\u2011term calculation from Process Value", None));
+        ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(14)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("Form", u"Enable P\u2011term calculation from Process Value", None));
+        ___qtablewidgetitem18 = self.tableWidget.verticalHeaderItem(15)
         ___qtablewidgetitem18.setText(QCoreApplication.translate("Form", u"Enable Feed Forward", None));
-        ___qtablewidgetitem19 = self.tableWidget.verticalHeaderItem(17)
+        ___qtablewidgetitem19 = self.tableWidget.verticalHeaderItem(16)
         ___qtablewidgetitem19.setText(QCoreApplication.translate("Form", u"Feed Forward for step change", None));
-        ___qtablewidgetitem20 = self.tableWidget.verticalHeaderItem(18)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("Form", u"New Row", None));
-        ___qtablewidgetitem21 = self.tableWidget.verticalHeaderItem(19)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("Form", u"Upper speed tolerance for hold transition (SP + Tol) ", None));
-        ___qtablewidgetitem22 = self.tableWidget.verticalHeaderItem(20)
-        ___qtablewidgetitem22.setText(QCoreApplication.translate("Form", u"Lower speed tolerance for hold transition (SP \u2013 Tol)", None));
-        ___qtablewidgetitem23 = self.tableWidget.verticalHeaderItem(21)
-        ___qtablewidgetitem23.setText(QCoreApplication.translate("Form", u"Time the speed must remain within tolerance for hold transition", None));
+        self.default_settings_btn.setText(QCoreApplication.translate("Form", u"Default ", None))
         self.set_changes_btn.setText(QCoreApplication.translate("Form", u"Save", None))
     # retranslateUi
 

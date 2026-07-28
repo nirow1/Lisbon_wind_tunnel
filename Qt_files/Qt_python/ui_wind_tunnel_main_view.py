@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_main_viewwTdbcZ.ui'
+## Form generated from reading UI file 'wind_tunnel_main_viewmLUUbt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -512,6 +512,20 @@ class Ui_MainWindow(object):
         self.widget_207.setObjectName(u"widget_207")
         self.gridLayout_2 = QGridLayout(self.widget_207)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.widget_44 = QWidget(self.widget_207)
+        self.widget_44.setObjectName(u"widget_44")
+        self.widget_44.setMaximumSize(QSize(16777215, 30))
+        self.horizontalLayout_40 = QHBoxLayout(self.widget_44)
+        self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
+        self.horizontalLayout_40.setContentsMargins(0, 0, 0, 0)
+        self.label_88 = QLabel(self.widget_44)
+        self.label_88.setObjectName(u"label_88")
+
+        self.horizontalLayout_40.addWidget(self.label_88)
+
+
+        self.gridLayout_2.addWidget(self.widget_44, 0, 2, 1, 1)
+
         self.widget_40 = QWidget(self.widget_207)
         self.widget_40.setObjectName(u"widget_40")
         self.widget_40.setMaximumSize(QSize(16777215, 30))
@@ -539,32 +553,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.widget_40, 0, 0, 1, 1)
 
-        self.widget_44 = QWidget(self.widget_207)
-        self.widget_44.setObjectName(u"widget_44")
-        self.widget_44.setMaximumSize(QSize(16777215, 30))
-        self.horizontalLayout_40 = QHBoxLayout(self.widget_44)
-        self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
-        self.horizontalLayout_40.setContentsMargins(0, 0, 0, 0)
-        self.label_86 = QLabel(self.widget_44)
-        self.label_86.setObjectName(u"label_86")
-        self.label_86.setMaximumSize(QSize(250, 16777215))
-
-        self.horizontalLayout_40.addWidget(self.label_86)
-
-        self.est_hexapod_ld = QLabel(self.widget_44)
-        self.est_hexapod_ld.setObjectName(u"est_hexapod_ld")
-        self.est_hexapod_ld.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_40.addWidget(self.est_hexapod_ld)
-
-        self.label_88 = QLabel(self.widget_44)
-        self.label_88.setObjectName(u"label_88")
-
-        self.horizontalLayout_40.addWidget(self.label_88)
-
-
-        self.gridLayout_2.addWidget(self.widget_44, 0, 1, 1, 1)
-
         self.widget_35 = QWidget(self.widget_207)
         self.widget_35.setObjectName(u"widget_35")
         self.widget_35.setMaximumSize(QSize(16777215, 30))
@@ -590,113 +578,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_35.addWidget(self.label_73)
 
 
-        self.gridLayout_2.addWidget(self.widget_35, 1, 0, 1, 1)
-
-        self.widget_43 = QWidget(self.widget_207)
-        self.widget_43.setObjectName(u"widget_43")
-        self.widget_43.setMaximumSize(QSize(16777215, 30))
-        self.horizontalLayout_39 = QHBoxLayout(self.widget_43)
-        self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
-        self.horizontalLayout_39.setContentsMargins(0, 0, 0, 0)
-        self.label_83 = QLabel(self.widget_43)
-        self.label_83.setObjectName(u"label_83")
-        self.label_83.setMaximumSize(QSize(250, 16777215))
-
-        self.horizontalLayout_39.addWidget(self.label_83)
-
-        self.est_doors_meas_space_ld = QLabel(self.widget_43)
-        self.est_doors_meas_space_ld.setObjectName(u"est_doors_meas_space_ld")
-        self.est_doors_meas_space_ld.setMaximumSize(QSize(25, 26))
-
-        self.horizontalLayout_39.addWidget(self.est_doors_meas_space_ld)
-
-        self.label_85 = QLabel(self.widget_43)
-        self.label_85.setObjectName(u"label_85")
-
-        self.horizontalLayout_39.addWidget(self.label_85)
-
-
-        self.gridLayout_2.addWidget(self.widget_43, 1, 1, 1, 1)
-
-        self.widget_42 = QWidget(self.widget_207)
-        self.widget_42.setObjectName(u"widget_42")
-        self.widget_42.setMaximumSize(QSize(16777215, 30))
-        self.horizontalLayout_38 = QHBoxLayout(self.widget_42)
-        self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
-        self.horizontalLayout_38.setContentsMargins(0, 0, 0, 0)
-        self.label_80 = QLabel(self.widget_42)
-        self.label_80.setObjectName(u"label_80")
-        self.label_80.setMinimumSize(QSize(170, 0))
-        self.label_80.setMaximumSize(QSize(250, 16777215))
-
-        self.horizontalLayout_38.addWidget(self.label_80)
-
-        self.est_measure_space_ld = QLabel(self.widget_42)
-        self.est_measure_space_ld.setObjectName(u"est_measure_space_ld")
-        self.est_measure_space_ld.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_38.addWidget(self.est_measure_space_ld)
-
-        self.label_82 = QLabel(self.widget_42)
-        self.label_82.setObjectName(u"label_82")
-
-        self.horizontalLayout_38.addWidget(self.label_82)
-
-
-        self.gridLayout_2.addWidget(self.widget_42, 2, 0, 1, 1)
-
-        self.widget_46 = QWidget(self.widget_207)
-        self.widget_46.setObjectName(u"widget_46")
-        self.widget_46.setMaximumSize(QSize(16777215, 30))
-        self.horizontalLayout_42 = QHBoxLayout(self.widget_46)
-        self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
-        self.horizontalLayout_42.setContentsMargins(0, 0, 0, 0)
-        self.label_92 = QLabel(self.widget_46)
-        self.label_92.setObjectName(u"label_92")
-        self.label_92.setMaximumSize(QSize(250, 16777215))
-
-        self.horizontalLayout_42.addWidget(self.label_92)
-
-        self.est_doors_meas_space_ld_2 = QLabel(self.widget_46)
-        self.est_doors_meas_space_ld_2.setObjectName(u"est_doors_meas_space_ld_2")
-        self.est_doors_meas_space_ld_2.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_42.addWidget(self.est_doors_meas_space_ld_2)
-
-        self.label_94 = QLabel(self.widget_46)
-        self.label_94.setObjectName(u"label_94")
-
-        self.horizontalLayout_42.addWidget(self.label_94)
-
-
-        self.gridLayout_2.addWidget(self.widget_46, 2, 1, 1, 1)
-
-        self.widget_41 = QWidget(self.widget_207)
-        self.widget_41.setObjectName(u"widget_41")
-        self.widget_41.setMaximumSize(QSize(16777215, 30))
-        self.horizontalLayout_37 = QHBoxLayout(self.widget_41)
-        self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
-        self.horizontalLayout_37.setContentsMargins(0, 0, 0, 0)
-        self.label_77 = QLabel(self.widget_41)
-        self.label_77.setObjectName(u"label_77")
-        self.label_77.setMinimumSize(QSize(170, 0))
-        self.label_77.setMaximumSize(QSize(250, 16777215))
-
-        self.horizontalLayout_37.addWidget(self.label_77)
-
-        self.est_entry_doors_ld = QLabel(self.widget_41)
-        self.est_entry_doors_ld.setObjectName(u"est_entry_doors_ld")
-        self.est_entry_doors_ld.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_37.addWidget(self.est_entry_doors_ld)
-
-        self.label_79 = QLabel(self.widget_41)
-        self.label_79.setObjectName(u"label_79")
-
-        self.horizontalLayout_37.addWidget(self.label_79)
-
-
-        self.gridLayout_2.addWidget(self.widget_41, 3, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.widget_35, 0, 1, 1, 1)
 
 
         self.verticalLayout_7.addWidget(self.widget_207)
@@ -853,6 +735,7 @@ class Ui_MainWindow(object):
 
         self.label_2 = QLabel(self.widget_203)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_2)
 
@@ -869,14 +752,15 @@ class Ui_MainWindow(object):
 
         self.label_13 = QLabel(self.widget_203)
         self.label_13.setObjectName(u"label_13")
+        self.label_13.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_13)
 
-        self.led_6 = QLabel(self.widget_203)
-        self.led_6.setObjectName(u"led_6")
-        self.led_6.setMaximumSize(QSize(25, 25))
+        self.led_2 = QLabel(self.widget_203)
+        self.led_2.setObjectName(u"led_2")
+        self.led_2.setMaximumSize(QSize(25, 25))
 
-        self.horizontalLayout_2.addWidget(self.led_6)
+        self.horizontalLayout_2.addWidget(self.led_2)
 
         self.widget_12 = QWidget(self.widget_203)
         self.widget_12.setObjectName(u"widget_12")
@@ -885,24 +769,9 @@ class Ui_MainWindow(object):
 
         self.label_4 = QLabel(self.widget_203)
         self.label_4.setObjectName(u"label_4")
+        self.label_4.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_4)
-
-        self.led_2 = QLabel(self.widget_203)
-        self.led_2.setObjectName(u"led_2")
-        self.led_2.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_2.addWidget(self.led_2)
-
-        self.widget_15 = QWidget(self.widget_203)
-        self.widget_15.setObjectName(u"widget_15")
-
-        self.horizontalLayout_2.addWidget(self.widget_15)
-
-        self.label_6 = QLabel(self.widget_203)
-        self.label_6.setObjectName(u"label_6")
-
-        self.horizontalLayout_2.addWidget(self.label_6)
 
         self.led_3 = QLabel(self.widget_203)
         self.led_3.setObjectName(u"led_3")
@@ -910,47 +779,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.led_3)
 
-        self.widget_17 = QWidget(self.widget_203)
-        self.widget_17.setObjectName(u"widget_17")
+        self.widget_15 = QWidget(self.widget_203)
+        self.widget_15.setObjectName(u"widget_15")
 
-        self.horizontalLayout_2.addWidget(self.widget_17)
+        self.horizontalLayout_2.addWidget(self.widget_15)
 
         self.label_10 = QLabel(self.widget_203)
         self.label_10.setObjectName(u"label_10")
+        self.label_10.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.label_10)
-
-        self.led_5 = QLabel(self.widget_203)
-        self.led_5.setObjectName(u"led_5")
-        self.led_5.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_2.addWidget(self.led_5)
-
-        self.widget_21 = QWidget(self.widget_203)
-        self.widget_21.setObjectName(u"widget_21")
-
-        self.horizontalLayout_2.addWidget(self.widget_21)
-
-        self.label_3 = QLabel(self.widget_203)
-        self.label_3.setObjectName(u"label_3")
-
-        self.horizontalLayout_2.addWidget(self.label_3)
-
-        self.led_7 = QLabel(self.widget_203)
-        self.led_7.setObjectName(u"led_7")
-        self.led_7.setMaximumSize(QSize(25, 25))
-
-        self.horizontalLayout_2.addWidget(self.led_7)
-
-        self.widget_16 = QWidget(self.widget_203)
-        self.widget_16.setObjectName(u"widget_16")
-
-        self.horizontalLayout_2.addWidget(self.widget_16)
-
-        self.label_8 = QLabel(self.widget_203)
-        self.label_8.setObjectName(u"label_8")
-
-        self.horizontalLayout_2.addWidget(self.label_8)
 
         self.led_4 = QLabel(self.widget_203)
         self.led_4.setObjectName(u"led_4")
@@ -958,10 +796,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.led_4)
 
-        self.widget_14 = QWidget(self.widget_203)
-        self.widget_14.setObjectName(u"widget_14")
+        self.widget_21 = QWidget(self.widget_203)
+        self.widget_21.setObjectName(u"widget_21")
 
-        self.horizontalLayout_2.addWidget(self.widget_14)
+        self.horizontalLayout_2.addWidget(self.widget_21)
 
 
         self.verticalLayout_4.addWidget(self.widget_203)
@@ -980,9 +818,9 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.config_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.drivers_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Drivers", None))
-        self.scales_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Scales", None))
+        self.scales_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Balances", None))
         self.pressures_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Pressures", None))
-        self.next_params_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Next parameters", None))
+        self.next_params_pg_btn.setText(QCoreApplication.translate("MainWindow", u"System params", None))
         self.pid_settings_pg_btn.setText(QCoreApplication.translate("MainWindow", u"PID", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Measurements", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Temperature input RAW:", None))
@@ -1020,27 +858,13 @@ class Ui_MainWindow(object):
         self.engine_temp_lbl.setText(QCoreApplication.translate("MainWindow", u"0.00", None))
         self.label_46.setText(QCoreApplication.translate("MainWindow", u"\u00b0C", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Safety circuits", None))
-        self.label_74.setText(QCoreApplication.translate("MainWindow", u"E-stop switchboard:", None))
+        self.label_88.setText("")
+        self.label_74.setText(QCoreApplication.translate("MainWindow", u"E-stop main:", None))
         self.est_converter_ld.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.label_76.setText("")
-        self.label_86.setText(QCoreApplication.translate("MainWindow", u"E-stop hexapod:", None))
-        self.est_hexapod_ld.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.label_88.setText("")
-        self.label_71.setText(QCoreApplication.translate("MainWindow", u"E-stop service:", None))
+        self.label_71.setText(QCoreApplication.translate("MainWindow", u"E-stop panel:", None))
         self.est_service_ld.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.label_73.setText("")
-        self.label_83.setText(QCoreApplication.translate("MainWindow", u"Doors test section:", None))
-        self.est_doors_meas_space_ld.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.label_85.setText("")
-        self.label_80.setText(QCoreApplication.translate("MainWindow", u"E-stop test section:", None))
-        self.est_measure_space_ld.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.label_82.setText("")
-        self.label_92.setText(QCoreApplication.translate("MainWindow", u"Doors test section:", None))
-        self.est_doors_meas_space_ld_2.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.label_94.setText("")
-        self.label_77.setText(QCoreApplication.translate("MainWindow", u"E-stop entry doors", None))
-        self.est_entry_doors_ld.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.label_79.setText("")
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"User name:", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Password:", None))
         self.log_in_btn.setText(QCoreApplication.translate("MainWindow", u"Log in", None))
@@ -1048,16 +872,10 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"ready", None))
         self.led_1.setText(QCoreApplication.translate("MainWindow", u"L1", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"e-reset", None))
-        self.led_6.setText(QCoreApplication.translate("MainWindow", u"L6", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"e-stop", None))
         self.led_2.setText(QCoreApplication.translate("MainWindow", u"L2", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"doors", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"e-stop", None))
         self.led_3.setText(QCoreApplication.translate("MainWindow", u"L3", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"drive error", None))
-        self.led_5.setText(QCoreApplication.translate("MainWindow", u"L5", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"concetrc", None))
-        self.led_7.setText(QCoreApplication.translate("MainWindow", u"L7", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"surge protection", None))
         self.led_4.setText(QCoreApplication.translate("MainWindow", u"L4", None))
     # retranslateUi
 

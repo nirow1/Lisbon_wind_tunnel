@@ -106,7 +106,7 @@ QPushButton:pressed {
          </size>
         </property>
         <property name="text">
-         <string>Page 1</string>
+         <string>Device 1</string>
         </property>
        </widget>
       </item>
@@ -125,7 +125,7 @@ QPushButton:pressed {
          </size>
         </property>
         <property name="text">
-         <string>Page 2</string>
+         <string>Device 2</string>
         </property>
        </widget>
       </item>
@@ -135,7 +135,7 @@ QPushButton:pressed {
    <item>
     <widget class="QStackedWidget" name="stackedWidget_3">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -486,7 +486,7 @@ QPushButton:pressed {
           <item>
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>Pressures 1</string>
+             <string>Device 1</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -875,7 +875,7 @@ QPushButton:pressed {
           <item>
            <widget class="QLabel" name="label_14">
             <property name="text">
-             <string>Pressures 2</string>
+             <string>Device 2</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>

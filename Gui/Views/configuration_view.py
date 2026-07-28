@@ -21,11 +21,10 @@ class ConfigurationView(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-        self.data_to_save = {"time": "00:00:00", "Velocity [m/s]": 0.0, "Velocity max-min[m/s]": 0.0,
-                             "Temp [°C]": 0.0, "Temp max-min[°C]":0.0, "pressure [Pa]": 0.0,
-                             "pressure max-min[Pa]": 0.0, "frequency [Hz]": 0.0}
+        self.data_to_save = {"time": "00:00:00", "Velocity [m/s]": 0.0,
+                             "Temp [°C]": 0.0, "pressure [Pa]": 0.0, "frequency [Hz]": 0.0}
 
-        self.configuration_data = {"ramp_up": 0, "ramp_down": 0, "run_duration": 0, "frequency": 0.0, "velocity": 0.0, "pid": False, "control": False}
+        self.configuration_data = { "frequency": 0.0, "velocity": 0.0, "pid": False}
 
         self.reset_save_file = False
         self.save_timer = QTimer()
@@ -51,9 +50,6 @@ class ConfigurationView(QWidget):
         self._bind_emits()
 
     def _init_graphical_changes(self):
-        self.ui.change_dir_btn.setIcon(QIcon("./App_data/dir_icon.png"))
-        self.ui.change_dir_btn.setIconSize(QSize(54, 30))
-
         # charts setup block
         self.chart = ZoomableChart(
             name="",
@@ -94,15 +90,12 @@ class ConfigurationView(QWidget):
             self.data_to_save["A pressure"] = papago_data.get("pressure")
 
     def _handle_plc_data(self, plc_data: dict):
-        self.chart.update_chart([plc_data.get("wind_velocity"), plc_data.get("average_temp")])
+        self.chart.update_chart([plc_data.get("wind_filtered"), plc_data.get("average_temp")])
         if self.saving:
-            self.data_to_save["Velocity [m/s]"] = plc_data.get("wind_velocity")
-            self.data_to_save["Velocity max-min[m/s]"] = plc_data.get("wind_velocity_maxmin")
+            self.data_to_save["Velocity [m/s]"] = plc_data.get("wind_filtered")
             self.data_to_save["Temp [°C]"] = plc_data.get("average_temp")
-            self.data_to_save["Temp max-min[°C]"] = plc_data.get("avg_temp_maxmin")
-            self.data_to_save["pressure [Pa]"] = plc_data.get("diff_pressure")
-            self.data_to_save["pressure max-min[Pa]"] = plc_data.get("pressure_maxmin")
-            self.data_to_save["frequency [Hz]"] = plc_data.get("engine_rotations")
+            self.data_to_save["pressure [Pa]"] = plc_data.get("pressure_filtered")
+            self.data_to_save["frequency [Hz]"] = plc_data.get("frequency")
 
     def start_tunnel(self):
         config = self.configuration_data
@@ -112,11 +105,7 @@ class ConfigurationView(QWidget):
         else:
             self.tunnel_plc.set_engine_frequency(config.get("frequency"))
 
-        self.tunnel_plc.set_ramp_up(config.get("ramp_up"))
-        self.tunnel_plc.set_ramp_down(config.get("ramp_down"))
-        self.tunnel_plc.set_run_dur(config.get("run_duration"))
         self.start_saving()
-        self.tunnel_plc.switch_control(config.get("control"))
         self.tunnel_plc.start_engine()
 
         self.ui.start_tunnel_btn.setEnabled(False)
@@ -126,10 +115,6 @@ class ConfigurationView(QWidget):
         self.tunnel_plc.switch_pid(False)
         self.tunnel_plc.set_wind_velocity(0)
         self.tunnel_plc.set_engine_frequency(0)
-        self.tunnel_plc.switch_control(False)
-        self.tunnel_plc.set_ramp_up(0)
-        self.tunnel_plc.set_ramp_down(0)
-        self.tunnel_plc.set_run_dur(0)
         self.tunnel_plc.stop_engine()
         self.stop_saving()
         self.ui.start_tunnel_btn.setEnabled(True)
@@ -141,7 +126,7 @@ class ConfigurationView(QWidget):
         self.ui.stop_tunnel_btn.setEnabled(False)
 
     def set_available(self, state: bool):
-        if self.ui.stop_tunnel_btn.isEnabled():
+        if state is False and self.ui.stop_tunnel_btn.isEnabled():
             self.stop_tunnel()
         self.ui.start_tunnel_btn.setEnabled(state)
 
@@ -161,7 +146,7 @@ class ConfigurationView(QWidget):
         self._update_configuration("pid", True)
 
     def _set_frequency_value(self):
-        req_frequency = float(self.ui.set_frequency_le.text())
+        req_frequency = float(self.ui.set_frequency_le.text()) if self.ui.set_frequency_le.text() != "" else 0
         self._update_configuration("frequency", req_frequency)
 
     def enable_setting_velocity(self, concentric: bool):
