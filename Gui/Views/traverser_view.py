@@ -2,7 +2,7 @@ from datetime import datetime
 from threading import Thread
 from time import sleep
 from PySide6.QtCore import Signal
-from PySide6.QtWidgets import QWidget, QTableWidget
+from PySide6.QtWidgets import QWidget
 from Device_controllers.driver_plc_controlle import DriverPLCController
 from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Gui.Custom_widgets.pos_field_view import PositionFieldWidget
@@ -39,9 +39,11 @@ class TraverserView(QWidget):
         self.field_3d_xz = PositionFieldWidget(1000,1000, 350, 350)
         self.ui.field_3d_xz_lo.addWidget(self.field_3d_xz)
 
-        self.test_plan_2d = TestPlanTab(["",""])
+        self.test_plan_2d = TestPlanTab(["Pos X","Pos Y"])
+        self.ui.test_plan_2d_lo.addWidget(self.test_plan_2d)
 
-        self.test_plan_3d = TestPlanTab(["","",""])
+        self.test_plan_3d = TestPlanTab(["Pos X","Pos Y","Pos Z"])
+        self.ui.test_plan_3d_lo.addWidget(self.test_plan_3d)
 
         self._init_graphical_changes()
         self._bind_buttons()
@@ -52,8 +54,8 @@ class TraverserView(QWidget):
         self.bind_emits()
 
     def _init_graphical_changes(self):
-        self.ui.test_running_wg.setVisible(False)
-        self.ui.tableWidget.verticalHeader().setVisible(False)
+        self.test_plan_2d.show_message(False)
+        self.test_plan_3d.show_message(False)
 
     def _bind_buttons(self):
         self.ui.pg_2d_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg))
@@ -62,11 +64,11 @@ class TraverserView(QWidget):
         self.ui.set_pos_x_2d_btn.clicked.connect(self.set_x_pos_2d)
         self.ui.set_pos_y_2d_btn.clicked.connect(self.set_y_pos_2d)
 
-        self.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
-        self.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
+        self.test_plan_2d.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
+        self.test_plan_2d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
-        self.ui.start_3d_test_plan_btn.clicked.connect(self._start_3d_test_plan)
-        self.ui.stop_3d_test_plan_btn.clicked.connect(self._stop_plan)
+        self.test_plan_3d.ui.start_test_plan_btn.clicked.connect(self._start_3d_test_plan)
+        self.test_plan_3d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
     def bind_emits(self):
         self.plc.DRIVERS_POS.connect(self.show_drivers_pos)
@@ -110,11 +112,14 @@ class TraverserView(QWidget):
     def test_hor_pos(self, hor_pos):
         self.ui.set_pos_y_2d_le.setText(str(hor_pos))
 
+    # todo: disable and enable depending on connected device
+    # todo: add function to set all positions at once
+    # todo: add confirmation for traverser
     def _start_test_plan(self):
         Thread(
             target=self._run_test_plan,
             args=(
-                self.ui.tableWidget,
+                self.test_plan_2d.get_test_plan(),
                 [self.set_x_pos_2d, self.set_y_pos_2d],
                 lambda: (self.x_2d, self.y_2d),
             ),
@@ -124,14 +129,13 @@ class TraverserView(QWidget):
         Thread(
             target=self._run_test_plan,
             args=(
-                self.ui.tableWidget_3d,
+                self.test_plan_3d.get_test_plan(),
                 [self.set_x_pos_3d, self.set_y_pos_3d, self.set_z_pos_3d],
                 lambda: (self.x_3d, self.y_3d, self.z_3d),
             ),
         ).start()
 
-    def _run_test_plan(self, table: QTableWidget, setters: list, get_current):
-        test_plan = self._create_test_plan(table)
+    def _run_test_plan(self, test_plan: list, setters: list, get_current):
         self.TEST_RUNNING.emit(True)
         for row in test_plan:
             self._wait_until(add_sec_to_current_time(row[0]))

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_traverser_viewzwWuZz.ui'
+## Form generated from reading UI file 'wind_tunnel_traverser_viewNYziQX.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -15,10 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
+    QLineEdit, QPushButton, QSizePolicy, QStackedWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -123,46 +122,6 @@ class Ui_Form(object):
         self.verticalLayout_3 = QVBoxLayout(self.widget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(3, 3, 3, 3)
-        self.widget_9 = QWidget(self.widget)
-        self.widget_9.setObjectName(u"widget_9")
-        self.widget_9.setMaximumSize(QSize(16777215, 60))
-        self.gridLayout = QGridLayout(self.widget_9)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.label = QLabel(self.widget_9)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-
-        self.pos_x_2d_lbl = QLabel(self.widget_9)
-        self.pos_x_2d_lbl.setObjectName(u"pos_x_2d_lbl")
-
-        self.gridLayout.addWidget(self.pos_x_2d_lbl, 0, 1, 1, 1)
-
-        self.label_5 = QLabel(self.widget_9)
-        self.label_5.setObjectName(u"label_5")
-
-        self.gridLayout.addWidget(self.label_5, 0, 2, 1, 1)
-
-        self.label_2 = QLabel(self.widget_9)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
-
-        self.pos_y_2d_lbl = QLabel(self.widget_9)
-        self.pos_y_2d_lbl.setObjectName(u"pos_y_2d_lbl")
-
-        self.gridLayout.addWidget(self.pos_y_2d_lbl, 1, 1, 1, 1)
-
-        self.label_6 = QLabel(self.widget_9)
-        self.label_6.setObjectName(u"label_6")
-
-        self.gridLayout.addWidget(self.label_6, 1, 2, 1, 1)
-
-
-        self.verticalLayout_3.addWidget(self.widget_9)
-
         self.label_20 = QLabel(self.widget)
         self.label_20.setObjectName(u"label_20")
         self.label_20.setMaximumSize(QSize(16777215, 25))
@@ -179,60 +138,6 @@ class Ui_Form(object):
 
         self.verticalLayout_3.addWidget(self.widget_15)
 
-        self.widget_4 = QWidget(self.widget)
-        self.widget_4.setObjectName(u"widget_4")
-        self.widget_4.setMaximumSize(QSize(16777215, 80))
-        self.gridLayout_2 = QGridLayout(self.widget_4)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout_2.setContentsMargins(-1, 5, -1, 5)
-        self.set_pos_x_2d_le = QLineEdit(self.widget_4)
-        self.set_pos_x_2d_le.setObjectName(u"set_pos_x_2d_le")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.set_pos_x_2d_le.sizePolicy().hasHeightForWidth())
-        self.set_pos_x_2d_le.setSizePolicy(sizePolicy)
-        self.set_pos_x_2d_le.setMaximumSize(QSize(60, 30))
-
-        self.gridLayout_2.addWidget(self.set_pos_x_2d_le, 1, 1, 1, 1)
-
-        self.label_4 = QLabel(self.widget_4)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout_2.addWidget(self.label_4, 2, 0, 1, 1)
-
-        self.set_pos_x_2d_btn = QPushButton(self.widget_4)
-        self.set_pos_x_2d_btn.setObjectName(u"set_pos_x_2d_btn")
-        self.set_pos_x_2d_btn.setMinimumSize(QSize(35, 0))
-        self.set_pos_x_2d_btn.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.set_pos_x_2d_btn, 1, 3, 1, 1)
-
-        self.set_pos_y_2d_le = QLineEdit(self.widget_4)
-        self.set_pos_y_2d_le.setObjectName(u"set_pos_y_2d_le")
-        sizePolicy.setHeightForWidth(self.set_pos_y_2d_le.sizePolicy().hasHeightForWidth())
-        self.set_pos_y_2d_le.setSizePolicy(sizePolicy)
-        self.set_pos_y_2d_le.setMaximumSize(QSize(60, 30))
-
-        self.gridLayout_2.addWidget(self.set_pos_y_2d_le, 2, 1, 1, 1)
-
-        self.label_3 = QLabel(self.widget_4)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout_2.addWidget(self.label_3, 1, 0, 1, 1)
-
-        self.set_pos_y_2d_btn = QPushButton(self.widget_4)
-        self.set_pos_y_2d_btn.setObjectName(u"set_pos_y_2d_btn")
-        self.set_pos_y_2d_btn.setMinimumSize(QSize(50, 0))
-        self.set_pos_y_2d_btn.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.set_pos_y_2d_btn, 2, 3, 1, 1)
-
-
-        self.verticalLayout_3.addWidget(self.widget_4)
-
         self.widget_19 = QWidget(self.widget)
         self.widget_19.setObjectName(u"widget_19")
 
@@ -243,83 +148,112 @@ class Ui_Form(object):
 
         self.widget_204 = QWidget(self.widget_2)
         self.widget_204.setObjectName(u"widget_204")
-        self.verticalLayout = QVBoxLayout(self.widget_204)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.test_running_wg = QWidget(self.widget_204)
-        self.test_running_wg.setObjectName(u"test_running_wg")
-        self.test_running_wg.setMinimumSize(QSize(0, 25))
-        self.test_running_wg.setStyleSheet(u"QLabel {\n"
-"    background-color: #4CAF50;\n"
-"    border-radius: 7px;\n"
-"    color: white; /* Optional: makes the text readable on red */\n"
-"}")
-        self.horizontalLayout_4 = QHBoxLayout(self.test_running_wg)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.label_7 = QLabel(self.test_running_wg)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setMaximumSize(QSize(150, 16777215))
-        self.label_7.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout_4.addWidget(self.label_7)
-
-
-        self.verticalLayout.addWidget(self.test_running_wg)
-
-        self.tableWidget = QTableWidget(self.widget_204)
-        if (self.tableWidget.columnCount() < 4):
-            self.tableWidget.setColumnCount(4)
-        __qtablewidgetitem = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        self.tableWidget.setObjectName(u"tableWidget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
-        self.tableWidget.setSizePolicy(sizePolicy1)
-
-        self.verticalLayout.addWidget(self.tableWidget)
-
-        self.widget_7 = QWidget(self.widget_204)
-        self.widget_7.setObjectName(u"widget_7")
-        self.widget_7.setMinimumSize(QSize(0, 50))
-        self.widget_7.setMaximumSize(QSize(16777215, 50))
-        self.horizontalLayout_3 = QHBoxLayout(self.widget_7)
+        self.test_plan_2d_lo = QVBoxLayout(self.widget_204)
+        self.test_plan_2d_lo.setObjectName(u"test_plan_2d_lo")
+        self.test_plan_2d_lo.setContentsMargins(3, 3, 3, 3)
+        self.widget_5 = QWidget(self.widget_204)
+        self.widget_5.setObjectName(u"widget_5")
+        self.widget_5.setMaximumSize(QSize(16777215, 145))
+        self.horizontalLayout_3 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.add_row_btn = QPushButton(self.widget_7)
-        self.add_row_btn.setObjectName(u"add_row_btn")
-        self.add_row_btn.setMinimumSize(QSize(0, 0))
-        self.add_row_btn.setMaximumSize(QSize(34, 34))
+        self.widget_206 = QWidget(self.widget_5)
+        self.widget_206.setObjectName(u"widget_206")
+        self.widget_206.setMinimumSize(QSize(0, 130))
+        self.widget_206.setMaximumSize(QSize(250, 130))
+        self.gridLayout = QGridLayout(self.widget_206)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label = QLabel(self.widget_206)
+        self.label.setObjectName(u"label")
+        self.label.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.horizontalLayout_3.addWidget(self.add_row_btn)
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
 
-        self.start_test_plan_btn = QPushButton(self.widget_7)
-        self.start_test_plan_btn.setObjectName(u"start_test_plan_btn")
-        self.start_test_plan_btn.setMaximumSize(QSize(100, 40))
+        self.pos_x_2d_lbl = QLabel(self.widget_206)
+        self.pos_x_2d_lbl.setObjectName(u"pos_x_2d_lbl")
 
-        self.horizontalLayout_3.addWidget(self.start_test_plan_btn)
+        self.gridLayout.addWidget(self.pos_x_2d_lbl, 0, 1, 1, 1)
 
-        self.stop_test_plan_btn = QPushButton(self.widget_7)
-        self.stop_test_plan_btn.setObjectName(u"stop_test_plan_btn")
-        self.stop_test_plan_btn.setMaximumSize(QSize(100, 40))
+        self.label_5 = QLabel(self.widget_206)
+        self.label_5.setObjectName(u"label_5")
 
-        self.horizontalLayout_3.addWidget(self.stop_test_plan_btn)
+        self.gridLayout.addWidget(self.label_5, 0, 2, 1, 1)
 
-        self.delete_row_btn = QPushButton(self.widget_7)
-        self.delete_row_btn.setObjectName(u"delete_row_btn")
-        self.delete_row_btn.setMaximumSize(QSize(34, 34))
+        self.label_2 = QLabel(self.widget_206)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.horizontalLayout_3.addWidget(self.delete_row_btn)
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+
+        self.pos_y_2d_lbl = QLabel(self.widget_206)
+        self.pos_y_2d_lbl.setObjectName(u"pos_y_2d_lbl")
+
+        self.gridLayout.addWidget(self.pos_y_2d_lbl, 1, 1, 1, 1)
+
+        self.label_6 = QLabel(self.widget_206)
+        self.label_6.setObjectName(u"label_6")
+
+        self.gridLayout.addWidget(self.label_6, 1, 2, 1, 1)
 
 
-        self.verticalLayout.addWidget(self.widget_7)
+        self.horizontalLayout_3.addWidget(self.widget_206)
+
+        self.widget_207 = QWidget(self.widget_5)
+        self.widget_207.setObjectName(u"widget_207")
+        self.widget_207.setMinimumSize(QSize(0, 13))
+        self.widget_207.setMaximumSize(QSize(250, 130))
+        self.gridLayout_2 = QGridLayout(self.widget_207)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setContentsMargins(-1, 5, -1, 5)
+        self.set_pos_x_2d_btn = QPushButton(self.widget_207)
+        self.set_pos_x_2d_btn.setObjectName(u"set_pos_x_2d_btn")
+        self.set_pos_x_2d_btn.setMinimumSize(QSize(35, 0))
+        self.set_pos_x_2d_btn.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_2.addWidget(self.set_pos_x_2d_btn, 1, 3, 1, 1)
+
+        self.set_pos_y_2d_le = QLineEdit(self.widget_207)
+        self.set_pos_y_2d_le.setObjectName(u"set_pos_y_2d_le")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.set_pos_y_2d_le.sizePolicy().hasHeightForWidth())
+        self.set_pos_y_2d_le.setSizePolicy(sizePolicy)
+        self.set_pos_y_2d_le.setMaximumSize(QSize(60, 30))
+
+        self.gridLayout_2.addWidget(self.set_pos_y_2d_le, 2, 1, 1, 1)
+
+        self.set_pos_y_2d_btn = QPushButton(self.widget_207)
+        self.set_pos_y_2d_btn.setObjectName(u"set_pos_y_2d_btn")
+        self.set_pos_y_2d_btn.setMinimumSize(QSize(50, 0))
+        self.set_pos_y_2d_btn.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_2.addWidget(self.set_pos_y_2d_btn, 2, 3, 1, 1)
+
+        self.set_pos_x_2d_le = QLineEdit(self.widget_207)
+        self.set_pos_x_2d_le.setObjectName(u"set_pos_x_2d_le")
+        sizePolicy.setHeightForWidth(self.set_pos_x_2d_le.sizePolicy().hasHeightForWidth())
+        self.set_pos_x_2d_le.setSizePolicy(sizePolicy)
+        self.set_pos_x_2d_le.setMaximumSize(QSize(60, 30))
+
+        self.gridLayout_2.addWidget(self.set_pos_x_2d_le, 1, 1, 1, 1)
+
+        self.label_4 = QLabel(self.widget_207)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.label_4, 2, 0, 1, 1)
+
+        self.label_3 = QLabel(self.widget_207)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.label_3, 1, 0, 1, 1)
+
+
+        self.horizontalLayout_3.addWidget(self.widget_207)
+
+
+        self.test_plan_2d_lo.addWidget(self.widget_5)
 
 
         self.horizontalLayout_2.addWidget(self.widget_204)
@@ -352,11 +286,11 @@ class Ui_Form(object):
 
         self.widget_200 = QWidget(self.widget_16)
         self.widget_200.setObjectName(u"widget_200")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.widget_200.sizePolicy().hasHeightForWidth())
-        self.widget_200.setSizePolicy(sizePolicy2)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.widget_200.sizePolicy().hasHeightForWidth())
+        self.widget_200.setSizePolicy(sizePolicy1)
         self.widget_200.setMinimumSize(QSize(350, 350))
         self.widget_200.setMaximumSize(QSize(350, 350))
         self.field_3d_xy_lo = QHBoxLayout(self.widget_200)
@@ -373,8 +307,8 @@ class Ui_Form(object):
 
         self.widget_201 = QWidget(self.widget_16)
         self.widget_201.setObjectName(u"widget_201")
-        sizePolicy2.setHeightForWidth(self.widget_201.sizePolicy().hasHeightForWidth())
-        self.widget_201.setSizePolicy(sizePolicy2)
+        sizePolicy1.setHeightForWidth(self.widget_201.sizePolicy().hasHeightForWidth())
+        self.widget_201.setSizePolicy(sizePolicy1)
         self.widget_201.setMinimumSize(QSize(350, 350))
         self.widget_201.setMaximumSize(QSize(350, 350))
         self.field_3d_xz_lo = QHBoxLayout(self.widget_201)
@@ -388,87 +322,73 @@ class Ui_Form(object):
 
         self.widget_205 = QWidget(self.widget_3)
         self.widget_205.setObjectName(u"widget_205")
-        self.verticalLayout_2 = QVBoxLayout(self.widget_205)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.test_running_wg_2 = QWidget(self.widget_205)
-        self.test_running_wg_2.setObjectName(u"test_running_wg_2")
-        self.test_running_wg_2.setMinimumSize(QSize(0, 25))
-        self.test_running_wg_2.setStyleSheet(u"QLabel {\n"
-"    background-color: #4CAF50;\n"
-"    border-radius: 7px;\n"
-"    color: white; /* Optional: makes the text readable on red */\n"
-"}")
-        self.horizontalLayout_5 = QHBoxLayout(self.test_running_wg_2)
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.label_8 = QLabel(self.test_running_wg_2)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setMaximumSize(QSize(150, 16777215))
-        self.label_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout_5.addWidget(self.label_8)
-
-
-        self.verticalLayout_2.addWidget(self.test_running_wg_2)
-
-        self.tableWidget_3d = QTableWidget(self.widget_205)
-        if (self.tableWidget_3d.columnCount() < 5):
-            self.tableWidget_3d.setColumnCount(5)
-        __qtablewidgetitem4 = QTableWidgetItem()
-        self.tableWidget_3d.setHorizontalHeaderItem(0, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.tableWidget_3d.setHorizontalHeaderItem(1, __qtablewidgetitem5)
-        __qtablewidgetitem6 = QTableWidgetItem()
-        self.tableWidget_3d.setHorizontalHeaderItem(2, __qtablewidgetitem6)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.tableWidget_3d.setHorizontalHeaderItem(3, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.tableWidget_3d.setHorizontalHeaderItem(4, __qtablewidgetitem8)
-        self.tableWidget_3d.setObjectName(u"tableWidget_3d")
-        sizePolicy1.setHeightForWidth(self.tableWidget_3d.sizePolicy().hasHeightForWidth())
-        self.tableWidget_3d.setSizePolicy(sizePolicy1)
-
-        self.verticalLayout_2.addWidget(self.tableWidget_3d)
-
-        self.widget_10 = QWidget(self.widget_205)
-        self.widget_10.setObjectName(u"widget_10")
-        self.widget_10.setMinimumSize(QSize(0, 50))
-        self.widget_10.setMaximumSize(QSize(16777215, 50))
-        self.horizontalLayout_6 = QHBoxLayout(self.widget_10)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.add_3d_row_btn = QPushButton(self.widget_10)
-        self.add_3d_row_btn.setObjectName(u"add_3d_row_btn")
-        self.add_3d_row_btn.setMinimumSize(QSize(0, 0))
-        self.add_3d_row_btn.setMaximumSize(QSize(34, 34))
-
-        self.horizontalLayout_6.addWidget(self.add_3d_row_btn)
-
-        self.start_3d_test_plan_btn = QPushButton(self.widget_10)
-        self.start_3d_test_plan_btn.setObjectName(u"start_3d_test_plan_btn")
-        self.start_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
-
-        self.horizontalLayout_6.addWidget(self.start_3d_test_plan_btn)
-
-        self.stop_3d_test_plan_btn = QPushButton(self.widget_10)
-        self.stop_3d_test_plan_btn.setObjectName(u"stop_3d_test_plan_btn")
-        self.stop_3d_test_plan_btn.setMaximumSize(QSize(100, 40))
-
-        self.horizontalLayout_6.addWidget(self.stop_3d_test_plan_btn)
-
-        self.delete_3d_row_btn = QPushButton(self.widget_10)
-        self.delete_3d_row_btn.setObjectName(u"delete_3d_row_btn")
-        self.delete_3d_row_btn.setMaximumSize(QSize(34, 34))
-
-        self.horizontalLayout_6.addWidget(self.delete_3d_row_btn)
-
-
-        self.verticalLayout_2.addWidget(self.widget_10)
-
+        self.test_plan_3d_lo = QVBoxLayout(self.widget_205)
+        self.test_plan_3d_lo.setObjectName(u"test_plan_3d_lo")
+        self.test_plan_3d_lo.setContentsMargins(3, 3, 3, 3)
         self.widget_20 = QWidget(self.widget_205)
         self.widget_20.setObjectName(u"widget_20")
-        self.horizontalLayout_10 = QHBoxLayout(self.widget_20)
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.widget_20.setMaximumSize(QSize(16777215, 145))
+        self.horicontal_layout = QHBoxLayout(self.widget_20)
+        self.horicontal_layout.setObjectName(u"horicontal_layout")
+        self.horicontal_layout.setContentsMargins(3, 3, 3, 3)
+        self.widget_203 = QWidget(self.widget_20)
+        self.widget_203.setObjectName(u"widget_203")
+        self.widget_203.setMinimumSize(QSize(0, 130))
+        self.widget_203.setMaximumSize(QSize(250, 130))
+        self.gridLayout_3 = QGridLayout(self.widget_203)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setContentsMargins(1, 1, 1, 1)
+        self.set_pos_y_3d_lbl = QLabel(self.widget_203)
+        self.set_pos_y_3d_lbl.setObjectName(u"set_pos_y_3d_lbl")
+
+        self.gridLayout_3.addWidget(self.set_pos_y_3d_lbl, 1, 1, 1, 1)
+
+        self.set_pos_x_3d_lbl = QLabel(self.widget_203)
+        self.set_pos_x_3d_lbl.setObjectName(u"set_pos_x_3d_lbl")
+
+        self.gridLayout_3.addWidget(self.set_pos_x_3d_lbl, 0, 1, 1, 1)
+
+        self.label_12 = QLabel(self.widget_203)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_3.addWidget(self.label_12, 1, 2, 1, 1)
+
+        self.label_9 = QLabel(self.widget_203)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout_3.addWidget(self.label_9, 0, 0, 1, 1)
+
+        self.label_11 = QLabel(self.widget_203)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout_3.addWidget(self.label_11, 1, 0, 1, 1)
+
+        self.label_10 = QLabel(self.widget_203)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout_3.addWidget(self.label_10, 0, 2, 1, 1)
+
+        self.label_16 = QLabel(self.widget_203)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout_3.addWidget(self.label_16, 2, 0, 1, 1)
+
+        self.set_pos_z_3d_lbl = QLabel(self.widget_203)
+        self.set_pos_z_3d_lbl.setObjectName(u"set_pos_z_3d_lbl")
+
+        self.gridLayout_3.addWidget(self.set_pos_z_3d_lbl, 2, 1, 1, 1)
+
+        self.label_18 = QLabel(self.widget_203)
+        self.label_18.setObjectName(u"label_18")
+
+        self.gridLayout_3.addWidget(self.label_18, 2, 2, 1, 1)
+
+
+        self.horicontal_layout.addWidget(self.widget_203)
+
         self.widget_202 = QWidget(self.widget_20)
         self.widget_202.setObjectName(u"widget_202")
         self.widget_202.setMinimumSize(QSize(0, 130))
@@ -537,68 +457,10 @@ class Ui_Form(object):
         self.gridLayout_4.addWidget(self.label_13, 1, 0, 1, 1)
 
 
-        self.horizontalLayout_10.addWidget(self.widget_202)
-
-        self.widget_203 = QWidget(self.widget_20)
-        self.widget_203.setObjectName(u"widget_203")
-        self.widget_203.setMinimumSize(QSize(0, 130))
-        self.widget_203.setMaximumSize(QSize(250, 130))
-        self.gridLayout_3 = QGridLayout(self.widget_203)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.gridLayout_3.setContentsMargins(1, 1, 1, 1)
-        self.set_pos_y_3d_lbl = QLabel(self.widget_203)
-        self.set_pos_y_3d_lbl.setObjectName(u"set_pos_y_3d_lbl")
-
-        self.gridLayout_3.addWidget(self.set_pos_y_3d_lbl, 1, 1, 1, 1)
-
-        self.set_pos_x_3d_lbl = QLabel(self.widget_203)
-        self.set_pos_x_3d_lbl.setObjectName(u"set_pos_x_3d_lbl")
-
-        self.gridLayout_3.addWidget(self.set_pos_x_3d_lbl, 0, 1, 1, 1)
-
-        self.label_12 = QLabel(self.widget_203)
-        self.label_12.setObjectName(u"label_12")
-
-        self.gridLayout_3.addWidget(self.label_12, 1, 2, 1, 1)
-
-        self.label_9 = QLabel(self.widget_203)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout_3.addWidget(self.label_9, 0, 0, 1, 1)
-
-        self.label_11 = QLabel(self.widget_203)
-        self.label_11.setObjectName(u"label_11")
-        self.label_11.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout_3.addWidget(self.label_11, 1, 0, 1, 1)
-
-        self.label_10 = QLabel(self.widget_203)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_3.addWidget(self.label_10, 0, 2, 1, 1)
-
-        self.label_16 = QLabel(self.widget_203)
-        self.label_16.setObjectName(u"label_16")
-        self.label_16.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout_3.addWidget(self.label_16, 2, 0, 1, 1)
-
-        self.set_pos_z_3d_lbl = QLabel(self.widget_203)
-        self.set_pos_z_3d_lbl.setObjectName(u"set_pos_z_3d_lbl")
-
-        self.gridLayout_3.addWidget(self.set_pos_z_3d_lbl, 2, 1, 1, 1)
-
-        self.label_18 = QLabel(self.widget_203)
-        self.label_18.setObjectName(u"label_18")
-
-        self.gridLayout_3.addWidget(self.label_18, 2, 2, 1, 1)
+        self.horicontal_layout.addWidget(self.widget_202)
 
 
-        self.horizontalLayout_10.addWidget(self.widget_203)
-
-
-        self.verticalLayout_2.addWidget(self.widget_20)
+        self.test_plan_3d_lo.addWidget(self.widget_20)
 
 
         self.horizontalLayout.addWidget(self.widget_205)
@@ -623,55 +485,20 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.pg_2d_btn.setText(QCoreApplication.translate("Form", u"2D view", None))
         self.pg_3d_btn.setText(QCoreApplication.translate("Form", u"3D view", None))
+        self.label_20.setText(QCoreApplication.translate("Form", u"Position X Y:", None))
         self.label.setText(QCoreApplication.translate("Form", u"Pos X:", None))
         self.pos_x_2d_lbl.setText(QCoreApplication.translate("Form", u"0.000", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"mm", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
         self.pos_y_2d_lbl.setText(QCoreApplication.translate("Form", u"0.000", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"mm", None))
-        self.label_20.setText(QCoreApplication.translate("Form", u"Position X Y:", None))
+        self.set_pos_x_2d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.set_pos_y_2d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.set_pos_x_2d_le.setText("")
         self.label_4.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
-        self.set_pos_x_2d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Pos X:", None))
-        self.set_pos_y_2d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.label_7.setText(QCoreApplication.translate("Form", u"test running", None))
-        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Min", None));
-        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sek", None));
-        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Pos X", None));
-        ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Pos Y", None));
-        self.add_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
-        self.start_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
-        self.stop_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))
-        self.delete_row_btn.setText(QCoreApplication.translate("Form", u"-", None))
         self.label_19.setText(QCoreApplication.translate("Form", u"Field X Y:", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"Field X Z:", None))
-        self.label_8.setText(QCoreApplication.translate("Form", u"test running", None))
-        ___qtablewidgetitem4 = self.tableWidget_3d.horizontalHeaderItem(0)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Min", None));
-        ___qtablewidgetitem5 = self.tableWidget_3d.horizontalHeaderItem(1)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Sek", None));
-        ___qtablewidgetitem6 = self.tableWidget_3d.horizontalHeaderItem(2)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Pos X", None));
-        ___qtablewidgetitem7 = self.tableWidget_3d.horizontalHeaderItem(3)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Pos Y", None));
-        ___qtablewidgetitem8 = self.tableWidget_3d.horizontalHeaderItem(4)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"Pos Z", None));
-        self.add_3d_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
-        self.start_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
-        self.stop_3d_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))
-        self.delete_3d_row_btn.setText(QCoreApplication.translate("Form", u"-", None))
-        self.set_pos_x_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.set_pos_y_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.label_15.setText(QCoreApplication.translate("Form", u"Pos Z:", None))
-        self.set_pos_x_3d_le.setText("")
-        self.label_14.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
-        self.set_pos_z_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
-        self.label_13.setText(QCoreApplication.translate("Form", u"Pos X:", None))
         self.set_pos_y_3d_lbl.setText(QCoreApplication.translate("Form", u"0.000", None))
         self.set_pos_x_3d_lbl.setText(QCoreApplication.translate("Form", u"0.000", None))
         self.label_12.setText(QCoreApplication.translate("Form", u"mm", None))
@@ -681,5 +508,12 @@ class Ui_Form(object):
         self.label_16.setText(QCoreApplication.translate("Form", u"Pos Z:", None))
         self.set_pos_z_3d_lbl.setText(QCoreApplication.translate("Form", u"0.000", None))
         self.label_18.setText(QCoreApplication.translate("Form", u"mm", None))
+        self.set_pos_x_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.set_pos_y_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.label_15.setText(QCoreApplication.translate("Form", u"Pos Z:", None))
+        self.set_pos_x_3d_le.setText("")
+        self.label_14.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
+        self.set_pos_z_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.label_13.setText(QCoreApplication.translate("Form", u"Pos X:", None))
     # retranslateUi
 

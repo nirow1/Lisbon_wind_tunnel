@@ -117,6 +117,7 @@ class InfoPanel(QWidget):
 
         self.tunnel_plc.start_engine()
 
+        self.set_velocity_control_state(False)
         self.ui.start_tunnel_btn.setEnabled(False)
         self.ui.stop_tunnel_btn.setEnabled(True)
 
@@ -126,12 +127,19 @@ class InfoPanel(QWidget):
         self.tunnel_plc.set_wind_velocity(0)
         self.tunnel_plc.set_engine_frequency(0)
         self.tunnel_plc.stop_engine()
+        self.set_velocity_control_state(True)
         self.ui.start_tunnel_btn.setEnabled(True)
         self.ui.stop_tunnel_btn.setEnabled(False)
 
     def set_buttons_state(self, state: bool):
         self.ui.stop_tunnel_btn.setEnabled(state)
         self.ui.start_tunnel_btn.setEnabled(state)
+
+    def set_velocity_control_state(self, state: bool):
+        self.ui.set_velocity_le.setEnabled(state)
+        self.ui.set_velocity_rb.setEnabled(state)
+        self.ui.set_velocity_le.setEnabled(state)
+        self.ui.set_velocity_rb.setEnabled(state)
 
     def set_available(self, state: bool):
         if state is False and self.ui.stop_tunnel_btn.isEnabled():

@@ -25,6 +25,7 @@ class ScalePLCController(PLCController):
 
             time.sleep(0.1)
 
+    # todo: missing equations and pitch yaw roll setters
     def _read_main_data(self) -> dict | None:
         try:
             b1 = self._read_plc_data(self.read_nb, 4, 40, '>40B')
