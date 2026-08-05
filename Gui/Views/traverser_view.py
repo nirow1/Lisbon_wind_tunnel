@@ -2,8 +2,9 @@ from datetime import datetime
 from threading import Thread
 from time import sleep
 from PySide6.QtCore import Signal
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QWidget, QTableWidget
 from Device_controllers.driver_plc_controlle import DriverPLCController
+from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Gui.Custom_widgets.pos_field_view import PositionFieldWidget
 from Qt_files.Qt_python.ui_wind_tunnel_traverser_view import Ui_Form
 from Utils.number_validator import IntValidator, FloatValidator
@@ -38,6 +39,10 @@ class TraverserView(QWidget):
         self.field_3d_xz = PositionFieldWidget(1000,1000, 350, 350)
         self.ui.field_3d_xz_lo.addWidget(self.field_3d_xz)
 
+        self.test_plan_2d = TestPlanTab(["",""])
+
+        self.test_plan_3d = TestPlanTab(["","",""])
+
         self._init_graphical_changes()
         self._bind_buttons()
 
@@ -57,16 +62,9 @@ class TraverserView(QWidget):
         self.ui.set_pos_x_2d_btn.clicked.connect(self.set_x_pos_2d)
         self.ui.set_pos_y_2d_btn.clicked.connect(self.set_y_pos_2d)
 
-        # tab
-        self.ui.add_row_btn.clicked.connect(lambda: self._add_row(self.ui.tableWidget))
-        self.ui.delete_row_btn.clicked.connect(lambda: self._delete_row(self.ui.tableWidget))
-
         self.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
         self.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
-        #3d tab
-        self.ui.add_3d_row_btn.clicked.connect(lambda: self._add_row(self.ui.tableWidget_3d))
-        self.ui.delete_3d_row_btn.clicked.connect(lambda: self._delete_row(self.ui.tableWidget_3d))
         self.ui.start_3d_test_plan_btn.clicked.connect(self._start_3d_test_plan)
         self.ui.stop_3d_test_plan_btn.clicked.connect(self._stop_plan)
 
@@ -132,7 +130,7 @@ class TraverserView(QWidget):
             ),
         ).start()
 
-    def _run_test_plan(self, table, setters, get_current):
+    def _run_test_plan(self, table: QTableWidget, setters: list, get_current):
         test_plan = self._create_test_plan(table)
         self.TEST_RUNNING.emit(True)
         for row in test_plan:
@@ -159,34 +157,6 @@ class TraverserView(QWidget):
             if all(abs(current - target) < 1 for current, target in zip(get_current(), targets)):
                 break
             sleep(0.3)
-
-    def _add_row(self, table):
-        table.insertRow(table.rowCount())
-
-    def _delete_row(self, table):
-        row_count = table.rowCount()
-        if row_count > 0:
-            table.removeRow(row_count - 1)
-
-    def _create_test_plan(self, table) -> list:
-        test_plan = []
-        for r in range(table.rowCount()):
-            row_values = [
-                table.item(r, c).text() if table.item(r, c) is not None else ""
-                for c in range(table.columnCount())
-            ]
-
-            minutes = int(row_values[0]) if row_values[0] != "" else 0
-            seconds = int(row_values[1]) if row_values[1] != "" else 0
-            total_seconds = minutes * 60 + seconds
-
-            positions = tuple(float(v) if v != "" else "" for v in row_values[2:])
-            test_plan.append((total_seconds, *positions))
-
-        return test_plan
-
-    def _show_test_state(self, state: bool):
-        self.ui.test_running_wg.setVisible(state)
 
     def _stop_plan(self):
         self.stop_plan = True

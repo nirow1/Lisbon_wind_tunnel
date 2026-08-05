@@ -1,9 +1,15 @@
+from datetime import datetime
+from threading import Thread
+from time import sleep
+
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
 from Gui.Charts.zoomable_chart import ZoomableChart
+from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Qt_files.Qt_python.ui_wind_tunnel_config_view import Ui_Form
+from Utils.static_methods import add_sec_to_current_time
 
 
 class ConfigurationView(QWidget):
@@ -11,12 +17,16 @@ class ConfigurationView(QWidget):
 
     def __init__(self, plc: TunnelPLCController, papago: PapagoController):
         QWidget.__init__(self)
-        self.concentric: bool = False
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
         self.tunnel_plc = plc
         self.papago = papago
+
+        self.test_plan_wg = TestPlanTab(["Velocity [m/s]", "Frequency [Hz]"])
+        self.ui.test_plan_vl.addWidget(self.test_plan_wg)
+
+        self.stop_plan = False
 
         self._init_graphical_changes()
         self._bind_buttons()
@@ -41,8 +51,39 @@ class ConfigurationView(QWidget):
         self.ui.chart_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chart_pg))
         self.ui.test_plan_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.test_plan_pg))
 
+        self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
+        self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_test_plan)
+
+    def _start_test_plan(self):
+        Thread(target=self._run_test_plan, daemon=True).start()
+
+    def _run_test_plan(self):
+        test_plan = self.test_plan_wg.get_test_plan()
+        self.test_plan_wg.show_message(True)
+        for row in test_plan:
+            self._wait_until(add_sec_to_current_time(row[0]))
+            pid = True if row[1] != "" else False
+
+            if self.stop_plan:
+                self.stop_plan = False
+                break
+
+            if pid:
+                self.tunnel_plc.set_wind_velocity(row[1])
+            else:
+                self.tunnel_plc.set_engine_frequency(row[2])
+
+        self.test_plan_wg.show_message(False)
+    
+    def _stop_test_plan(self):
+        self.stop_plan = True
+
     def _bind_emits(self):
         self.tunnel_plc.PLC_DATA.connect(self._handle_plc_data)
 
     def _handle_plc_data(self, plc_data: dict):
         self.chart.update_chart([plc_data.get("wind_filtered"), plc_data.get("average_temp")])
+
+    def _wait_until(self, target_time: datetime):
+        while datetime.now() < target_time and not self.stop_plan:
+            sleep(0.1)

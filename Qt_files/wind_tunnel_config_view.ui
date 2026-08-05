@@ -224,184 +224,19 @@ QPushButton:pressed {
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QWidget" name="widget_205" native="true">
-               <layout class="QVBoxLayout" name="verticalLayout_3">
-                <item>
-                 <widget class="QWidget" name="test_running_wg_2" native="true">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>25</height>
-                   </size>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLabel {
-    background-color: #4CAF50;
-    border-radius: 7px;
-    color: white; /* Optional: makes the text readable on red */
-}</string>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_5">
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QLabel" name="label_8">
-                     <property name="maximumSize">
-                      <size>
-                       <width>150</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>test running</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QTableWidget" name="tableWidget_3d">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="autoScrollMargin">
-                   <number>16</number>
-                  </property>
-                  <attribute name="horizontalHeaderMinimumSectionSize">
-                   <number>36</number>
-                  </attribute>
-                  <attribute name="horizontalHeaderDefaultSectionSize">
-                   <number>140</number>
-                  </attribute>
-                  <attribute name="verticalHeaderDefaultSectionSize">
-                   <number>30</number>
-                  </attribute>
-                  <column>
-                   <property name="text">
-                    <string>Min</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Sek</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>wind velocity [m/s]</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Frequency [Hz]</string>
-                   </property>
-                  </column>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QWidget" name="widget_10" native="true">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_6">
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QPushButton" name="add_3d_row_btn">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>34</width>
-                       <height>34</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>+</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="start_3d_test_plan_btn">
-                     <property name="maximumSize">
-                      <size>
-                       <width>100</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>Start plan</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="stop_3d_test_plan_btn">
-                     <property name="maximumSize">
-                      <size>
-                       <width>100</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>End plan</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="delete_3d_row_btn">
-                     <property name="maximumSize">
-                      <size>
-                       <width>34</width>
-                       <height>34</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>-</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
+               <layout class="QVBoxLayout" name="test_plan_vl">
+                <property name="leftMargin">
+                 <number>3</number>
+                </property>
+                <property name="topMargin">
+                 <number>3</number>
+                </property>
+                <property name="rightMargin">
+                 <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>3</number>
+                </property>
                </layout>
               </widget>
              </item>
