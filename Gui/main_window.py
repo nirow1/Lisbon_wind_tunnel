@@ -83,6 +83,9 @@ class MainWindow(QMainWindow):
 
     def _handle_emits(self):
         self.settings_pg.RETURN_TO_MAIN.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.config_view))
+        self.config_view.TEST_RUNNING.connect(
+            lambda running: self.info_panel.set_buttons_state(not running)
+        )
 
         self.tunnel_plc.SENSOR_VALUES.connect(self._handle_plc_data)
         self.tunnel_plc.STATUS_DATA.connect(self._handle_status_data)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_traverser_viewNYziQX.ui'
+## Form generated from reading UI file 'wind_tunnel_traverser_viewnddiGf.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -469,13 +469,54 @@ class Ui_Form(object):
         self.horizontalLayout_8.addWidget(self.widget_3)
 
         self.stackedWidget.addWidget(self.drivers_3d_pg)
+        self.page = QWidget()
+        self.page.setObjectName(u"page")
+        self.horizontalLayout_4 = QHBoxLayout(self.page)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.widget_4 = QWidget(self.page)
+        self.widget_4.setObjectName(u"widget_4")
+        self.widget_4.setMaximumSize(QSize(400, 200))
+        self.verticalLayout = QVBoxLayout(self.widget_4)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.label_7 = QLabel(self.widget_4)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setMaximumSize(QSize(16777215, 30))
+        self.label_7.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.verticalLayout.addWidget(self.label_7)
+
+        self.label_8 = QLabel(self.widget_4)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setMaximumSize(QSize(16777215, 30))
+        self.label_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.verticalLayout.addWidget(self.label_8)
+
+        self.widget_6 = QWidget(self.widget_4)
+        self.widget_6.setObjectName(u"widget_6")
+        self.widget_6.setMaximumSize(QSize(16777215, 87))
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_6)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.continue_btn = QPushButton(self.widget_6)
+        self.continue_btn.setObjectName(u"continue_btn")
+        self.continue_btn.setMaximumSize(QSize(150, 35))
+
+        self.horizontalLayout_5.addWidget(self.continue_btn)
+
+
+        self.verticalLayout.addWidget(self.widget_6)
+
+
+        self.horizontalLayout_4.addWidget(self.widget_4)
+
+        self.stackedWidget.addWidget(self.page)
 
         self.verticalLayout_5.addWidget(self.stackedWidget)
 
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -515,5 +556,8 @@ class Ui_Form(object):
         self.label_14.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
         self.set_pos_z_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_13.setText(QCoreApplication.translate("Form", u"Pos X:", None))
+        self.label_7.setText(QCoreApplication.translate("Form", u"You are about to set positions for traversers. ", None))
+        self.label_8.setText(QCoreApplication.translate("Form", u"Are you sure you want to continue? ", None))
+        self.continue_btn.setText(QCoreApplication.translate("Form", u"Yes continue", None))
     # retranslateUi
 

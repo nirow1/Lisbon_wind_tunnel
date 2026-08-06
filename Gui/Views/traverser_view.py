@@ -56,6 +56,7 @@ class TraverserView(QWidget):
     def _init_graphical_changes(self):
         self.test_plan_2d.show_message(False)
         self.test_plan_3d.show_message(False)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page)
 
     def _bind_buttons(self):
         self.ui.pg_2d_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg))
@@ -67,12 +68,22 @@ class TraverserView(QWidget):
         self.test_plan_2d.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
         self.test_plan_2d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
+        self.ui.continue_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg))
+
         self.test_plan_3d.ui.start_test_plan_btn.clicked.connect(self._start_3d_test_plan)
         self.test_plan_3d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
     def bind_emits(self):
         self.plc.DRIVERS_POS.connect(self.show_drivers_pos)
+        self.TEST_RUNNING.connect(self.set_buttons_state)
 
+    def set_buttons_state(self, state: bool):
+        self.ui.set_pos_x_2d_btn.setEnabled(state)
+        self.ui.set_pos_y_2d_btn.setEnabled(state)
+        self.ui.set_pos_x_3d_btn.setEnabled(state)
+        self.ui.set_pos_y_3d_btn.setEnabled(state)
+        self.ui.set_pos_z_3d_btn.setEnabled(state)
+        
     def show_drivers_pos(self, pos: dict):
         self.x_2d = pos.get("x_2d", 0)
         self.y_2d = pos.get("y_2d", 0)
@@ -106,21 +117,27 @@ class TraverserView(QWidget):
     def set_z_pos_3d(self, pos: float):
         pass
 
+    def set_all_positions_2d(self, x_pos: float, y_pos: float):
+        self.set_x_pos_2d(x_pos)
+        self.set_y_pos_2d(y_pos)
+
+    def set_all_positions_3d(self, x_pos: float, y_pos: float, z_pos: float):
+        self.set_x_pos_3d(x_pos)
+        self.set_y_pos_3d(y_pos)
+        self.set_z_pos_3d(z_pos)
+
     def test_ver_pos(self, ver_pos):
         self.ui.set_pos_x_2d_le.setText(str(ver_pos))
 
     def test_hor_pos(self, hor_pos):
         self.ui.set_pos_y_2d_le.setText(str(hor_pos))
 
-    # todo: disable and enable depending on connected device
-    # todo: add function to set all positions at once
-    # todo: add confirmation for traverser
     def _start_test_plan(self):
         Thread(
             target=self._run_test_plan,
             args=(
                 self.test_plan_2d.get_test_plan(),
-                [self.set_x_pos_2d, self.set_y_pos_2d],
+                self.set_all_positions_2d,
                 lambda: (self.x_2d, self.y_2d),
             ),
         ).start()
@@ -130,12 +147,12 @@ class TraverserView(QWidget):
             target=self._run_test_plan,
             args=(
                 self.test_plan_3d.get_test_plan(),
-                [self.set_x_pos_3d, self.set_y_pos_3d, self.set_z_pos_3d],
+                self.set_all_positions_3d,
                 lambda: (self.x_3d, self.y_3d, self.z_3d),
             ),
         ).start()
 
-    def _run_test_plan(self, test_plan: list, setters: list, get_current):
+    def _run_test_plan(self, test_plan: list, set_positions, get_current):
         self.TEST_RUNNING.emit(True)
         for row in test_plan:
             self._wait_until(add_sec_to_current_time(row[0]))
@@ -144,12 +161,12 @@ class TraverserView(QWidget):
                 self.stop_plan = False
                 break
 
-            positions = row[1:]
-            for setter, pos in zip(setters, positions):
-                if pos != "":
-                    setter(int(pos))
-
-            self._wait_until_correct_pos(get_current, [int(pos) for pos in positions])
+            positions = [
+                int(pos) if pos != "" else int(cur)
+                for pos, cur in zip(row[1:], get_current())
+            ]
+            set_positions(*positions)
+            self._wait_until_correct_pos(get_current, positions)
         self.TEST_RUNNING.emit(False)
 
     def _wait_until(self, target_time: datetime):

@@ -13,6 +13,7 @@ from Utils.static_methods import add_sec_to_current_time
 
 class ConfigurationView(QWidget):
     RETURN_TO_MAIN = Signal()
+    TEST_RUNNING = Signal(bool)
 
     def __init__(self, plc: TunnelPLCController, papago: PapagoController):
         QWidget.__init__(self)
@@ -59,25 +60,31 @@ class ConfigurationView(QWidget):
     def _start_test_plan(self):
         Thread(target=self._run_test_plan, daemon=True).start()
 
-    # todo: add disabling tunnel control buttons while test plan is running
-    # todo: need to set control byte
     def _run_test_plan(self):
         test_plan = self.test_plan_wg.get_test_plan()
+        self.TEST_RUNNING.emit(True)
         self.test_plan_wg.show_message(True)
+        self.tunnel_plc.start_engine()
         for row in test_plan:
             self._wait_until(add_sec_to_current_time(row[0]))
-            pid = True if row[1] != "" else False
 
             if self.stop_plan:
                 self.stop_plan = False
                 break
 
-            if pid:
-                self.tunnel_plc.set_wind_velocity(row[1])
-            else:
+            # velocity set → PID regulation (False); frequency set → frequency mode (True)
+            use_frequency = row[1] == ""
+            self.tunnel_plc.switch_pid(use_frequency)
+            if use_frequency:
                 self.tunnel_plc.set_engine_frequency(row[2])
+            else:
+                self.tunnel_plc.set_wind_velocity(row[1])
+            # rewrite control byte so the PID bit is applied while engine stays running
+            self.tunnel_plc.start_engine()
 
+        self.tunnel_plc.stop_engine()
         self.test_plan_wg.show_message(False)
+        self.TEST_RUNNING.emit(False)
     
     def _stop_test_plan(self):
         self.stop_plan = True
