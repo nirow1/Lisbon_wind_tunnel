@@ -118,13 +118,10 @@ class TraverserView(QWidget):
         pass
 
     def set_all_positions_2d(self, x_pos: float, y_pos: float):
-        self.set_x_pos_2d(x_pos)
-        self.set_y_pos_2d(y_pos)
+        self.plc.set_2d_pos(x_pos, y_pos)
 
     def set_all_positions_3d(self, x_pos: float, y_pos: float, z_pos: float):
-        self.set_x_pos_3d(x_pos)
-        self.set_y_pos_3d(y_pos)
-        self.set_z_pos_3d(z_pos)
+        self.plc.set_3d_pos(x_pos, y_pos, z_pos)
 
     def test_ver_pos(self, ver_pos):
         self.ui.set_pos_x_2d_le.setText(str(ver_pos))
