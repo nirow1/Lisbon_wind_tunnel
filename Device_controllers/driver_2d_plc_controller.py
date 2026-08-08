@@ -1,46 +1,14 @@
-from threading import Thread
-from time import sleep
 from PySide6.QtCore import Signal
-from Device_controllers.plc_controller import PLCController
-from Utils.helper_functions import byte_to_bits, control_dict_to_bytes
+from Device_controllers.polling_plc_controller import PollingPLCController
+from Utils.helper_functions import byte_to_bits
 
 
-class Driver2DPLCController(PLCController):
+class Driver2DPLCController(PollingPLCController):
     DRIVERS_POS = Signal(dict)
     STATUS_DATA = Signal(dict)
 
     def __init__(self, ip_address="192.168.10.10"):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=102)
-        self.control_byte = {"block": 0, "start": 0, "stop": 0, "confirm": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0,
-                             "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}
-        self.control_byte_map = {"block": 0, "start": 1, "stop": 2, "confirm": 3, "4": 4, "5": 5, "6": 6, "7": 7,
-                                 "8": 8,
-                                 "9": 9, "10": 10, "11": 11, "12": 12, "13": 13, "14": 14, "15": 15}
-        self.status_byte = {"ready": 0, "error": 0, "moving": 0, "estop_active": 0, "xHWLimit": 0, "xSWLimit": 0,
-                            "6": 0, "x_homed": 0, "y_homed": 0, "z_homed": 0, "all_homed": 0, "11": 0, "12": 0, "13": 0,
-                            "14": 0, "15": 0}
-        self.PLC_CONNECTED.connect(self._start_reading_plc_data)
-
-    def _start_reading_plc_data(self):
-        read_thread = Thread(target=self._read_plc_data_and_emit, daemon=True)
-        read_thread.start()
-
-    def _read_plc_data_and_emit(self):
-        while self.connected:
-            try:
-                main_data_dict = self._read_main_data()
-                if main_data_dict is None:
-                    self.connected = False
-                    self.PLC_CONNECTED.emit(False)
-                    break
-
-                self.DRIVERS_POS.emit(main_data_dict[0])
-                self.STATUS_DATA.emit(main_data_dict[1])
-            except Exception as e:
-                main_data_dict = {}
-                print(e)
-
-            sleep(0.1)
 
     def _read_main_data(self) -> list[dict] | None:
         try:
@@ -54,24 +22,9 @@ class Driver2DPLCController(PLCController):
             print(e)
             return None
 
-    def start_driver(self):
-        Thread(target=self.send_ping,args=["start"] ,daemon=True).start()
-
-    def stop_driver(self):
-        Thread(target=self.send_ping,args=["stop"] ,daemon=True).start()
-
-    def confirm_error(self):
-        Thread(target=self.send_ping,args=["confirm"] ,daemon=True).start()
-
-    def send_ping(self, key: str):
-        self.send_control_byte(key, 1)
-        sleep(0.1)
-        self.send_control_byte(key, 0)
-
-    def send_control_byte(self, key: str, value: int):
-        self.control_byte[key] = value
-        data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
-        self._write_plc_data(self.write_nb, 0, 2, data_short)
+    def _emit_read_data(self, data):
+        self.DRIVERS_POS.emit(data[0])
+        self.STATUS_DATA.emit(data[1])
 
     def set_2d_pos(self, x: float, y: float):
         self.set_2d_x(x)
@@ -79,7 +32,7 @@ class Driver2DPLCController(PLCController):
         self.start_driver()
 
     def set_2d_x(self, x: float):
-        self._write_plc_float(self.write_nb, 2, x)
+        self._write_axis(2, x)
 
     def set_2d_y(self, y: float):
-        self._write_plc_float(self.write_nb, 6, y)
+        self._write_axis(6, y)
