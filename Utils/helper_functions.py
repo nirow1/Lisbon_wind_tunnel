@@ -42,13 +42,8 @@ def list_to_short(bits: Sequence[int], msb_first: bool = True, signed=False) -> 
     return value
 
 
-def control_dict_to_bytes(ctrl: dict, endian="little") -> bytearray:
+def control_dict_to_bytes(ctrl: dict, bit_map: dict, endian="little") -> bytearray:
     # Map keys to bit positions
-    bit_map = {
-        "start": 0, "stop": 1, "ack": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7,
-        "8": 8, "PID": 9, "10": 10, "11": 11, "12": 12, "13": 13, "14": 14, "15": 15
-    }
-
     value = 0
 
     # Build the 16-bit word

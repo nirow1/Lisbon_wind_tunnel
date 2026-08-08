@@ -17,6 +17,8 @@ class TunnelPLCController(PLCController):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=102)
         self.control_byte = { "start": 0, "stop": 0, "ack": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0,
                              "8": 0, "PID": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0 }
+        self.control_byte_map = { "start": 0, "stop": 1, "ack": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7,
+                             "8": 8, "PID": 9, "10": 10, "11": 11, "12": 12, "13": 13, "14": 14, "15": 15 }
         self.PLC_CONNECTED.connect(self._start_reading_plc_data)
 
     def _start_reading_plc_data(self):
@@ -43,13 +45,13 @@ class TunnelPLCController(PLCController):
 
             time.sleep(0.1)
 
-    def _read_main_data(self) -> list | None:
+    def _read_main_data(self) -> list[dict] | None:
         try:
             plc_data = self._read_plc_data(
                 self.read_nb,
                 0,
                 84,
-                '>2H2f3f3f3f3fBB5f2B'  # <-- BB5f2B, not BBi4f2B
+                '>2H2f3f3f3f3fBB5f2B'
             )
             self.watchdog_count = plc_data[0]
             status_bits = byte_to_bits(((plc_data[1] & 0xFF) << 8) | (plc_data[1] >> 8), "little")  # 16 bits from 2 bytes
@@ -147,7 +149,7 @@ class TunnelPLCController(PLCController):
     def start_engine(self):
         self.control_byte["start"] = 1
         self.control_byte["stop"] = 0
-        data_short = control_dict_to_bytes(self.control_byte, endian="little")
+        data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
         self._write_plc_data(self.write_nb, 2, 2,  data_short)
 
     def read_parameter_data(self) -> tuple | None:

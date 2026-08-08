@@ -1,5 +1,5 @@
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
-from Device_controllers.driver_plc_controlle import DriverPLCController
+from Device_controllers.driver_3d_plc_controller import DriverPLCController
 from Device_controllers.scale_plc_controller import ScalePLCController
 from Qt_files.Qt_python.ui_wind_tunnel_main_view import Ui_MainWindow
 from Device_controllers.tlaskan_controller import TlaskanController
@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         self.control_byte = {}
 
         # creating views
-        self.info_panel = InfoPanel(self.tunnel_plc, self.papago)
+        self.info_panel = InfoPanel(self.tunnel_plc, self.driver_plc, self.papago)
         self.ui.control_panel_lo.addWidget(self.info_panel)
 
         self.config_view = ConfigurationView(self.tunnel_plc, self.papago)

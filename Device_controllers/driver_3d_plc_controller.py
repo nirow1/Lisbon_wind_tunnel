@@ -1,8 +1,6 @@
 import time
 from threading import Thread
 from time import sleep
-from turtledemo.penrose import start
-
 from PySide6.QtCore import Signal
 from Device_controllers.plc_controller import PLCController
 from Utils.helper_functions import control_dict_to_bytes, byte_to_bits
@@ -12,7 +10,6 @@ class DriverPLCController(PLCController):
     DRIVERS_POS = Signal(dict)
     STATUS_DATA = Signal(dict)
 
-    #10 = 2d, 12 = vahy
     def __init__(self, ip_address="192.168.10.11"):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=102)
         self.control_byte = {"block": 0, "start": 0, "stop": 0, "confirm": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}
@@ -20,7 +17,7 @@ class DriverPLCController(PLCController):
                              "9": 9, "10": 10, "11": 11, "12": 12, "13": 13, "14": 14, "15": 15}
         self.status_byte = { "ready": 0, "error": 0, "moving": 0, "estop_active": 0, "xHWLimit": 0, "xSWLimit": 0, "6": 0, "x_homed": 0, "y_homed": 0, "z_homed": 0, "all_homed": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}
         self.PLC_CONNECTED.connect(self._start_reading_plc_data)
-,
+        
     def _start_reading_plc_data(self):
         read_thread = Thread(target=self._read_plc_data_and_emit, daemon=True)
         read_thread.start()
@@ -55,22 +52,13 @@ class DriverPLCController(PLCController):
             return None
 
     def start_driver(self):
-        self.control_byte["start"] = 1
-        data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
-        self._write_plc_data(self.write_nb, 0, 2,  data_short)
-        sleep(1)
-        self.control_byte["start"] = 0
-        self._write_plc_data(self.write_nb, 0, 2, data_short)
+        Thread(target=self.send_ping,args=["start"] ,daemon=True).start()
 
     def stop_driver(self):
-        self.control_byte["stop"] = 1
-        data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
-        self._write_plc_data(self.write_nb, 0, 2,  data_short)
+        Thread(target=self.send_ping,args=["stop"] ,daemon=True).start()
 
     def confirm_error(self):
-        self.control_byte["confirm"] = 1
-        data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
-        self._write_plc_data(self.write_nb, 0, 2,  data_short)
+        Thread(target=self.send_ping,args=["confirm"] ,daemon=True).start()
 
     def set_2d_pos(self, x: float, y: float):
         self.set_2d_x(x)
@@ -97,3 +85,13 @@ class DriverPLCController(PLCController):
 
     def set_3d_z(self, z: float):
         self._write_plc_float(self.write_nb, 10, z)
+
+    def send_ping(self, key: str):
+        self.send_control_byte(key, 1)
+        sleep(0.1)
+        self.send_control_byte(key, 0)
+
+    def send_control_byte(self, key:str, value: int):
+        self.control_byte[key] = value
+        data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
+        self._write_plc_data(self.write_nb, 0, 2,  data_short)

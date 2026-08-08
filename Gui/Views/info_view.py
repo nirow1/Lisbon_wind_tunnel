@@ -1,6 +1,8 @@
 from PySide6.QtCore import Signal, QSize
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget, QFileDialog
+
+from Device_controllers.driver_3d_plc_controller import DriverPLCController
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
 from Gui.Custom_functions.saving_thread import SavingThread
@@ -11,7 +13,7 @@ from Utils.number_validator import FloatValidator
 class InfoPanel(QWidget):
     STOP_TUNNEL = Signal()
 
-    def __init__(self, tunnel_plc: TunnelPLCController, papago: PapagoController):
+    def __init__(self, tunnel_plc: TunnelPLCController, driver_3d: DriverPLCController, papago: PapagoController):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -20,6 +22,7 @@ class InfoPanel(QWidget):
         self._req_velocity: float = 0.0
 
         self.tunnel_plc = tunnel_plc
+        self.driver_3d = driver_3d
         self.papago = papago
 
         self.configuration_data = { "frequency": 0.0, "velocity": 0.0, "pid": False}
@@ -170,6 +173,7 @@ class InfoPanel(QWidget):
         #connecting
         self.tunnel_plc.start()
         self.papago.start()
+        self.driver_3d.start()
 
         self.set_buttons_state(True)
 
@@ -179,6 +183,7 @@ class InfoPanel(QWidget):
             self.ui.connect_tunel_btn.show()
 
             self.tunnel_plc.disconnect()
+            self.driver_3d.disconnect()
 
             self.set_buttons_state(False)
         except Exception as e:

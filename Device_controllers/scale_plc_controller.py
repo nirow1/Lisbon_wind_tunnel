@@ -7,7 +7,7 @@ from Device_controllers.plc_controller import PLCController
 class ScalePLCController(PLCController):
     SCALE_DATA = Signal(dict)
 
-    def __init__(self, ip_address="192.168.1.1"):
+    def __init__(self, ip_address="192.168.10.12"):
         super().__init__(ip_address, read_nb=2, write_nb=3, param_nb=4)
         self.PLC_CONNECTED.connect(self._start_reading_plc_data)
 
