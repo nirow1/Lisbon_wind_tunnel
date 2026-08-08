@@ -47,7 +47,7 @@ class PollingPLCController(PLCController):
     def _emit_read_data(self, data):
         raise NotImplementedError
 
-    def _write_axis(self, offset: int, value: float):
+    def _write_element(self, offset: int, value: float):
         self._write_plc_float(self.write_nb, offset, value)
 
     def start_driver(self):

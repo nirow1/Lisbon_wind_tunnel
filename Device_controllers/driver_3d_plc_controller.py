@@ -33,10 +33,10 @@ class DriverPLCController(PollingPLCController):
         self.start_driver()
 
     def set_3d_x(self, x: float):
-        self._write_axis(2, x)
+        self._write_element(2, x)
 
     def set_3d_y(self, y: float):
-        self._write_axis(6, y)
+        self._write_element(6, y)
 
     def set_3d_z(self, z: float):
-        self._write_axis(10, z)
+        self._write_element(10, z)

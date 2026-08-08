@@ -32,7 +32,7 @@ class Driver2DPLCController(PollingPLCController):
         self.start_driver()
 
     def set_2d_x(self, x: float):
-        self._write_axis(2, x)
+        self._write_element(2, x)
 
     def set_2d_y(self, y: float):
-        self._write_axis(6, y)
+        self._write_element(6, y)
