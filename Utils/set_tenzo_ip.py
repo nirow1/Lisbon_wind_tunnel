@@ -81,7 +81,7 @@ class FJtechIPSocket(socket.socket):
 
 
 if __name__ == '__main__':
-    socket = FJtechIPSocket("tenzoscan", "192.168.1.98")
+    socket = FJtechIPSocket("tenzoscan", "192.168.10.96")
     socket.fj_connect()
 
     socket.send(b'AT+RAM_RW=0,1\r\n')
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     print(empty)
     print(error)
 
-    ip_add = [192, 168, 1, 8]
+    ip_add = [192, 168, 10, 97]
     byte_ip = bytearray(ip_add)
     socket.send(b'AT+EEPROM_RW=0,4\r\n')
     echo = socket.fj_read_line_from_socket()

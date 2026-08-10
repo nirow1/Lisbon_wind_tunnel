@@ -6,5 +6,6 @@ __pycache__/
 /workspace.xml
 *.png
 *.exe
+*.csv
 # Editor-based HTTP Client requests
 /httpRequests/

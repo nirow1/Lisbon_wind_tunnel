@@ -5,13 +5,13 @@ from Qt_files.Qt_python.ui_wind_tunnel_pressure_view import Ui_Form
 
 
 class PressureView(QWidget):
-    def __init__(self, tlaskan_1, tlaskan_2):
+    def __init__(self, tlaskans: tuple):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-        self.tlaskan_1 = tlaskan_1
-        self.tlaskan_2 = tlaskan_2
+        self.tlaskan_1 = tlaskans[0]
+        self.tlaskan_2 = tlaskans[1]
 
         self.pressure_chart_1 = ZoomableChart("pressure 1",
                                               x_axis_seconds=600,
@@ -42,4 +42,7 @@ class PressureView(QWidget):
         self.ui.reset_pressure_chart_btn_2.clicked.connect(self.pressure_chart_2.reset_axis)
 
     def _bind_emits(self):
-        pass
+        self.tlaskan_1.PRESSURE_DATA.connect(lambda: self._handle_pressure_data(self.tlaskan_1.processed_pressure))
+        self.tlaskan_2.PRESSURE_DATA.connect()
+
+    def _handle_pressure_data(self, pressure_data: list):

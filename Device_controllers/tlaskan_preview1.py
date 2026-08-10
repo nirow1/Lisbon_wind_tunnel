@@ -5,7 +5,7 @@ import time
 import threading
 
 # Konfigurace Tlaskanů (Změněno na seznam)
-IP_ADDRESSES = ['192.168.1.98', '192.168.1.99']
+IP_ADDRESSES = ['192.168.10.98']
 PORT = 23
 MEASURE_PERIOD = 1
 

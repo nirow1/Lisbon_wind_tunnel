@@ -26,8 +26,7 @@ class MainWindow(QMainWindow):
         self.tunnel_plc = TunnelPLCController()
         self.driver_plc = DriverPLCController()
         #self.scale_plc = ScalePLCController()
-        self.tlaskan = TlaskanController("192.168.10.91")
-        self.tlaskan_2 = TlaskanController("192.168.10.90")
+        self.tlaskans = (TlaskanController("192.168.10.98"), TlaskanController("192.168.10.99")) 
         self.papago = PapagoController()
 
         self.control_byte = {}
@@ -48,7 +47,7 @@ class MainWindow(QMainWindow):
         self.scale_view = ScaleView()
         self.ui.stackedWidget.addWidget(self.scale_view)
 
-        self.pressure_view = PressureView(self.tlaskan, self.tlaskan_2)
+        self.pressure_view = PressureView(self.tlaskans)
         self.ui.stackedWidget.addWidget(self.pressure_view)
 
         self._init_graphical_changes()

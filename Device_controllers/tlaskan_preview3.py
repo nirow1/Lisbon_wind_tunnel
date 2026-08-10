@@ -4,7 +4,7 @@ import csv
 import threading
 
 # --- KONFIGURACE ---
-TCP_IP = '192.168.1.96'  # Výchozí IP adresa zařízení
+TCP_IP = '192.168.10.96'  # Výchozí IP adresa zařízení
 TCP_PORT = 23  # Port definovaný v tcp_server.c
 
 REG_STREAM_EN = 18  # Adresa pro kontext_ram.tcp_stream_en
