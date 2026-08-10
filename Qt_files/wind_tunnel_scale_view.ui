@@ -223,7 +223,7 @@ QPushButton:pressed {
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>70</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -252,7 +252,7 @@ QPushButton:pressed {
               <widget class="QLabel" name="fy_lbl">
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>70</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -287,7 +287,7 @@ QPushButton:pressed {
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>70</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -316,7 +316,7 @@ QPushButton:pressed {
               <widget class="QLabel" name="mx_lbl">
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>70</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -345,7 +345,7 @@ QPushButton:pressed {
               <widget class="QLabel" name="my_lbl">
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>70</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -374,7 +374,7 @@ QPushButton:pressed {
               <widget class="QLabel" name="mz_lbl">
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>70</width>
                  <height>16777215</height>
                 </size>
                </property>

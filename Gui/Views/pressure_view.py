@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QLabel, QWidget
 
 from Gui.Charts.zoomable_chart import ZoomableChart
 from Qt_files.Qt_python.ui_wind_tunnel_pressure_view import Ui_Form
@@ -16,15 +16,15 @@ class PressureView(QWidget):
         self.pressure_chart_1 = ZoomableChart("pressure 1",
                                               x_axis_seconds=600,
                                               y_axis=(-500, 500),
-                                              line_name=[f"P{i}" for i in range(1,17)],
-                                              line_count=16)
+                                              line_name=[f"P{i}" for i in range(1,13)],
+                                              line_count=12)
         self.ui.pressure_chart_lo.addWidget(self.pressure_chart_1)
 
         self.pressure_chart_2 = ZoomableChart("pressure 2",
                                               x_axis_seconds=600,
-                                              y_axis=(-500, 500),
-                                              line_name=[f"P{i}" for i in range(1,17)],
-                                              line_count=16)
+                                              y_axis=(-1000, 1000),
+                                              line_name=[f"P{i}" for i in range(1,13)],
+                                              line_count=12)
         self.ui.pressure_chart_lo_2.addWidget(self.pressure_chart_2)
 
         self._bind_buttons()
@@ -42,7 +42,16 @@ class PressureView(QWidget):
         self.ui.reset_pressure_chart_btn_2.clicked.connect(self.pressure_chart_2.reset_axis)
 
     def _bind_emits(self):
-        self.tlaskan_1.PRESSURE_DATA.connect(lambda: self._handle_pressure_data(self.tlaskan_1.processed_pressure))
-        self.tlaskan_2.PRESSURE_DATA.connect()
+        self.tlaskan_1.PRESSURE_DATA.connect(lambda data: self._handle_pressure_data(data,
+         self.ui.widget, 1))
+        self.tlaskan_2.PRESSURE_DATA.connect(lambda data: self._handle_pressure_data(data,
+        self.ui.widget_5, 2))
 
-    def _handle_pressure_data(self, pressure_data: list):
+    def _handle_pressure_data(self, pressure_data: list, widget: QWidget, id : int):
+        for i, value in enumerate(pressure_data):
+            widget.findChild(QLabel, f"lbl_{id}_{i}").setText(f"{value:.2f}")
+
+        if id == 1:
+            self.pressure_chart_1.update_chart(pressure_data)
+        else:
+            self.pressure_chart_2.update_chart(pressure_data)

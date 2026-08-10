@@ -25,14 +25,20 @@ class MainWindow(QMainWindow):
         # device communication
         self.tunnel_plc = TunnelPLCController()
         self.driver_plc = DriverPLCController()
-        #self.scale_plc = ScalePLCController()
+        self.scale_plc = ScalePLCController()
         self.tlaskans = (TlaskanController("192.168.10.98"), TlaskanController("192.168.10.99")) 
         self.papago = PapagoController()
 
         self.control_byte = {}
 
         # creating views
-        self.info_panel = InfoPanel(self.tunnel_plc, self.driver_plc, self.papago)
+        
+
+        self.info_panel = InfoPanel(self.tunnel_plc,
+         self.driver_plc,
+          self.papago,
+           self.scale_plc,
+            self.tlaskans)
         self.ui.control_panel_lo.addWidget(self.info_panel)
 
         self.config_view = ConfigurationView(self.tunnel_plc, self.papago)
@@ -44,7 +50,7 @@ class MainWindow(QMainWindow):
         self.traverser_view = TraverserView(self.driver_plc)
         self.ui.stackedWidget.addWidget(self.traverser_view)
 
-        self.scale_view = ScaleView()
+        self.scale_view = ScaleView(self.scale_plc)
         self.ui.stackedWidget.addWidget(self.scale_view)
 
         self.pressure_view = PressureView(self.tlaskans)
@@ -146,9 +152,9 @@ class MainWindow(QMainWindow):
     def on_app_exit(self):
         self.tunnel_plc.disconnect()
         self.driver_plc.disconnect()
-        #self.scale_plc.disconnect()
-        self.tlaskan.disconnect()
-        self.tlaskan_2.disconnect()
+        self.scale_plc.disconnect()
+        self.tlaskans[0].disconnect()
+        self.tlaskans[1].disconnect()
         self.info_panel.disconnect_tunnel()
 
     @staticmethod

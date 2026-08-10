@@ -104,7 +104,6 @@ class TraverserView(QWidget):
         self.ui.set_pos_y_3d_lbl.setText(str(round(y_3d, 2)))
         self.ui.set_pos_z_3d_lbl.setText(str(round(z_3d, 2)))
 
-    # todo: separate 3d driver controller and 2d driver controller
     def set_x_pos_2d(self):
         pos = float(self.ui.set_pos_x_2d_le.text())
         self.plc_2d.set_2d_x(pos)

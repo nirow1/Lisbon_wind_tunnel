@@ -104,6 +104,7 @@ class TlaskanController(QThread):
 
     def _listen_to_tls(self):
         self._open_csv()
+        emit_counter = 0
         try:
             self.tlaskan.recv(1024)
             while self.connected:
@@ -134,13 +135,16 @@ class TlaskanController(QThread):
                         for i in range(len(pressures))
                     ]
                     self._print_data_line(self.processed_pressure)
-                    self.PRESSURE_DATA.emit(self.processed_pressure)
+                    emit_counter += 1
+                    if emit_counter % 10 == 0:
+                        self.PRESSURE_DATA.emit(self.processed_pressure)
                 except socket.timeout:
                     continue
                 except OSError:
                     break
         finally:
             self._close_csv()
+
 
     def _set_ram_register_blind(self, reg, val):
         """Blind write for safe shutdown without waiting for a reply."""

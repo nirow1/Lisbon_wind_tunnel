@@ -40,7 +40,6 @@ class TunnelPLCController(PLCController):
                 self.DRIVER_DATA.emit(main_data_dict[2])
                 self.SAFETY_DIAGNOSTICS.emit(main_data_dict[3])
             except Exception as e:
-                main_data_dict = {}
                 print(e)
 
             time.sleep(0.1)

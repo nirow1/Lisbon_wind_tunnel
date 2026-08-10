@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewARTINu.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewJdzkZE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -139,7 +139,7 @@ class Ui_Form(object):
         self.fx_lbl = QLabel(self.widget_45)
         self.fx_lbl.setObjectName(u"fx_lbl")
         self.fx_lbl.setMinimumSize(QSize(0, 0))
-        self.fx_lbl.setMaximumSize(QSize(40, 16777215))
+        self.fx_lbl.setMaximumSize(QSize(70, 16777215))
 
         self.horizontalLayout_21.addWidget(self.fx_lbl)
 
@@ -152,7 +152,7 @@ class Ui_Form(object):
 
         self.fy_lbl = QLabel(self.widget_45)
         self.fy_lbl.setObjectName(u"fy_lbl")
-        self.fy_lbl.setMaximumSize(QSize(40, 16777215))
+        self.fy_lbl.setMaximumSize(QSize(70, 16777215))
 
         self.horizontalLayout_21.addWidget(self.fy_lbl)
 
@@ -166,7 +166,7 @@ class Ui_Form(object):
         self.fz_lbl = QLabel(self.widget_45)
         self.fz_lbl.setObjectName(u"fz_lbl")
         self.fz_lbl.setMinimumSize(QSize(0, 0))
-        self.fz_lbl.setMaximumSize(QSize(40, 16777215))
+        self.fz_lbl.setMaximumSize(QSize(70, 16777215))
 
         self.horizontalLayout_21.addWidget(self.fz_lbl)
 
@@ -179,7 +179,7 @@ class Ui_Form(object):
 
         self.mx_lbl = QLabel(self.widget_45)
         self.mx_lbl.setObjectName(u"mx_lbl")
-        self.mx_lbl.setMaximumSize(QSize(40, 16777215))
+        self.mx_lbl.setMaximumSize(QSize(70, 16777215))
 
         self.horizontalLayout_21.addWidget(self.mx_lbl)
 
@@ -192,7 +192,7 @@ class Ui_Form(object):
 
         self.my_lbl = QLabel(self.widget_45)
         self.my_lbl.setObjectName(u"my_lbl")
-        self.my_lbl.setMaximumSize(QSize(40, 16777215))
+        self.my_lbl.setMaximumSize(QSize(70, 16777215))
 
         self.horizontalLayout_21.addWidget(self.my_lbl)
 
@@ -205,7 +205,7 @@ class Ui_Form(object):
 
         self.mz_lbl = QLabel(self.widget_45)
         self.mz_lbl.setObjectName(u"mz_lbl")
-        self.mz_lbl.setMaximumSize(QSize(40, 16777215))
+        self.mz_lbl.setMaximumSize(QSize(70, 16777215))
 
         self.horizontalLayout_21.addWidget(self.mz_lbl)
 

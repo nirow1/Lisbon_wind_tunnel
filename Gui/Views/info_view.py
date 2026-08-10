@@ -4,16 +4,22 @@ from PySide6.QtWidgets import QWidget, QFileDialog
 
 from Device_controllers.driver_3d_plc_controller import DriverPLCController
 from Device_controllers.papago_controller import PapagoController
+from Device_controllers.scale_plc_controller import ScalePLCController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
 from Gui.Custom_functions.saving_thread import SavingThread
 from Qt_files.Qt_python.ui_wind_tunnel_Info_view import Ui_Form
+from Device_controllers.tlaskan_controller import TlaskanController
 from Utils.number_validator import FloatValidator
 
 
 class InfoPanel(QWidget):
     STOP_TUNNEL = Signal()
 
-    def __init__(self, tunnel_plc: TunnelPLCController, driver_3d: DriverPLCController, papago: PapagoController):
+    def __init__(self, tunnel_plc: TunnelPLCController,
+                 driver_3d: DriverPLCController,
+                 papago: PapagoController,
+                 scales: ScalePLCController, 
+                 tlaskans: tuple[TlaskanController, TlaskanController]):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -24,6 +30,8 @@ class InfoPanel(QWidget):
         self.tunnel_plc = tunnel_plc
         self.driver_3d = driver_3d
         self.papago = papago
+        self.scales = scales
+        self.tlaskans = tlaskans
 
         self.configuration_data = { "frequency": 0.0, "velocity": 0.0, "pid": False}
 
@@ -174,6 +182,9 @@ class InfoPanel(QWidget):
         self.tunnel_plc.start()
         self.papago.start()
         self.driver_3d.start()
+        self.scales.start()
+        self.tlaskans[0].start()
+        self.tlaskans[1].start()
 
         self.set_buttons_state(True)
 
@@ -182,6 +193,9 @@ class InfoPanel(QWidget):
             self.ui.disconnect_tunnel_btn.hide()
             self.ui.connect_tunel_btn.show()
 
+            self.tlaskans[0].disconnect()
+            self.tlaskans[1].disconnect()
+            self.scales.disconnect()
             self.tunnel_plc.disconnect()
             self.driver_3d.disconnect()
 

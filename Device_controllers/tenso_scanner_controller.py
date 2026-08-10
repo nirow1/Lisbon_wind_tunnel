@@ -9,7 +9,7 @@ from PySide6.QtCore import QThread, Signal
 
 
 class TensoScannerController(QThread):
-    PRESSURE_DATA = Signal(list)
+    TENSO_DATA = Signal(list)
 
     REG_MODE = 8
     REG_STREAM_EN = 18
@@ -188,7 +188,7 @@ class TensoScannerController(QThread):
 
                     sample_n += 1
                     if sample_n % 100 == 0:
-                        print(f"sample {sample_n}: pid={packet_id} ts={unpacked[0]} ch={channels}")
+                        self.TENSO_DATA.emit(channels[:3])
 
                     offset += sample_size
 

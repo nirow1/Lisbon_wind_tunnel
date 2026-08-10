@@ -31,16 +31,16 @@ class PositionFieldWidget(QWidget):
         # Background rectangle
         self.scene.addRect(
             QRectF(0, 0, self.field_width_px, self.field_height_px),
-            QPen(Qt.black),
-            QBrush(Qt.white)
+            QPen(Qt.GlobalColor.black),
+            QBrush(Qt.GlobalColor.white)
         )
 
         # Point item
         r = self.point_radius
         self.point_item = self.scene.addEllipse(
             -r, -r, 2*r, 2*r,
-            QPen(Qt.red),
-            QBrush(Qt.red)
+            QPen(Qt.GlobalColor.red),
+            QBrush(Qt.GlobalColor.red)
         )
         self.point_item.setPos(0.0, 0.0)
 

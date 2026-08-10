@@ -4,6 +4,7 @@ from time import sleep
 
 from PySide6.QtWidgets import QWidget
 
+from Device_controllers.scale_plc_controller import ScalePLCController
 from Gui.Charts.zoomable_chart import ZoomableChart
 from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Qt_files.Qt_python.ui_wind_tunnel_scale_view import Ui_Form
@@ -11,7 +12,7 @@ from Utils.static_methods import add_sec_to_current_time
 
 
 class ScaleView(QWidget):
-    def __init__(self):
+    def __init__(self, scale_controller: ScalePLCController):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -25,6 +26,8 @@ class ScaleView(QWidget):
                                               line_count=6)
         self.ui.scale_chart.addWidget(self.scale_chart)
 
+        self.scales = scale_controller
+
         self.test_plan_wg = TestPlanTab(["Pitch", "Roll", "Yaw"])
         self.ui.test_plan_lo.addWidget(self.test_plan_wg)
 
@@ -36,7 +39,6 @@ class ScaleView(QWidget):
         self.ui.stackedWidget.setCurrentWidget(self.scale_chart)
         self.test_plan_wg.show_message(False)
 
-    # todo: add setting pitch roll and yaw individually
     def _bind_buttons(self):
         self.ui.test_plan_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.test_plan_pg))
         self.ui.chart_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chart_pg))
@@ -45,21 +47,36 @@ class ScaleView(QWidget):
         self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
     def _bind_emits(self):
-        pass
+        self.scales.POS_DATA.connect(self._handle_pos_data)
+        self.scales.SCALE_DATA.connect(self._handle_scale_data)
+        self.scales.STATUS_DATA.connect(self._handle_status_data)
 
-    def set_pitch(self, value: float):
+    def _handle_pos_data(self, data: dict):
         ...
+
+    def _handle_scale_data(self, data: dict):
+        self.ui.fx_lbl.setText(f"{data['x']:.2f}")
+        self.ui.fy_lbl.setText(f"{data['y']:.2f}")
+        self.ui.fz_lbl.setText(f"{data['z']:.2f}")
+        self.ui.mx_lbl.setText(f"{data['mx']:.2f}")
+        self.ui.my_lbl.setText(f"{data['my']:.2f}")
+        self.ui.mz_lbl.setText(f"{data['mz']:.2f}")
+        
+    def _handle_status_data(self, data: dict):
+        self.ready = data['ready']
+        self.moving = data['moving']
+    
+    def set_pitch(self, value: float):
+        self.scales.set_pitch(value)
 
     def set_yaw(self, value: float):
-        ...
+        self.scales.set_yaw(value)
 
     def set_roll(self, value: float):
-        ...
+        self.scales.set_roll(value)
 
     def set_parameters(self, pitch: float, roll: float, yaw: float):
-        self.set_pitch(pitch)
-        self.set_roll(roll)
-        self.set_yaw(yaw)
+        self.scales.set_pitch_yaw_roll(pitch, yaw, roll)
 
     def start_test_plan(self):
         Thread(target=self._run_test_plan, daemon=True).start()
