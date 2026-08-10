@@ -1,8 +1,11 @@
 import time
 from time import sleep
-from PySide6.QtCore import QThread, Signal
-from Utils.static_methods import combine_to_float
+
 from pymodbus.client import ModbusTcpClient as ModbusClient
+from PySide6.QtCore import QThread, Signal
+
+from Utils.static_methods import combine_to_float
+
 
 class PapagoController(QThread):
     PAPAGO_DATA = Signal(dict)

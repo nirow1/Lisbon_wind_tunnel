@@ -2,7 +2,7 @@ from PySide6.QtCore import Signal, QSize
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget, QFileDialog
 
-from Device_controllers.driver_3d_plc_controller import DriverPLCController
+from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.scale_plc_controller import ScalePLCController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
@@ -16,10 +16,12 @@ class InfoPanel(QWidget):
     STOP_TUNNEL = Signal()
 
     def __init__(self, tunnel_plc: TunnelPLCController,
-                 driver_3d: DriverPLCController,
+                 driver_3d: Driver3DPLCController,
+                 driver_2d: Driver3DPLCController,
                  papago: PapagoController,
                  scales: ScalePLCController, 
-                 tlaskans: tuple[TlaskanController, TlaskanController]):
+                 tlaskans: tuple[TlaskanController, TlaskanController],
+                 ):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -50,7 +52,6 @@ class InfoPanel(QWidget):
         self.set_buttons_state(False)
         self.ui.change_dir_btn.setIcon(QIcon("./App_data/dir_icon.png"))
         self.ui.change_dir_btn.setIconSize(QSize(54, 30))
-        self.ui.reserved_error_lbl.setVisible(False)
         self.ui.stop_saving_btn.setVisible(False)
 
     def _bind_buttons(self):

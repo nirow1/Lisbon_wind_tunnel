@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_Info_viewbWpZoA.ui'
+## Form generated from reading UI file 'wind_tunnel_Info_viewVbdZdV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -222,14 +222,6 @@ class Ui_Form(object):
         self.plc_not_connected_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_9.addWidget(self.plc_not_connected_lbl)
-
-        self.reserved_error_lbl = QLabel(self.widget_37)
-        self.reserved_error_lbl.setObjectName(u"reserved_error_lbl")
-        self.reserved_error_lbl.setMinimumSize(QSize(0, 25))
-        self.reserved_error_lbl.setMaximumSize(QSize(16777215, 25))
-        self.reserved_error_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_9.addWidget(self.reserved_error_lbl)
 
 
         self.verticalLayout.addWidget(self.widget_37)
@@ -608,7 +600,6 @@ class Ui_Form(object):
         self.save_timer_chb.setText("")
         self.label_7.setText(QCoreApplication.translate("Form", u"Timer", None))
         self.plc_not_connected_lbl.setText(QCoreApplication.translate("Form", u"Wind tunnel not connected", None))
-        self.reserved_error_lbl.setText(QCoreApplication.translate("Form", u"Pressure device not connected", None))
         self.connect_tunel_btn.setText(QCoreApplication.translate("Form", u"Connect tunnel", None))
         self.disconnect_tunnel_btn.setText(QCoreApplication.translate("Form", u"Disconnect tunnel", None))
         self.label.setText(QCoreApplication.translate("Form", u"Temp :", None))

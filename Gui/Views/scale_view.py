@@ -22,7 +22,7 @@ class ScaleView(QWidget):
         self.scale_chart = ZoomableChart("Balances",
                                               x_axis_seconds=600,
                                               y_axis=(-500, 500),
-                                              line_name=["Fx","Fy","fz","","",""],
+                                              line_name=["Fx","Fy","fz","Mx","My","Mz"],
                                               line_count=6)
         self.ui.scale_chart.addWidget(self.scale_chart)
 
@@ -61,6 +61,7 @@ class ScaleView(QWidget):
         self.ui.mx_lbl.setText(f"{data['mx']:.2f}")
         self.ui.my_lbl.setText(f"{data['my']:.2f}")
         self.ui.mz_lbl.setText(f"{data['mz']:.2f}")
+        self.scale_chart.update_chart(data)
         
     def _handle_status_data(self, data: dict):
         self.ready = data['ready']

@@ -1,18 +1,19 @@
-from Device_controllers.tunnel_plc_controller import TunnelPLCController
-from Device_controllers.driver_3d_plc_controller import DriverPLCController
-from Device_controllers.scale_plc_controller import ScalePLCController
-from Qt_files.Qt_python.ui_wind_tunnel_main_view import Ui_MainWindow
-from Device_controllers.tlaskan_controller import TlaskanController
-from Device_controllers.papago_controller import PapagoController
-from Gui.Views.configuration_view import ConfigurationView
-from Gui.Views.traverser_view import TraverserView
-from Gui.Views.pressure_view import PressureView
-from Gui.Views.settings_view import SettingsView
-from PySide6.QtWidgets import QMainWindow, QLabel
-from Gui.Views.scale_view import ScaleView
-from Gui.Views.info_view import InfoPanel
-from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtCore import QSize
+from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtWidgets import QLabel, QMainWindow
+
+from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
+from Device_controllers.papago_controller import PapagoController
+from Device_controllers.scale_plc_controller import ScalePLCController
+from Device_controllers.tlaskan_controller import TlaskanController
+from Device_controllers.tunnel_plc_controller import TunnelPLCController
+from Gui.Views.configuration_view import ConfigurationView
+from Gui.Views.info_view import InfoPanel
+from Gui.Views.pressure_view import PressureView
+from Gui.Views.scale_view import ScaleView
+from Gui.Views.settings_view import SettingsView
+from Gui.Views.traverser_view import TraverserView
+from Qt_files.Qt_python.ui_wind_tunnel_main_view import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
@@ -22,9 +23,23 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.current_frequency = 0
 
+        # todo: when disconnected is clicked show disconnect messages
+        # todo: stop is not disabled when connected
+        # todo: test staving 
+        # todo: improve saving to csv file from tlaskan and tenso
+        # todo: when save path is added set it for tlaskan and tenso
+        # todo: add values to default values in configuration view
+        # todo: dissapearing and showing not connected messages
+        # todo: test all test plans
+        # todo: velocity was not showing
+        # todo: allert messages not showing
+        # todo: point field is not sinced with real values and orientation
+        # todo: disconnect when starting tunnel
+
         # device communication
         self.tunnel_plc = TunnelPLCController()
-        self.driver_plc = DriverPLCController()
+        self.driver_3d_plc = Driver3DPLCController()
+        self.driver_2d_plc = Driver3DPLCController()
         self.scale_plc = ScalePLCController()
         self.tlaskans = (TlaskanController("192.168.10.98"), TlaskanController("192.168.10.99")) 
         self.papago = PapagoController()
@@ -32,10 +47,9 @@ class MainWindow(QMainWindow):
         self.control_byte = {}
 
         # creating views
-        
-
         self.info_panel = InfoPanel(self.tunnel_plc,
-         self.driver_plc,
+         self.driver_3d_plc,
+          self.driver_2d_plc,
           self.papago,
            self.scale_plc,
             self.tlaskans)
@@ -47,7 +61,7 @@ class MainWindow(QMainWindow):
         self.settings_pg = SettingsView(self.tunnel_plc)
         self.ui.stackedWidget.addWidget(self.settings_pg)
 
-        self.traverser_view = TraverserView(self.driver_plc)
+        self.traverser_view = TraverserView(self.driver_3d_plc, self.driver_2d_plc)
         self.ui.stackedWidget.addWidget(self.traverser_view)
 
         self.scale_view = ScaleView(self.scale_plc)
@@ -149,9 +163,14 @@ class MainWindow(QMainWindow):
             self.ui.password_le.setText("")
             self.ui.stackedWidget.setCurrentWidget(self.settings_pg)
 
+    def switch_to_traverser_view(self):
+        self.ui.stackedWidget.setCurrentWidget(self.traverser_view)
+        self.traverser_view.show_alert_message()
+
     def on_app_exit(self):
         self.tunnel_plc.disconnect()
-        self.driver_plc.disconnect()
+        self.driver_3d_plc.disconnect()
+        self.driver_2d_plc.disconnect()
         self.scale_plc.disconnect()
         self.tlaskans[0].disconnect()
         self.tlaskans[1].disconnect()

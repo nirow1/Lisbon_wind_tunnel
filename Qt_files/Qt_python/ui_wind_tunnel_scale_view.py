@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewJdzkZE.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewVOkxWc.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -94,13 +94,42 @@ class Ui_Form(object):
         self.verticalLayout_6 = QVBoxLayout(self.widget_13)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(1, -1, 1, 1)
+        self.connected_message_wg = QWidget(self.widget_13)
+        self.connected_message_wg.setObjectName(u"connected_message_wg")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.connected_message_wg.sizePolicy().hasHeightForWidth())
+        self.connected_message_wg.setSizePolicy(sizePolicy1)
+        self.connected_message_wg.setMinimumSize(QSize(0, 0))
+        self.connected_message_wg.setStyleSheet(u"QLabel {\n"
+"    background-color: #FF3636;\n"
+"    border-radius: 7px;\n"
+"    color: white; /* Optional: makes the text readable on red */\n"
+"}\n"
+"")
+        self.verticalLayout_10 = QVBoxLayout(self.connected_message_wg)
+        self.verticalLayout_10.setSpacing(3)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.lbl = QLabel(self.connected_message_wg)
+        self.lbl.setObjectName(u"lbl")
+        self.lbl.setMinimumSize(QSize(0, 25))
+        self.lbl.setMaximumSize(QSize(16777215, 25))
+        self.lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.verticalLayout_10.addWidget(self.lbl)
+
+
+        self.verticalLayout_6.addWidget(self.connected_message_wg)
+
         self.widget = QWidget(self.widget_13)
         self.widget.setObjectName(u"widget")
         self.widget.setMinimumSize(QSize(0, 40))
         self.widget.setMaximumSize(QSize(16777215, 40))
         self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(3, 3, 3, 3)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.chart_pg_btn = QPushButton(self.widget)
         self.chart_pg_btn.setObjectName(u"chart_pg_btn")
         self.chart_pg_btn.setMaximumSize(QSize(100, 35))
@@ -318,11 +347,11 @@ class Ui_Form(object):
 
         self.set_x_le = QLineEdit(self.widget_44)
         self.set_x_le.setObjectName(u"set_x_le")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.set_x_le.sizePolicy().hasHeightForWidth())
-        self.set_x_le.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.set_x_le.sizePolicy().hasHeightForWidth())
+        self.set_x_le.setSizePolicy(sizePolicy2)
         self.set_x_le.setMinimumSize(QSize(0, 0))
         self.set_x_le.setMaximumSize(QSize(70, 30))
 
@@ -353,8 +382,8 @@ class Ui_Form(object):
 
         self.set_y_le = QLineEdit(self.widget_51)
         self.set_y_le.setObjectName(u"set_y_le")
-        sizePolicy1.setHeightForWidth(self.set_y_le.sizePolicy().hasHeightForWidth())
-        self.set_y_le.setSizePolicy(sizePolicy1)
+        sizePolicy2.setHeightForWidth(self.set_y_le.sizePolicy().hasHeightForWidth())
+        self.set_y_le.setSizePolicy(sizePolicy2)
         self.set_y_le.setMinimumSize(QSize(0, 0))
         self.set_y_le.setMaximumSize(QSize(70, 30))
 
@@ -385,8 +414,8 @@ class Ui_Form(object):
 
         self.set_z_le = QLineEdit(self.widget_52)
         self.set_z_le.setObjectName(u"set_z_le")
-        sizePolicy1.setHeightForWidth(self.set_z_le.sizePolicy().hasHeightForWidth())
-        self.set_z_le.setSizePolicy(sizePolicy1)
+        sizePolicy2.setHeightForWidth(self.set_z_le.sizePolicy().hasHeightForWidth())
+        self.set_z_le.setSizePolicy(sizePolicy2)
         self.set_z_le.setMinimumSize(QSize(0, 0))
         self.set_z_le.setMaximumSize(QSize(70, 30))
 
@@ -428,7 +457,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -436,6 +465,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
+        self.lbl.setText(QCoreApplication.translate("Form", u"Scales not connected", None))
         self.chart_pg_btn.setText(QCoreApplication.translate("Form", u"Chart", None))
         self.test_plan_pg_btn.setText(QCoreApplication.translate("Form", u"Test plan", None))
         self.label_16.setText(QCoreApplication.translate("Form", u"Fx:", None))

@@ -155,6 +155,69 @@ QPushButton:pressed {
         <number>3</number>
        </property>
        <item>
+        <widget class="QWidget" name="connected_message_wg_1" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    background-color: #FF3636;
+    border-radius: 7px;
+    color: white; /* Optional: makes the text readable on red */
+}
+</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_4">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Devise 1 not connected</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QWidget" name="widget" native="true">
          <property name="maximumSize">
           <size>
@@ -175,10 +238,10 @@ QPushButton:pressed {
           <property name="bottomMargin">
            <number>1</number>
           </property>
-          <item row="1" column="16">
-           <widget class="QLabel" name="lbl_1_p_12">
+          <item row="1" column="11">
+           <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>0.0</string>
+             <string>P10:</string>
             </property>
            </widget>
           </item>
@@ -196,24 +259,16 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="1" column="13">
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>P11:</string>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
             </property>
-           </widget>
-          </item>
-          <item row="1" column="11">
-           <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>P10:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="10">
-           <widget class="QLabel" name="lbl_1_p_9">
-            <property name="text">
-             <string>0.0</string>
+             <string>P1:</string>
             </property>
            </widget>
           </item>
@@ -230,8 +285,8 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="1" column="8">
-           <widget class="QLabel" name="lbl_1_p_8">
+          <item row="1" column="6">
+           <widget class="QLabel" name="lbl_1_p_7">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -250,16 +305,24 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="1" column="5">
-           <widget class="QLabel" name="label_9">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
+          <item row="1" column="10">
+           <widget class="QLabel" name="lbl_1_p_9">
             <property name="text">
-             <string>P7:</string>
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="12">
+           <widget class="QLabel" name="lbl_1_p_10">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="16">
+           <widget class="QLabel" name="lbl_1_p_12">
+            <property name="text">
+             <string>0.0</string>
             </property>
            </widget>
           </item>
@@ -276,8 +339,15 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="14">
-           <widget class="QLabel" name="lbl_1_p_5">
+          <item row="0" column="6">
+           <widget class="QLabel" name="lbl_1_p_1">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="8">
+           <widget class="QLabel" name="lbl_1_p_2">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -296,8 +366,68 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="12">
-           <widget class="QLabel" name="lbl_1_p_4">
+          <item row="0" column="10">
+           <widget class="QLabel" name="lbl_1_p_3">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLabel" name="label_9">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P7:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="16">
+           <widget class="QLabel" name="lbl_1_p_6">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="13">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>P11:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="7">
+           <widget class="QLabel" name="label_3">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P2:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="9">
+           <widget class="QLabel" name="label_4">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P3:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="14">
+           <widget class="QLabel" name="lbl_1_p_5">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -316,84 +446,17 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="10">
-           <widget class="QLabel" name="lbl_1_p_3">
+          <item row="1" column="8">
+           <widget class="QLabel" name="lbl_1_p_8">
             <property name="text">
              <string>0.0</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="9">
-           <widget class="QLabel" name="label_4">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P3:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="6">
-           <widget class="QLabel" name="lbl_1_p_7">
+          <item row="0" column="12">
+           <widget class="QLabel" name="lbl_1_p_4">
             <property name="text">
              <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="12">
-           <widget class="QLabel" name="lbl_1_p_10">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="16">
-           <widget class="QLabel" name="lbl_1_p_6">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="8">
-           <widget class="QLabel" name="lbl_1_p_2">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="7">
-           <widget class="QLabel" name="label_3">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P2:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="6">
-           <widget class="QLabel" name="lbl_1_p_1">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QLabel" name="label">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P1:</string>
             </property>
            </widget>
           </item>
@@ -414,18 +477,18 @@ QPushButton:pressed {
            <height>35</height>
           </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_32">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="leftMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <property name="topMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <property name="rightMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <property name="bottomMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <item>
            <widget class="QLabel" name="label_2">
@@ -488,6 +551,69 @@ QPushButton:pressed {
         <number>3</number>
        </property>
        <item>
+        <widget class="QWidget" name="connected_message_wg_2" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    background-color: #FF3636;
+    border-radius: 7px;
+    color: white; /* Optional: makes the text readable on red */
+}
+</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Device 2 not connected</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QWidget" name="widget_5" native="true">
          <property name="maximumSize">
           <size>
@@ -508,136 +634,7 @@ QPushButton:pressed {
           <property name="bottomMargin">
            <number>1</number>
           </property>
-          <item row="1" column="16">
-           <widget class="QLabel" name="lbl_2_p_12">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="15">
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>P12:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="14">
-           <widget class="QLabel" name="lbl_2_p_11">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="13">
-           <widget class="QLabel" name="label_21">
-            <property name="text">
-             <string>P11:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="12">
-           <widget class="QLabel" name="lbl_2_p_10">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="11">
-           <widget class="QLabel" name="label_31">
-            <property name="text">
-             <string>P10:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="10">
-           <widget class="QLabel" name="lbl_2_p_9">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="9">
-           <widget class="QLabel" name="label_34">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P9:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="8">
-           <widget class="QLabel" name="lbl_2_p_8">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="7">
-           <widget class="QLabel" name="label_32">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P8:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="6">
-           <widget class="QLabel" name="lbl_2_p_7">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="5">
-           <widget class="QLabel" name="label_16">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P7:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="16">
-           <widget class="QLabel" name="lbl_2_p_6">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="15">
-           <widget class="QLabel" name="label_29">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P6:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="14">
-           <widget class="QLabel" name="lbl_2_p_5">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="13">
            <widget class="QLabel" name="label_15">
             <property name="maximumSize">
              <size>
@@ -650,14 +647,63 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="12">
+          <item row="2" column="12">
+           <widget class="QLabel" name="lbl_2_p_10">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QLabel" name="lbl_2_p_7">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="10">
+           <widget class="QLabel" name="lbl_2_p_9">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="13">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>P11:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="16">
+           <widget class="QLabel" name="lbl_2_p_6">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="12">
            <widget class="QLabel" name="lbl_2_p_4">
             <property name="text">
              <string>0.0</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="11">
+          <item row="1" column="10">
+           <widget class="QLabel" name="lbl_2_p_3">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLabel" name="lbl_2_p_1">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="11">
            <widget class="QLabel" name="label_24">
             <property name="maximumSize">
              <size>
@@ -670,14 +716,40 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="10">
-           <widget class="QLabel" name="lbl_2_p_3">
+          <item row="1" column="15">
+           <widget class="QLabel" name="label_29">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P6:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="14">
+           <widget class="QLabel" name="lbl_2_p_11">
             <property name="text">
              <string>0.0</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="9">
+          <item row="2" column="7">
+           <widget class="QLabel" name="label_32">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P8:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="9">
            <widget class="QLabel" name="label_33">
             <property name="maximumSize">
              <size>
@@ -690,14 +762,81 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="8">
+          <item row="2" column="9">
+           <widget class="QLabel" name="label_34">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P9:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLabel" name="label_16">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P7:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="11">
+           <widget class="QLabel" name="label_31">
+            <property name="text">
+             <string>P10:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLabel" name="label_23">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>P1:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="14">
+           <widget class="QLabel" name="lbl_2_p_5">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="8">
+           <widget class="QLabel" name="lbl_2_p_8">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="8">
            <widget class="QLabel" name="lbl_2_p_2">
             <property name="text">
              <string>0.0</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="7">
+          <item row="2" column="16">
+           <widget class="QLabel" name="lbl_2_p_12">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7">
            <widget class="QLabel" name="label_30">
             <property name="maximumSize">
              <size>
@@ -710,23 +849,10 @@ QPushButton:pressed {
             </property>
            </widget>
           </item>
-          <item row="0" column="6">
-           <widget class="QLabel" name="lbl_2_p_1">
+          <item row="2" column="15">
+           <widget class="QLabel" name="label_20">
             <property name="text">
-             <string>0.0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QLabel" name="label_23">
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>P1:</string>
+             <string>P12:</string>
             </property>
            </widget>
           </item>
@@ -747,18 +873,18 @@ QPushButton:pressed {
            <height>35</height>
           </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_33">
+         <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="leftMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <property name="topMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <property name="rightMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <property name="bottomMargin">
-           <number>1</number>
+           <number>3</number>
           </property>
           <item>
            <widget class="QLabel" name="label_14">

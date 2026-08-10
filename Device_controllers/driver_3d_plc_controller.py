@@ -3,7 +3,7 @@ from Utils.helper_functions import byte_to_bits
 from PySide6.QtCore import Signal
 
 
-class DriverPLCController(PollingPLCController):
+class Driver3DPLCController(PollingPLCController):
     DRIVERS_POS = Signal(dict)
     STATUS_DATA = Signal(dict)
 

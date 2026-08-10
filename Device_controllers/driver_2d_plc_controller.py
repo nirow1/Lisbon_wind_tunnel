@@ -1,4 +1,5 @@
 from PySide6.QtCore import Signal
+
 from Device_controllers.polling_plc_controller import PollingPLCController
 from Utils.helper_functions import byte_to_bits
 
@@ -13,9 +14,11 @@ class Driver2DPLCController(PollingPLCController):
     def _read_main_data(self) -> list[dict] | None:
         try:
             position_data = self._read_plc_data(self.read_nb, 0, 26, '>2d8BH')
+            if position_data is None:
+                raise Exception("No position data received")
 
-            stats_data = byte_to_bits(((position_data[11] & 0xFF) << 8) | (position_data[11] >> 8), "little")
-            return [{"x": position_data[0], "y": position_data[1], "z": position_data[2]},
+            stats_data = byte_to_bits(((position_data[10] & 0xFF) << 8) | (position_data[10] >> 8), "little")
+            return [{"x": position_data[0], "y": position_data[1]},
                     {"ready": stats_data[0], "moving": stats_data[1]}]
 
         except Exception as e:

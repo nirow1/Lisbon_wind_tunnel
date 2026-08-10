@@ -3,8 +3,9 @@ from threading import Thread
 from time import sleep
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget
-from Device_controllers.driver_3d_plc_controller import DriverPLCController
 from Gui.Custom_functions.test_plan_tab import TestPlanTab
+from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
+from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
 from Gui.Custom_widgets.pos_field_view import PositionFieldWidget
 from Qt_files.Qt_python.ui_wind_tunnel_traverser_view import Ui_Form
 from Utils.number_validator import IntValidator, FloatValidator
@@ -14,14 +15,14 @@ from Utils.static_methods import add_sec_to_current_time
 class TraverserView(QWidget):
     TEST_RUNNING = Signal(bool)
 
-    def __init__(self, plc_3d: DriverPLCController):
+    def __init__(self, plc_3d: Driver3DPLCController, plc_2d: Driver2DPLCController):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
         self.stop_plan = False
         self.plc_3d = plc_3d
-        self.plc_2d = None
+        self.plc_2d = plc_2d
 
         self.ready = 1
         self.moving = 0
@@ -32,7 +33,7 @@ class TraverserView(QWidget):
                                             400)
         self.ui.field_2d_lo.addWidget(self.field_2d)
 
-        self.field_3d_xy = PositionFieldWidget(1000,1000, 350,350)
+        self.field_3d_xy = PositionFieldWidget(1000,1000, 350, 350)
         self.ui.field_3d_xy_lo.addWidget(self.field_3d_xy)
         self.field_3d_xz = PositionFieldWidget(1000,1000, 350, 350)
         self.ui.field_3d_xz_lo.addWidget(self.field_3d_xz)
@@ -49,12 +50,11 @@ class TraverserView(QWidget):
         #self.ui.set_pos_x_2d_le.setValidator(IntValidator(0))
         #self.ui.set_pos_y_2d_le.setValidator(FloatValidator(0, 483))
 
-        self.bind_emits()
+        self._bind_emits()
 
     def _init_graphical_changes(self):
         self.test_plan_2d.show_message(False)
         self.test_plan_3d.show_message(False)
-        self.ui.stackedWidget.setCurrentWidget(self.ui.page)
 
     def _bind_buttons(self):
         self.ui.pg_2d_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg))
@@ -70,28 +70,38 @@ class TraverserView(QWidget):
         self.test_plan_2d.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
         self.test_plan_2d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
-        self.ui.continue_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg))
+        self.ui.continue_btn.clicked.connect(self._accept_alert_message)
 
         self.test_plan_3d.ui.start_test_plan_btn.clicked.connect(self._start_3d_test_plan)
         self.test_plan_3d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
-    def bind_emits(self):
-        self.plc_3d.DRIVERS_POS.connect(self.show_3d_drivers_pos)
+    def _bind_emits(self):
+        self.plc_3d.DRIVERS_POS.connect(self._show_3d_drivers_pos)
         self.plc_3d.STATUS_DATA.connect(self.set_status_data)
-        self.TEST_RUNNING.connect(self.set_buttons_state)
+        self.TEST_RUNNING.connect(self._set_buttons_state)
 
     def set_status_data(self, status_data: dict):
         self.ready = status_data.get("ready", 0)
         self.moving = status_data.get("moving", 0)
 
-    def set_buttons_state(self, state: bool):
+    def show_alert_message(self,):
+        self.ui.pg_2d_btn.hide()
+        self.ui.pg_3d_btn.hide()
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page)
+
+    def _accept_alert_message(self):
+        self.ui.pg_2d_btn.show()
+        self.ui.pg_3d_btn.show()
+        self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg)
+
+    def _set_buttons_state(self, state: bool):
         self.ui.set_pos_x_2d_btn.setEnabled(state)
         self.ui.set_pos_y_2d_btn.setEnabled(state)
         self.ui.set_pos_x_3d_btn.setEnabled(state)
         self.ui.set_pos_y_3d_btn.setEnabled(state)
         self.ui.set_pos_z_3d_btn.setEnabled(state)
         
-    def show_3d_drivers_pos(self, pos: dict):
+    def _show_3d_drivers_pos(self, pos: dict):
         x_3d = pos.get("x", 0)
         y_3d = pos.get("y", 0)
         z_3d = pos.get("z", 0)
