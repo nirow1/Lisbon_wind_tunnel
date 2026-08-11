@@ -50,7 +50,8 @@ class ScaleView(QWidget):
         self.scales.POS_DATA.connect(self._handle_pos_data)
         self.scales.SCALE_DATA.connect(self._handle_scale_data)
         self.scales.STATUS_DATA.connect(self._handle_status_data)
-
+        self.scales.PLC_CONNECTED.connect(lambda state: self.ui.connected_message_wg.setVisible(state))
+        
     def _handle_pos_data(self, data: dict):
         ...
 

@@ -1,14 +1,14 @@
-from PySide6.QtCore import Signal, QSize
+from PySide6.QtCore import QSize, Signal
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QWidget, QFileDialog
+from PySide6.QtWidgets import QFileDialog, QWidget
 
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.scale_plc_controller import ScalePLCController
+from Device_controllers.tlaskan_controller import TlaskanController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
 from Gui.Custom_functions.saving_thread import SavingThread
 from Qt_files.Qt_python.ui_wind_tunnel_Info_view import Ui_Form
-from Device_controllers.tlaskan_controller import TlaskanController
 from Utils.number_validator import FloatValidator
 
 
@@ -93,10 +93,10 @@ class InfoPanel(QWidget):
         temp = plc_data.get("average_temp")
         pressure = plc_data.get("pressure_filtered")
 
-        self.ui.wind_velocity_lbl.setText(f"{str(wind_velocity)}")
-        self.ui.frequency_lbl.setText(f"{str(frequency)}")
-        self.ui.average_temp_lbl.setText(f"{str(temp)}")
-        self.ui.pressure_lbl.setText(f"{str(pressure)}")
+        self.ui.wind_velocity_lbl.setText(f"{wind_velocity!s}")
+        self.ui.frequency_lbl.setText(f"{frequency!s}")
+        self.ui.average_temp_lbl.setText(f"{temp!s}")
+        self.ui.pressure_lbl.setText(f"{pressure!s}")
 
         if self.save_thread.saving:
             self.save_thread.update_key_value("Velocity [m/s]", wind_velocity)
@@ -147,6 +147,10 @@ class InfoPanel(QWidget):
         self.ui.stop_tunnel_btn.setEnabled(state)
         self.ui.start_tunnel_btn.setEnabled(state)
 
+    def _set_buttons_state(self, state: bool):
+        self.ui.start_tunnel_btn.setEnabled(state)
+        self.ui.stop_tunnel_btn.setEnabled(not state)
+
     def set_velocity_control_state(self, state: bool):
         self.ui.set_velocity_le.setEnabled(state)
         self.ui.set_velocity_rb.setEnabled(state)
@@ -176,8 +180,7 @@ class InfoPanel(QWidget):
         self.save_thread.set_file_path(folder_path)
 
     def _connect_tunnel(self):
-        self.ui.connect_tunel_btn.hide()
-        self.ui.disconnect_tunnel_btn.show()
+        self._change_connect_btns_state(False)
 
         #connecting
         self.tunnel_plc.start()
@@ -187,12 +190,11 @@ class InfoPanel(QWidget):
         self.tlaskans[0].start()
         self.tlaskans[1].start()
 
-        self.set_buttons_state(True)
+        self._set_buttons_state(True)
 
     def disconnect_tunnel(self):
         try:
-            self.ui.disconnect_tunnel_btn.hide()
-            self.ui.connect_tunel_btn.show()
+            self._change_connect_btns_state(True)
 
             self.tlaskans[0].disconnect()
             self.tlaskans[1].disconnect()
@@ -200,8 +202,12 @@ class InfoPanel(QWidget):
             self.tunnel_plc.disconnect()
             self.driver_3d.disconnect()
 
-            self.set_buttons_state(False)
+            self._set_buttons_state(False)
         except Exception as e:
             print(e)
+
+    def _change_connect_btns_state(self, state: bool):
+        self.ui.connect_tunel_btn.setVisible(state)
+        self.ui.disconnect_tunnel_btn.setVisible(not state)
 
 

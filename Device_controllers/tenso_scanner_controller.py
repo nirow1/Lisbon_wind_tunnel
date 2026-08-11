@@ -16,8 +16,6 @@ class TensoScannerController(QThread):
     AD_DISABLE = 0
     AD_MAX_SPEED = 1
 
-    # todo: make a parent class for tlaskan and scale controllers
-    # todo: solve problem with saving data after connecting for tlaskans as well 
     def __init__(self, ip="192.168.10.96"):
         super().__init__()
         self.connected = False
@@ -75,7 +73,7 @@ class TensoScannerController(QThread):
                 chunk = self.tenso_scan.recv(4096)
                 if not chunk:
                     break
-        except socket.timeout:
+        except TimeoutError:
             pass
         except OSError:
             pass
@@ -194,7 +192,7 @@ class TensoScannerController(QThread):
 
                     offset += sample_size
 
-            except socket.timeout:
+            except TimeoutError:
                 continue
             except Exception as e:
                 if self.connected:

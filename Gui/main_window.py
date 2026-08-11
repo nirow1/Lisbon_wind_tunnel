@@ -22,19 +22,20 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.current_frequency = 0
+        # todo: disconnect when setting velocity or frequency of tunnel
+        # todo: velocity was not showing
 
-        # todo: when disconnected is clicked show disconnect messages
-        # todo: stop is not disabled when connected
-        # todo: test staving 
+        # todo: dissapearing and showing not connected messages (tlaskan left)
         # todo: improve saving to csv file from tlaskan and tenso
         # todo: when save path is added set it for tlaskan and tenso
-        # todo: add values to default values in configuration view
-        # todo: dissapearing and showing not connected messages
-        # todo: test all test plans
-        # todo: velocity was not showing
-        # todo: allert messages not showing
+        # todo: make a parent class for tlaskan and scale controllers
+        # todo: when disconnected is clicked show disconnect messages
+        # todo: test staving 
+        # todo: check if the threads end when gui is turned of while connecting
+
         # todo: point field is not sinced with real values and orientation
-        # todo: disconnect when starting tunnel
+        # todo: add values to default values in configuration view
+        # todo: test all test plans
 
         # device communication
         self.tunnel_plc = TunnelPLCController()
@@ -93,7 +94,7 @@ class MainWindow(QMainWindow):
         self.ui.pid_settings_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.login_pg))
         self.ui.config_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.config_view))
         self.ui.next_params_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.next_params_pg))
-        self.ui.drivers_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.traverser_view))
+        self.ui.drivers_pg_btn.clicked.connect(self.switch_to_traverser_view)
         self.ui.scales_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.scale_view))
         self.ui.pressures_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.pressure_view))
 

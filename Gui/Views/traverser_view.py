@@ -1,14 +1,15 @@
 from datetime import datetime
 from threading import Thread
 from time import sleep
+
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget
-from Gui.Custom_functions.test_plan_tab import TestPlanTab
+
 from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
+from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Gui.Custom_widgets.pos_field_view import PositionFieldWidget
 from Qt_files.Qt_python.ui_wind_tunnel_traverser_view import Ui_Form
-from Utils.number_validator import IntValidator, FloatValidator
 from Utils.static_methods import add_sec_to_current_time
 
 
@@ -78,6 +79,8 @@ class TraverserView(QWidget):
     def _bind_emits(self):
         self.plc_3d.DRIVERS_POS.connect(self._show_3d_drivers_pos)
         self.plc_3d.STATUS_DATA.connect(self.set_status_data)
+        self.plc_3d.PLC_CONNECTED.connect(lambda state: self.ui.connected_message_wg_2.setVisible(state))
+        self.plc_2d.PLC_CONNECTED.connect(lambda state: self.ui.connected_message_wg.setVisible(state))
         self.TEST_RUNNING.connect(self._set_buttons_state)
 
     def set_status_data(self, status_data: dict):
