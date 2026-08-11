@@ -29,15 +29,14 @@ class MainWindow(QMainWindow):
         # todo: stop buttons for drivers and scales
         # todo: hooming logic
         # todo: dissapearing and showing not connected messages (tlaskan left)
-        # todo: improve saving to csv file from tlaskan and tenso
-        # todo: when save path is added set it for tlaskan and tenso
-        # todo: make a parent class for tlaskan and scale controllers
         # todo: when disconnected is clicked show disconnect messages
-        # todo: test staving 
         # todo: check if the threads end when gui is turned of while connecting
+        # todo: when disconnect is clicked while connecting the gui frezzes. disconnect should be able to end all connection threads
 
         # todo: point field is not sinced with real values and orientation
         # todo: add values to default values in configuration view
+        
+        # todo: test staving 
         # todo: test all test plans
 
         # device communication

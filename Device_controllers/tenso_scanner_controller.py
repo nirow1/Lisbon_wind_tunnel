@@ -1,71 +1,50 @@
-import csv
-import os
-import socket
 import struct
 import threading
 import time
 
-from PySide6.QtCore import QThread, Signal
+from PySide6.QtCore import Signal
+
+from Device_controllers.fjtech_socket_controller import SocketDeviceController
 
 
-class TensoScannerController(QThread):
+class TensoScannerController(SocketDeviceController):
     TENSO_DATA = Signal(list)
 
-    def __init__(self, ip="192.168.10.96"):
-        super().__init__()
-        self.connected = False
-        self.ip = ip
-        self.port = 23
-        self.msg = ""
-        self.zero_values = [0.0 for _ in range(4)]
-        self.processed_pressure = []
-        self.tenso_scan: socket.socket | None = None
-        self._receive_thread = None
-        self._rx_buffer = bytearray()
-        self.csv_path = ""
-        self._csv_file = None
-        self._csv_writer = None
+    _csv_basename = "tenzoscan_data"
+    _csv_delimiter = ","
+    _csv_header = ["Packet_ID", "Timestamp_us", "CH1", "CH2", "CH3"]
 
-    def set_csv_path(self, path):
-        self.csv_path = path if path else ""
+    def __init__(self, ip="192.168.10.96"):
+        super().__init__(ip)
+        self._rx_buffer = bytearray()
 
     def run(self):
         while not self.connected:
             if self._connect():
                 self._start_streaming()
-                if self._receive_thread is not None:
-                    self._receive_thread.join()
+                self._join_worker_thread(timeout=None)
                 return
             time.sleep(2)
 
     def _connect(self):
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(2.0)
-            sock.connect((self.ip, self.port))
-            self.tenso_scan = sock
-            self.connected = True
-            self._rx_buffer.clear()
-            # Previous sessions may leave the device streaming; stop and clear the socket.
-            self._set_ram_register_blind(8, 0)
-            self._set_ram_register_blind(18, 0)
-            self._drain_socket()
-            return True
-        except Exception as e:
-            print(f"Failed to connect to tenzoscan: {e}")
-            self.tenso_scan = None
-            self.connected = False
+        if not self._connect_socket(timeout=2.0):
             return False
+        self._rx_buffer.clear()
+        # Previous sessions may leave the device streaming; stop and clear the socket.
+        self._set_ram_register_blind(8, 0)   # mode = disable
+        self._set_ram_register_blind(18, 0)  # stream enable = off
+        self._drain_socket()
+        return True
 
     def _drain_socket(self):
-        if self.tenso_scan is None:
+        if self._sock is None:
             return
         self._rx_buffer.clear()
-        prev_timeout = self.tenso_scan.gettimeout()
-        self.tenso_scan.settimeout(0.05)
+        prev_timeout = self._sock.gettimeout()
+        self._sock.settimeout(0.05)
         try:
             while True:
-                chunk = self.tenso_scan.recv(4096)
+                chunk = self._sock.recv(4096)
                 if not chunk:
                     break
         except TimeoutError:
@@ -73,17 +52,16 @@ class TensoScannerController(QThread):
         except OSError:
             pass
         finally:
-            self.tenso_scan.settimeout(prev_timeout if prev_timeout is not None else 2.0)
+            self._sock.settimeout(prev_timeout if prev_timeout is not None else 2.0)
 
     def _start_streaming(self):
-        self._open_csv()
         try:
             # Complete both AT writes before the reader thread touches the socket.
             # send_ram_write keeps any trailing 0xAA payload in _rx_buffer.
-            self.send_ram_write(18, 1)
-            self.send_ram_write(8, 1)
-            self._receive_thread = threading.Thread(target=self._receive_stream, daemon=True)
-            self._receive_thread.start()
+            self.send_ram_write(18, 1)  # stream enable
+            self.send_ram_write(8, 1)   # mode = max speed
+            self._worker_thread = threading.Thread(target=self._receive_stream, daemon=True)
+            self._worker_thread.start()
         except Exception as e:
             print(f"Failed to start streaming: {e}")
 
@@ -96,7 +74,7 @@ class TensoScannerController(QThread):
                 self._rx_buffer.clear()
                 if token in buf:
                     break
-            chunk = self.tenso_scan.recv(1024)
+            chunk = self._sock.recv(1024)
             if not chunk:
                 raise ConnectionError("Socket closed while waiting for AT response")
             buf.extend(chunk)
@@ -113,20 +91,10 @@ class TensoScannerController(QThread):
 
     def send_ram_write(self, reg, value):
         cmd = f"AT+RAM_RW={reg},1\r\n"
-        self.tenso_scan.sendall(cmd.encode("ascii"))
+        self._sock.sendall(cmd.encode("ascii"))
         self._recv_at_response(b"Waiting")
-        self.tenso_scan.sendall(bytes([value]))
+        self._sock.sendall(bytes([value]))
         self._recv_at_response(b"OK")
-
-    def _set_ram_register_blind(self, reg, value):
-        try:
-            cmd = f"AT+RAM_RW={reg},1\r\n".encode("ascii")
-            self.tenso_scan.sendall(cmd)
-            time.sleep(0.05)
-            self.tenso_scan.sendall(bytes([value]))
-            time.sleep(0.05)
-        except Exception as e:
-            print(f"Blind write reg {reg} failed: {e}")
 
     def _recv_exact(self, size):
         data = bytearray()
@@ -137,7 +105,7 @@ class TensoScannerController(QThread):
                 data.extend(self._rx_buffer[:take])
                 del self._rx_buffer[:take]
                 continue
-            chunk = self.tenso_scan.recv(need)
+            chunk = self._sock.recv(need)
             if not chunk:
                 raise ConnectionError("Socket closed while reading")
             data.extend(chunk)
@@ -178,9 +146,7 @@ class TensoScannerController(QThread):
                 for _ in range(sample_count):
                     unpacked = struct.unpack(sample_format, payload[offset: offset + sample_size])
                     channels = self._channels_from_sample(unpacked, active_mask)
-                    if self._csv_writer is not None:
-                        self._csv_writer.writerow([packet_id, unpacked[0], *channels])
-
+                    self._write_csv_row([packet_id, unpacked[0], *channels[:3]])
                     sample_n += 1
                     if sample_n % 100 == 0:
                         self.TENSO_DATA.emit(channels[:3])
@@ -194,61 +160,13 @@ class TensoScannerController(QThread):
                     print(f"[Stream] Error: {e}")
                 return
 
-    def _csv_filename(self):
-        safe_ip = self.ip.replace(".", "_")
-        name = f"tenzoscan_data_{safe_ip}.csv"
-        if self.csv_path:
-            path = os.path.join(self.csv_path, name)
-        else:
-            path = name
-        return os.path.abspath(path)
-
-    def _open_csv(self):
-        path = self._csv_filename()
-        directory = os.path.dirname(path)
-        if directory:
-            os.makedirs(directory, exist_ok=True)
-        self._csv_file = open(path, "w", newline="", buffering=1)
-        self._csv_writer = csv.writer(self._csv_file)
-        self._csv_writer.writerow(["Packet_ID", "Timestamp_us", "CH1", "CH2", "CH3", "CH4"])
-        self._csv_file.flush()
-
-    def _close_csv(self):
-        if self._csv_file is not None:
-            try:
-                self._csv_file.flush()
-                self._csv_file.close()
-            except Exception as e:
-                print(f"Error closing CSV: {e}")
-            self._csv_file = None
-            self._csv_writer = None
+    def _on_disconnect(self):
+        self._set_ram_register_blind(8, 0)   # mode = disable
+        self._set_ram_register_blind(18, 0)  # stream enable = off
 
     def disconnect(self):
-        was_connected = self.connected
-        self.connected = False
-
-        if self.tenso_scan is not None and was_connected:
-            try:
-                self.tenso_scan.settimeout(None)
-                self.tenso_scan.setblocking(True)
-                self._set_ram_register_blind(self.REG_MODE, self.AD_DISABLE)
-                self._set_ram_register_blind(self.REG_STREAM_EN, 0)
-            except Exception as e:
-                print(f"Error stopping tenzoscan: {e}")
-
-        if self._receive_thread is not None:
-            self._receive_thread.join(timeout=2.0)
-            self._receive_thread = None
-
-        if self.tenso_scan is not None:
-            try:
-                self.tenso_scan.close()
-            except Exception as e:
-                print(f"Error closing tenzoscan socket: {e}")
-            self.tenso_scan = None
-
+        super().disconnect()
         self._rx_buffer.clear()
-        self._close_csv()
 
 
 if __name__ == "__main__":

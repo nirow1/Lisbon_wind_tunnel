@@ -58,14 +58,6 @@ class ScalePLCController(PollingPLCController):
             self._make_calculations()
 
     def _make_calculations(self) -> None:
-        # TEMP: store samples, average every 50, print on first console line, clear
-        self._tenso_samples.append(list(self.tenso_data.values()))
-        if len(self._tenso_samples) >= 50:
-            n = len(self._tenso_samples)
-            averages = [sum(col) / n for col in zip(*self._tenso_samples)]
-            print(f"\033[H\033[K{averages}", flush=True)
-            self._tenso_samples.clear()
-
         ch1_tso1 = self.tenso_data["ch1_tso1"]
         ch2_tso1 = self.tenso_data["ch2_tso1"]
         ch3_tso1 = self.tenso_data["ch3_tso1"]
@@ -73,12 +65,12 @@ class ScalePLCController(PollingPLCController):
         ch2_tso2 = self.tenso_data["ch2_tso2"]
         ch3_tso2 = self.tenso_data["ch3_tso2"]
 
-        x = ch2_tso1 + ch3_tso1
-        y = ch1_tso1
-        z = ch1_tso2 + ch2_tso2 + ch3_tso2
-        mx = -ch2_tso2*0.215 + ch1_tso2*0.215 - ch1_tso1*1.167
-        my = -1.167*ch1_tso1 - 1.167*ch2_tso1-0.215*ch3_tso2 + 0.215*ch1_tso2+0.215*ch2_tso2
-        mz = ch2_tso1*0.215 + ch3_tso1*0.215
+        x = ch1_tso1 * -0.0000040934 + ch2_tso1 * 0.0000103008 + ch3_tso1 * -0.0000077890 + ch1_tso2 * 0.0000235612 + ch2_tso2 * 0.0001517056 + ch3_tso2 * 0.0001514674 - 2861,3773566694
+        y = ch1_tso1 * 0.0000244077 + ch2_tso1 * -0.0000069629 + ch3_tso1 * -0.0000051808 + ch1_tso2 * 0.0001158091 + ch2_tso2 * -0.0000116837 + ch3_tso2 * -0.0000054757 - 1011,2072954020
+        z = ch1_tso1 * 0.0001735134 + ch2_tso1 * 0.0005021131 + ch3_tso1 * 0.0004471496 + ch1_tso2 * 0.0002450960 + ch2_tso2 * -0.0000567972 + ch3_tso2 * -0.0001257411 - 9700,7692685649
+        mx = ch1_tso1 * -0.0000106209 + ch2_tso1 * -0.0000196786 + ch3_tso1 * 0.0000265507 + ch1_tso2 * -0.0000072199 + ch2_tso2 * -0.0000312812 + ch3_tso2 * -0.0000281642 + 623,5219933303
+        my = ch1_tso1 * -0.0000174044 + ch2_tso1 * 0.0000707668 + ch3_tso1 * -0.000032043 + ch1_tso2 * 0.0000658358 + ch2_tso2 * 0.0000262472 + ch3_tso2 * 0.0000221171 - 1436,6778343669
+        mz = ch1_tso1 * -0.0000015874 + ch2_tso1 * -0.0000071138 + ch3_tso1 * 0.000033506 + ch1_tso2 * -0.000046326 + ch2_tso2 * -0.0000360606 + ch3_tso2 * 0.0000244908 + 193,3865058669
 
         self.SCALE_DATA.emit({"x": x, "y": y, "z": z, "mx": mx, "my": my, "mz": mz})
 

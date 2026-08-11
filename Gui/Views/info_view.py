@@ -68,8 +68,8 @@ class InfoPanel(QWidget):
         self.ui.set_velocity_rb.clicked.connect(lambda: self._set_frequency_mode(False))
         self.ui.set_frequency_rb.clicked.connect(lambda: self._set_frequency_mode(True))
 
-        self.ui.start_saving_btn.clicked.connect(self.save_thread.start_saving)
-        self.ui.stop_saving_btn.clicked.connect(self.save_thread.stop_saving)
+        self.ui.start_saving_btn.clicked.connect(self._start_saving)
+        self.ui.stop_saving_btn.clicked.connect(self._stop_saving)
         self.ui.change_dir_btn.clicked.connect(self._open_dir_dialog)
         self.ui.set_name_btn.clicked.connect(lambda: self.save_thread.set_save_file_name(self.ui.file_name_le.text()))
         self.ui.save_timer_chb.clicked.connect(lambda: self.save_thread.activate_timer(self.ui.save_timer_chb.isChecked(), self.ui.save_timer_le.text()))
@@ -187,11 +187,26 @@ class InfoPanel(QWidget):
         self.ui.start_tunnel_btn.setEnabled(True)
         self.ui.stop_tunnel_btn.setEnabled(False)
 
+    def _csv_devices(self):
+        return (*self.tlaskans, *self.scales.tenso_scanners)
+
+    def _start_saving(self):
+        self.save_thread.start_saving()
+        for device in self._csv_devices():
+            device.start_csv_logging()
+
+    def _stop_saving(self):
+        self.save_thread.stop_saving()
+        for device in self._csv_devices():
+            device.stop_csv_logging()
+
     def _open_dir_dialog(self):
         options = QFileDialog(self).options()
         folder_path = QFileDialog.getExistingDirectory(self, "Select Folder", "", options=options)
         self.ui.dir_path_line.setText(folder_path)
         self.save_thread.set_file_path(folder_path)
+        for device in self._csv_devices():
+            device.set_csv_path(folder_path)
 
     def _connect_tunnel(self):
         self._change_connect_btns_state(False)

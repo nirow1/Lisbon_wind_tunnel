@@ -33,7 +33,6 @@ class PLCController(QThread):
         while not self.connected:
             try:
                 self.plc = client.Client()
-                self.plc.set_connection_type(client.ConnectionType.S7Basic) # addedd line not sure if it works
                 self.plc.connect(self.ip, 0, 1)
                 self.connected = self.plc.get_connected()
                 self.PLC_CONNECTED.emit(self.connected)
