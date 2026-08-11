@@ -11,11 +11,6 @@ from PySide6.QtCore import QThread, Signal
 class TensoScannerController(QThread):
     TENSO_DATA = Signal(list)
 
-    REG_MODE = 8
-    REG_STREAM_EN = 18
-    AD_DISABLE = 0
-    AD_MAX_SPEED = 1
-
     def __init__(self, ip="192.168.10.96"):
         super().__init__()
         self.connected = False
@@ -52,8 +47,8 @@ class TensoScannerController(QThread):
             self.connected = True
             self._rx_buffer.clear()
             # Previous sessions may leave the device streaming; stop and clear the socket.
-            self._set_ram_register_blind(self.REG_MODE, self.AD_DISABLE)
-            self._set_ram_register_blind(self.REG_STREAM_EN, 0)
+            self._set_ram_register_blind(8, 0)
+            self._set_ram_register_blind(18, 0)
             self._drain_socket()
             return True
         except Exception as e:
@@ -85,8 +80,8 @@ class TensoScannerController(QThread):
         try:
             # Complete both AT writes before the reader thread touches the socket.
             # send_ram_write keeps any trailing 0xAA payload in _rx_buffer.
-            self.send_ram_write(self.REG_STREAM_EN, 1)
-            self.send_ram_write(self.REG_MODE, self.AD_MAX_SPEED)
+            self.send_ram_write(18, 1)
+            self.send_ram_write(8, 1)
             self._receive_thread = threading.Thread(target=self._receive_stream, daemon=True)
             self._receive_thread.start()
         except Exception as e:

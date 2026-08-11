@@ -46,6 +46,14 @@ class PressureView(QWidget):
          self.ui.widget, 1))
         self.tlaskan_2.PRESSURE_DATA.connect(lambda data: self._handle_pressure_data(data,
         self.ui.widget_5, 2))
+        self.tlaskan_1.DEVICE_CONNECTED.connect(self._on_tlaskan_1_connected)
+        self.tlaskan_2.DEVICE_CONNECTED.connect(self._on_tlaskan_2_connected)
+
+    def _on_tlaskan_1_connected(self, connected: bool):
+        self.ui.connected_message_wg_1.setVisible(not connected)
+
+    def _on_tlaskan_2_connected(self, connected: bool):
+        self.ui.connected_message_wg_2.setVisible(not connected)
 
     def _handle_pressure_data(self, pressure_data: list, widget: QWidget, id : int):
         for i, value in enumerate(pressure_data):

@@ -15,13 +15,15 @@ class PapagoController(QThread):
         self.ip = "192.168.10.13"
         self.port = 502
         self.client: ModbusClient | None = None
-        self.connected: bool= False
+        self.connected: bool = False
+        self._running = False
 
     def run(self):
+        self._running = True
         self._connect_to_papago()
 
     def _connect_to_papago(self):
-        while not self.connected:
+        while self._running and not self.connected:
             try:
                 self.client = ModbusClient(self.ip, port=self.port)
                 self.connected = self.client.connect()
@@ -32,9 +34,10 @@ class PapagoController(QThread):
             except Exception as e:
                 print(e)
                 print("papago reading data error")
+                sleep(5)
 
     def _read_papago_data(self):
-        while self.connected:
+        while self._running and self.connected:
             temp = self.client.read_input_registers(12, count=2)
             hum = self.client.read_input_registers(22, count=2)
             atmo_press = self.client.read_input_registers(32, count=2)
@@ -45,6 +48,18 @@ class PapagoController(QThread):
                 papago_data = {"temperature": temp_float, "humidity": hum_float, "pressure": press_float}
                 self.PAPAGO_DATA.emit(papago_data)
             time.sleep(0.3)
+
+    def disconnect(self):
+        self._running = False
+        self.connected = False
+        try:
+            if self.client is not None:
+                self.client.close()
+        except Exception as e:
+            print(e)
+        finally:
+            self.client = None
+        self.wait(3000)
 
 if __name__ == '__main__':
     papago = PapagoController()

@@ -79,9 +79,15 @@ class TraverserView(QWidget):
     def _bind_emits(self):
         self.plc_3d.DRIVERS_POS.connect(self._show_3d_drivers_pos)
         self.plc_3d.STATUS_DATA.connect(self.set_status_data)
-        self.plc_3d.PLC_CONNECTED.connect(lambda state: self.ui.connected_message_wg_2.setVisible(state))
-        self.plc_2d.PLC_CONNECTED.connect(lambda state: self.ui.connected_message_wg.setVisible(state))
+        self.plc_3d.PLC_CONNECTED.connect(self._on_plc_3d_connected)
+        self.plc_2d.PLC_CONNECTED.connect(self._on_plc_2d_connected)
         self.TEST_RUNNING.connect(self._set_buttons_state)
+
+    def _on_plc_3d_connected(self, connected: bool):
+        self.ui.connected_message_wg_2.setVisible(not connected)
+
+    def _on_plc_2d_connected(self, connected: bool):
+        self.ui.connected_message_wg.setVisible(not connected)
 
     def set_status_data(self, status_data: dict):
         self.ready = status_data.get("ready", 0)

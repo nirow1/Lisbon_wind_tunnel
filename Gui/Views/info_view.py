@@ -2,6 +2,7 @@ from PySide6.QtCore import QSize, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QFileDialog, QWidget
 
+from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.scale_plc_controller import ScalePLCController
@@ -17,7 +18,7 @@ class InfoPanel(QWidget):
 
     def __init__(self, tunnel_plc: TunnelPLCController,
                  driver_3d: Driver3DPLCController,
-                 driver_2d: Driver3DPLCController,
+                 driver_2d: Driver2DPLCController,
                  papago: PapagoController,
                  scales: ScalePLCController, 
                  tlaskans: tuple[TlaskanController, TlaskanController],
@@ -31,6 +32,7 @@ class InfoPanel(QWidget):
 
         self.tunnel_plc = tunnel_plc
         self.driver_3d = driver_3d
+        self.driver_2d = driver_2d
         self.papago = papago
         self.scales = scales
         self.tlaskans = tlaskans
@@ -157,11 +159,23 @@ class InfoPanel(QWidget):
         self.ui.set_velocity_le.setEnabled(state)
         self.ui.set_velocity_rb.setEnabled(state)
 
-    def set_available(self, state: bool):
-        if state is False and self.ui.stop_tunnel_btn.isEnabled():
+    def set_available(self, connected: bool):
+        """Handle real PLC connection changes only (PLC_CONNECTED)."""
+        if connected is False and self.ui.stop_tunnel_btn.isEnabled():
             self.stop_tunnel()
-        self.ui.plc_not_connected_lbl.setVisible(not state)
-        self.ui.start_tunnel_btn.setEnabled(state)
+        self.ui.plc_not_connected_lbl.setVisible(not connected)
+        if connected:
+            if not self.ui.stop_tunnel_btn.isEnabled():
+                self.ui.start_tunnel_btn.setEnabled(True)
+        else:
+            self.ui.start_tunnel_btn.setEnabled(False)
+            self.ui.stop_tunnel_btn.setEnabled(False)
+
+    def set_ready(self, ready: bool):
+        """Enable Start only when drive reports ready and tunnel is not running."""
+        if self.ui.stop_tunnel_btn.isEnabled():
+            return
+        self.ui.start_tunnel_btn.setEnabled(bool(ready))
 
     def set_check_btn_state(self, state: bool):
         self.ui.set_velocity_rb.setEnabled(state)
@@ -186,6 +200,7 @@ class InfoPanel(QWidget):
         self.tunnel_plc.start()
         self.papago.start()
         self.driver_3d.start()
+        self.driver_2d.start()
         self.scales.start()
         self.tlaskans[0].start()
         self.tlaskans[1].start()
@@ -201,6 +216,8 @@ class InfoPanel(QWidget):
             self.scales.disconnect()
             self.tunnel_plc.disconnect()
             self.driver_3d.disconnect()
+            self.driver_2d.disconnect()
+            self.papago.disconnect()
 
             self._set_buttons_state(False)
         except Exception as e:

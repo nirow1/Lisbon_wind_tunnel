@@ -2,6 +2,7 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QLabel, QMainWindow
 
+from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
 from Device_controllers.papago_controller import PapagoController
 from Device_controllers.scale_plc_controller import ScalePLCController
@@ -25,6 +26,8 @@ class MainWindow(QMainWindow):
         # todo: disconnect when setting velocity or frequency of tunnel
         # todo: velocity was not showing
 
+        # todo: stop buttons for drivers and scales
+        # todo: hooming logic
         # todo: dissapearing and showing not connected messages (tlaskan left)
         # todo: improve saving to csv file from tlaskan and tenso
         # todo: when save path is added set it for tlaskan and tenso
@@ -40,7 +43,7 @@ class MainWindow(QMainWindow):
         # device communication
         self.tunnel_plc = TunnelPLCController()
         self.driver_3d_plc = Driver3DPLCController()
-        self.driver_2d_plc = Driver3DPLCController()
+        self.driver_2d_plc = Driver2DPLCController()
         self.scale_plc = ScalePLCController()
         self.tlaskans = (TlaskanController("192.168.10.98"), TlaskanController("192.168.10.99")) 
         self.papago = PapagoController()
@@ -125,7 +128,10 @@ class MainWindow(QMainWindow):
         self.change_led(self.ui.led_3, "red", status_data.get("e-stop"))
         self.change_led(self.ui.led_4, "red", status_data.get("drive_error"))
 
-        self.info_panel.set_available(status_data.get("rdy"))
+        # Gate Start on drive ready only — do NOT reuse set_available(rdy).
+        # rdy drops while running; set_available treats False as disconnect and
+        # would stop the tunnel / show "not connected".
+        self.info_panel.set_ready(status_data.get("rdy"))
 
     def _handle_control_byte_data(self, control_byte_data: dict):
         if control_byte_data == self.control_byte:

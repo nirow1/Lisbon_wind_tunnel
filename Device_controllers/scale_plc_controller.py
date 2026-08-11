@@ -1,4 +1,5 @@
 from PySide6.QtCore import Signal
+
 from Device_controllers.polling_plc_controller import PollingPLCController
 from Device_controllers.tenso_scanner_controller import TensoScannerController
 from Utils.helper_functions import byte_to_bits
@@ -7,14 +8,16 @@ from Utils.helper_functions import byte_to_bits
 class ScalePLCController(PollingPLCController):
     SCALE_DATA = Signal(dict)
     POS_DATA = Signal(dict)
-    STATUS_DATA = Signal(list)
+    STATUS_DATA = Signal(dict)
 
     def __init__(self, ip_address="192.168.10.12"):
-        super().__init__(ip_address, read_nb=2, write_nb=3, param_nb=4)
+        super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=4)
         self.tenso_scanners = (TensoScannerController("192.168.10.96"),
                                TensoScannerController("192.168.10.97"))
         self.tenso_data = {"ch1_tso1": 0, "ch2_tso1": 0, "ch3_tso1": 0,
                            "ch1_tso2": 0, "ch2_tso2": 0, "ch3_tso2": 0,}
+        # TEMP: collect samples for column averages
+        self._tenso_samples: list[list] = []
         self.bind_emits()
 
     def _read_main_data(self) -> list | None:
@@ -24,7 +27,7 @@ class ScalePLCController(PollingPLCController):
             status_data = byte_to_bits(((scale_data[4] & 0xFF) << 8) | (scale_data[4] >> 8), "little")
 
             return [{"roll": scale_data[2], "pitch": scale_data[1], "yaw": scale_data[0], "axis_4": scale_data[3]},
-                    {"ready": scale_data[3], "moving": scale_data[4]}]
+                    {"ready": status_data[0], "moving": status_data[1]}]
 
         except Exception as e:
             print(e)
@@ -35,7 +38,9 @@ class ScalePLCController(PollingPLCController):
         self.tenso_scanners[1].TENSO_DATA.connect(lambda data: self._handle_tenso_data(data, 2))
         self.PLC_CONNECTED.connect(self.connect_to_tenso_scanners)
 
-    def connect_to_tenso_scanners(self) -> None:
+    def connect_to_tenso_scanners(self, connected: bool = True) -> None:
+        if not connected:
+            return
         self.tenso_scanners[0].start()
         self.tenso_scanners[1].start()
 
@@ -53,6 +58,14 @@ class ScalePLCController(PollingPLCController):
             self._make_calculations()
 
     def _make_calculations(self) -> None:
+        # TEMP: store samples, average every 50, print on first console line, clear
+        self._tenso_samples.append(list(self.tenso_data.values()))
+        if len(self._tenso_samples) >= 50:
+            n = len(self._tenso_samples)
+            averages = [sum(col) / n for col in zip(*self._tenso_samples)]
+            print(f"\033[H\033[K{averages}", flush=True)
+            self._tenso_samples.clear()
+
         ch1_tso1 = self.tenso_data["ch1_tso1"]
         ch2_tso1 = self.tenso_data["ch2_tso1"]
         ch3_tso1 = self.tenso_data["ch3_tso1"]

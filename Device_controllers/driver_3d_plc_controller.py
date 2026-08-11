@@ -1,6 +1,7 @@
+from PySide6.QtCore import Signal
+
 from Device_controllers.polling_plc_controller import PollingPLCController
 from Utils.helper_functions import byte_to_bits
-from PySide6.QtCore import Signal
 
 
 class Driver3DPLCController(PollingPLCController):

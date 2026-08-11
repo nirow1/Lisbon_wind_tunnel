@@ -23,7 +23,9 @@ class PollingPLCController(PLCController):
         }
         self.PLC_CONNECTED.connect(self._start_reading_plc_data)
 
-    def _start_reading_plc_data(self):
+    def _start_reading_plc_data(self, connected: bool = True):
+        if not connected:
+            return
         read_thread = Thread(target=self._read_plc_data_and_emit, daemon=True)
         read_thread.start()
 

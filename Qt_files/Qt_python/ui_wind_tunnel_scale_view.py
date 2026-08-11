@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewVOkxWc.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewWTVqzW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -274,10 +274,10 @@ class Ui_Form(object):
 
         self.horizontalLayout_29.addWidget(self.label_24)
 
-        self.currnet_x_lbl = QLabel(self.widget_53)
-        self.currnet_x_lbl.setObjectName(u"currnet_x_lbl")
+        self.current_pitch_lbl = QLabel(self.widget_53)
+        self.current_pitch_lbl.setObjectName(u"current_pitch_lbl")
 
-        self.horizontalLayout_29.addWidget(self.currnet_x_lbl)
+        self.horizontalLayout_29.addWidget(self.current_pitch_lbl)
 
 
         self.horizontalLayout_26.addWidget(self.widget_53)
@@ -294,10 +294,10 @@ class Ui_Form(object):
 
         self.horizontalLayout_30.addWidget(self.label_26)
 
-        self.currnet_y_lbl = QLabel(self.widget_54)
-        self.currnet_y_lbl.setObjectName(u"currnet_y_lbl")
+        self.current_roll_lbl = QLabel(self.widget_54)
+        self.current_roll_lbl.setObjectName(u"current_roll_lbl")
 
-        self.horizontalLayout_30.addWidget(self.currnet_y_lbl)
+        self.horizontalLayout_30.addWidget(self.current_roll_lbl)
 
 
         self.horizontalLayout_26.addWidget(self.widget_54)
@@ -314,10 +314,10 @@ class Ui_Form(object):
 
         self.horizontalLayout_31.addWidget(self.label_28)
 
-        self.currnet_z_lbl = QLabel(self.widget_55)
-        self.currnet_z_lbl.setObjectName(u"currnet_z_lbl")
+        self.current_yaw_lbl = QLabel(self.widget_55)
+        self.current_yaw_lbl.setObjectName(u"current_yaw_lbl")
 
-        self.horizontalLayout_31.addWidget(self.currnet_z_lbl)
+        self.horizontalLayout_31.addWidget(self.current_yaw_lbl)
 
 
         self.horizontalLayout_26.addWidget(self.widget_55)
@@ -345,24 +345,24 @@ class Ui_Form(object):
 
         self.horizontalLayout_20.addWidget(self.label_14)
 
-        self.set_x_le = QLineEdit(self.widget_44)
-        self.set_x_le.setObjectName(u"set_x_le")
+        self.set_pitch_le = QLineEdit(self.widget_44)
+        self.set_pitch_le.setObjectName(u"set_pitch_le")
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.set_x_le.sizePolicy().hasHeightForWidth())
-        self.set_x_le.setSizePolicy(sizePolicy2)
-        self.set_x_le.setMinimumSize(QSize(0, 0))
-        self.set_x_le.setMaximumSize(QSize(70, 30))
+        sizePolicy2.setHeightForWidth(self.set_pitch_le.sizePolicy().hasHeightForWidth())
+        self.set_pitch_le.setSizePolicy(sizePolicy2)
+        self.set_pitch_le.setMinimumSize(QSize(0, 0))
+        self.set_pitch_le.setMaximumSize(QSize(70, 30))
 
-        self.horizontalLayout_20.addWidget(self.set_x_le)
+        self.horizontalLayout_20.addWidget(self.set_pitch_le)
 
-        self.set_x_btn = QPushButton(self.widget_44)
-        self.set_x_btn.setObjectName(u"set_x_btn")
-        self.set_x_btn.setMinimumSize(QSize(0, 0))
-        self.set_x_btn.setMaximumSize(QSize(55, 30))
+        self.set_pitch_btn = QPushButton(self.widget_44)
+        self.set_pitch_btn.setObjectName(u"set_pitch_btn")
+        self.set_pitch_btn.setMinimumSize(QSize(0, 0))
+        self.set_pitch_btn.setMaximumSize(QSize(55, 30))
 
-        self.horizontalLayout_20.addWidget(self.set_x_btn)
+        self.horizontalLayout_20.addWidget(self.set_pitch_btn)
 
 
         self.horizontalLayout_17.addWidget(self.widget_44)
@@ -380,21 +380,21 @@ class Ui_Form(object):
 
         self.horizontalLayout_27.addWidget(self.label_21)
 
-        self.set_y_le = QLineEdit(self.widget_51)
-        self.set_y_le.setObjectName(u"set_y_le")
-        sizePolicy2.setHeightForWidth(self.set_y_le.sizePolicy().hasHeightForWidth())
-        self.set_y_le.setSizePolicy(sizePolicy2)
-        self.set_y_le.setMinimumSize(QSize(0, 0))
-        self.set_y_le.setMaximumSize(QSize(70, 30))
+        self.set_roll_le = QLineEdit(self.widget_51)
+        self.set_roll_le.setObjectName(u"set_roll_le")
+        sizePolicy2.setHeightForWidth(self.set_roll_le.sizePolicy().hasHeightForWidth())
+        self.set_roll_le.setSizePolicy(sizePolicy2)
+        self.set_roll_le.setMinimumSize(QSize(0, 0))
+        self.set_roll_le.setMaximumSize(QSize(70, 30))
 
-        self.horizontalLayout_27.addWidget(self.set_y_le)
+        self.horizontalLayout_27.addWidget(self.set_roll_le)
 
-        self.set_y_btn = QPushButton(self.widget_51)
-        self.set_y_btn.setObjectName(u"set_y_btn")
-        self.set_y_btn.setMinimumSize(QSize(0, 0))
-        self.set_y_btn.setMaximumSize(QSize(55, 30))
+        self.set_roll_btn = QPushButton(self.widget_51)
+        self.set_roll_btn.setObjectName(u"set_roll_btn")
+        self.set_roll_btn.setMinimumSize(QSize(0, 0))
+        self.set_roll_btn.setMaximumSize(QSize(55, 30))
 
-        self.horizontalLayout_27.addWidget(self.set_y_btn)
+        self.horizontalLayout_27.addWidget(self.set_roll_btn)
 
 
         self.horizontalLayout_17.addWidget(self.widget_51)
@@ -412,21 +412,21 @@ class Ui_Form(object):
 
         self.horizontalLayout_28.addWidget(self.label_23)
 
-        self.set_z_le = QLineEdit(self.widget_52)
-        self.set_z_le.setObjectName(u"set_z_le")
-        sizePolicy2.setHeightForWidth(self.set_z_le.sizePolicy().hasHeightForWidth())
-        self.set_z_le.setSizePolicy(sizePolicy2)
-        self.set_z_le.setMinimumSize(QSize(0, 0))
-        self.set_z_le.setMaximumSize(QSize(70, 30))
+        self.set_yaw_le = QLineEdit(self.widget_52)
+        self.set_yaw_le.setObjectName(u"set_yaw_le")
+        sizePolicy2.setHeightForWidth(self.set_yaw_le.sizePolicy().hasHeightForWidth())
+        self.set_yaw_le.setSizePolicy(sizePolicy2)
+        self.set_yaw_le.setMinimumSize(QSize(0, 0))
+        self.set_yaw_le.setMaximumSize(QSize(70, 30))
 
-        self.horizontalLayout_28.addWidget(self.set_z_le)
+        self.horizontalLayout_28.addWidget(self.set_yaw_le)
 
-        self.set_z_btn = QPushButton(self.widget_52)
-        self.set_z_btn.setObjectName(u"set_z_btn")
-        self.set_z_btn.setMinimumSize(QSize(0, 0))
-        self.set_z_btn.setMaximumSize(QSize(55, 30))
+        self.set_yaw_btn = QPushButton(self.widget_52)
+        self.set_yaw_btn.setObjectName(u"set_yaw_btn")
+        self.set_yaw_btn.setMinimumSize(QSize(0, 0))
+        self.set_yaw_btn.setMaximumSize(QSize(55, 30))
 
-        self.horizontalLayout_28.addWidget(self.set_z_btn)
+        self.horizontalLayout_28.addWidget(self.set_yaw_btn)
 
 
         self.horizontalLayout_17.addWidget(self.widget_52)
@@ -457,7 +457,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -482,16 +482,16 @@ class Ui_Form(object):
         self.mz_lbl.setText(QCoreApplication.translate("Form", u"00.0", None))
         self.reset_scale_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart", None))
         self.label_24.setText(QCoreApplication.translate("Form", u"Current Pitch:", None))
-        self.currnet_x_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
+        self.current_pitch_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
         self.label_26.setText(QCoreApplication.translate("Form", u"Current Roll:", None))
-        self.currnet_y_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
+        self.current_roll_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
         self.label_28.setText(QCoreApplication.translate("Form", u"Current Yaw:", None))
-        self.currnet_z_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
+        self.current_yaw_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
         self.label_14.setText(QCoreApplication.translate("Form", u"Pitch:", None))
-        self.set_x_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.set_pitch_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_21.setText(QCoreApplication.translate("Form", u"Roll:", None))
-        self.set_y_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.set_roll_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_23.setText(QCoreApplication.translate("Form", u"Yaw:", None))
-        self.set_z_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.set_yaw_btn.setText(QCoreApplication.translate("Form", u"Set", None))
     # retranslateUi
 

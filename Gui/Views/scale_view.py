@@ -43,6 +43,10 @@ class ScaleView(QWidget):
         self.ui.test_plan_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.test_plan_pg))
         self.ui.chart_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chart_pg))
 
+        self.ui.set_pitch_btn.clicked.connect(lambda: self.set_pitch(self.ui.set_pitch_le.text()))
+        self.ui.set_roll_btn.clicked.connect(lambda: self.set_roll(self.ui.set_roll_le.text()))
+        self.ui.set_yaw_btn.clicked.connect(lambda: self.set_yaw(float(self.ui.set_yaw_le.text())))
+
         self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self.start_test_plan)
         self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
@@ -50,10 +54,16 @@ class ScaleView(QWidget):
         self.scales.POS_DATA.connect(self._handle_pos_data)
         self.scales.SCALE_DATA.connect(self._handle_scale_data)
         self.scales.STATUS_DATA.connect(self._handle_status_data)
-        self.scales.PLC_CONNECTED.connect(lambda state: self.ui.connected_message_wg.setVisible(state))
-        
+        self.scales.PLC_CONNECTED.connect(self._on_plc_connected)
+
+    def _on_plc_connected(self, connected: bool):
+        # Banner is "Scales not connected" — show when disconnected
+        self.ui.connected_message_wg.setVisible(not connected)
+
     def _handle_pos_data(self, data: dict):
-        ...
+        self.ui.current_pitch_lbl.setText(f"{data.get('pitch'):.2f}")
+        self.ui.current_roll_lbl.setText(f"{data.get('roll'):.2f}")
+        self.ui.current_yaw_lbl.setText(f"{data.get('yaw'):.2f}")
 
     def _handle_scale_data(self, data: dict):
         self.ui.fx_lbl.setText(f"{data['x']:.2f}")
@@ -62,20 +72,23 @@ class ScaleView(QWidget):
         self.ui.mx_lbl.setText(f"{data['mx']:.2f}")
         self.ui.my_lbl.setText(f"{data['my']:.2f}")
         self.ui.mz_lbl.setText(f"{data['mz']:.2f}")
-        self.scale_chart.update_chart(data)
-        
+        self.scale_chart.update_chart([data['x'], data['y'], data['z'], data['mx'], data['my'], data['mz']])
+
     def _handle_status_data(self, data: dict):
-        self.ready = data['ready']
-        self.moving = data['moving']
+        self.ready = data.get('ready')
+        self.moving = data.get('moving')
     
     def set_pitch(self, value: float):
         self.scales.set_pitch(value)
+        self.scales.start_driver()
 
     def set_yaw(self, value: float):
         self.scales.set_yaw(value)
+        self.scales.start_driver()
 
     def set_roll(self, value: float):
         self.scales.set_roll(value)
+        self.scales.start_driver()
 
     def set_parameters(self, pitch: float, roll: float, yaw: float):
         self.scales.set_pitch_yaw_roll(pitch, yaw, roll)

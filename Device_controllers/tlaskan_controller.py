@@ -1,17 +1,17 @@
 import csv
 import os
+import socket
 import sys
 import threading
-import logging
-import socket
 import time
-
-from PySide6.QtCore import Signal, QThread
 from struct import unpack
+
+from PySide6.QtCore import QThread, Signal
 
 
 class TlaskanController(QThread):
     PRESSURE_DATA = Signal(list)
+    DEVICE_CONNECTED = Signal(bool)
 
     def __init__(self, ip="192.168.10.98"):
         super().__init__()
@@ -26,6 +26,7 @@ class TlaskanController(QThread):
         self.csv_path = ""
         self._csv_file = None
         self._csv_writer = None
+        self._running = False
 
     def set_csv_path(self, path):
         self.csv_path = path if path else ""
@@ -73,14 +74,16 @@ class TlaskanController(QThread):
             self._csv_writer = None
 
     def run(self):
+        self._running = True
         self._connect_to_tlaskan()
 
     def _connect_to_tlaskan(self):
-        while not self.connected:
+        while self._running and not self.connected:
             try:
                 self.tlaskan = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.tlaskan.connect((self.ip, self.port))
                 self.connected = True
+                self.DEVICE_CONNECTED.emit(True)
                 self.tlaskan.send(b'AT+RAM_RW=5,1\x0d\x0a')
                 self.tlaskan.send(b'\x01')
                 self._start_communication()
@@ -138,7 +141,7 @@ class TlaskanController(QThread):
                     emit_counter += 1
                     if emit_counter % 10 == 0:
                         self.PRESSURE_DATA.emit(self.processed_pressure)
-                except socket.timeout:
+                except TimeoutError:
                     continue
                 except OSError:
                     break
@@ -158,6 +161,8 @@ class TlaskanController(QThread):
             print(f"Blind write reg {reg} failed: {e}")
 
     def disconnect(self):
+        was_connected = self.connected
+        self._running = False
         self.connected = False
         if self._request_thread is not None:
             self._request_thread.join(timeout=1.0)
@@ -165,6 +170,9 @@ class TlaskanController(QThread):
 
         if self.tlaskan is None:
             self._close_csv()
+            if was_connected:
+                self.DEVICE_CONNECTED.emit(False)
+            self.wait(3000)
             return
 
         try:
@@ -178,6 +186,9 @@ class TlaskanController(QThread):
         finally:
             self.tlaskan = None
             self._close_csv()
+            if was_connected:
+                self.DEVICE_CONNECTED.emit(False)
+            self.wait(3000)
 
     def set_zero_values(self):
         if self.connected:

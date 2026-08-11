@@ -539,7 +539,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="currnet_x_lbl">
+                 <widget class="QLabel" name="current_pitch_lbl">
                   <property name="text">
                    <string>0.00</string>
                   </property>
@@ -580,7 +580,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="currnet_y_lbl">
+                 <widget class="QLabel" name="current_roll_lbl">
                   <property name="text">
                    <string>0.00</string>
                   </property>
@@ -621,7 +621,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="currnet_z_lbl">
+                 <widget class="QLabel" name="current_yaw_lbl">
                   <property name="text">
                    <string>0.00</string>
                   </property>
@@ -698,7 +698,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="set_x_le">
+                 <widget class="QLineEdit" name="set_pitch_le">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -720,7 +720,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="set_x_btn">
+                 <widget class="QPushButton" name="set_pitch_btn">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -779,7 +779,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="set_y_le">
+                 <widget class="QLineEdit" name="set_roll_le">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -801,7 +801,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="set_y_btn">
+                 <widget class="QPushButton" name="set_roll_btn">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -860,7 +860,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="set_z_le">
+                 <widget class="QLineEdit" name="set_yaw_le">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -882,7 +882,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="set_z_btn">
+                 <widget class="QPushButton" name="set_yaw_btn">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>

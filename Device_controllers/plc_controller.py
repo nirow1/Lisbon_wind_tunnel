@@ -1,9 +1,9 @@
 import struct
-
-from snap7 import client, util
-from PySide6.QtCore import QThread, Signal, QTimer
 from threading import Lock
 from time import sleep
+
+from PySide6.QtCore import QThread, QTimer, Signal
+from snap7 import client, util
 
 
 class PLCController(QThread):
@@ -33,6 +33,7 @@ class PLCController(QThread):
         while not self.connected:
             try:
                 self.plc = client.Client()
+                self.plc.set_connection_type(client.ConnectionType.S7Basic) # addedd line not sure if it works
                 self.plc.connect(self.ip, 0, 1)
                 self.connected = self.plc.get_connected()
                 self.PLC_CONNECTED.emit(self.connected)
@@ -62,9 +63,9 @@ class PLCController(QThread):
     def _write_plc_float(self,db: int, pos: int, request: float):
         self._write_plc_data(db, pos, 4, request)
 
-    def _write_plc_data(self, db: int, pos: int, size: int, request: bytes|int|float):
+    def _write_plc_data(self, db: int, pos: int, size: int, request: bytes | float):
         if not self.connected:
-            return None
+            return
 
         with self._lock:
             try:
@@ -125,12 +126,21 @@ class PLCController(QThread):
         self._watchdog_timer.stop()
 
     def disconnect(self):
+        was_connected = self.connected
+        self.connected = False
         try:
-            self.connected = False
-            self.plc.disconnect()
-            self.quit()
+            self._stop_timers()
+        except Exception:
+            pass
+        try:
+            if getattr(self, "plc", None) is not None:
+                self.plc.disconnect()
         except Exception as e:
             print(e)
+        if was_connected:
+            self.PLC_CONNECTED.emit(False)
+        self.quit()
+        self.wait(3000)
 
     @staticmethod
     def byte_to_bits(byte):
