@@ -1,8 +1,10 @@
 from threading import Thread
-from PySide6.QtCore import Signal, Qt
-from PySide6.QtWidgets import QWidget, QTableWidgetItem
-from Qt_files.Qt_python.ui_wind_tunnel_settings_view import Ui_Form
+
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtWidgets import QTableWidgetItem, QWidget
+
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
+from Qt_files.Qt_python.ui_wind_tunnel_settings_view import Ui_Form
 
 
 class SettingsView(QWidget):
@@ -16,6 +18,9 @@ class SettingsView(QWidget):
         self._average_speed = [0]
         self._req_velocity: float = 0.0
 
+        self.default_values = [0.0010000000474974513, 6.0, 0, 10.0,1.0, 25.0, '', 0.699999988079071, 20.0, 4.0,
+                               0.10000000149011612, 10.0, 0, 0, 256, 1]
+
         self.regulation: bool = False
 
         self.plc = plc
@@ -24,25 +29,37 @@ class SettingsView(QWidget):
         self._bind_emits()
 
     def _initial_graphical_changes(self):
-        order = [0, 30, 34, 38, 40, 44, 48, 52, 56, 60, 64, 68, 72,76.1, 76.2, 78, 80]
+        order = [0, 30, 34, 38, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76.1, 76.2, 78, 80]
         for row in range(len(order)):
-            item = QTableWidgetItem("")
-            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-            self.ui.tableWidget.setItem(row, 0, item)
+            default = self.default_values[row] if row < len(self.default_values) else ""
+            default_item = QTableWidgetItem(str(default))
+            default_item.setFlags(default_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 0, default_item)
+
+            current_item = QTableWidgetItem("")
+            current_item.setFlags(current_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 1, current_item)
+
+            self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(""))
 
     def _bind_buttons(self):
         self.ui.set_changes_btn.clicked.connect(self._set_values)
+        self.ui.default_settings_btn.clicked.connect(self._set_defaults)
 
     def _bind_emits(self):
         # PLC_CONNECTED emits bool — call _confirm_changes only on connect
         self.plc.PLC_CONNECTED.connect(lambda connected: self._check_parameters() if connected else None)
 
+    def _set_defaults(self):
+        for row, value in enumerate(self.default_values):
+            self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(str(value)))
+
     def _set_values(self):
-        order = [0, 30, 34, 38, 40, 44, 48, 52, 56, 60, 64, 68, 72,76.1, 76.2, 78, 80]
+        order = [0, 30, 34, 38, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76.1, 76.2, 78, 80]
         values = {}
         for row, key in enumerate(order):
-            item = self.ui.tableWidget.item(row, 1)
-            values[key] = float(item.text()) if item is not None else 0.0
+            item = self.ui.tableWidget.item(row, 2)
+            values[key] = float(item.text()) if item is not None and item.text() != "" else 0.0
 
         Thread(target=self._send_and_confirm, args=(values,), daemon=True).start()
 
@@ -68,11 +85,8 @@ class SettingsView(QWidget):
             78: bool_78, 80: data[22]
         }
 
-        order = [0, 30, 34, 38, 40, 44, 48, 52, 56, 60, 64, 68, 72,76.1, 76.2, 78, 80]
+        order = [0, 30, 34, 38, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76.1, 76.2, 78, 80]
         for row, key in enumerate(order):
-            non_editable_0 = QTableWidgetItem(str(data_dict.get(key, "")))
-            non_editable_0.setFlags(non_editable_0.flags() & ~Qt.ItemFlag.ItemIsEditable)
-            self.ui.tableWidget.setItem(row, 0, non_editable_0)
-
-            non_editable_1 = QTableWidgetItem(str(data_dict.get(key, "")))
-            self.ui.tableWidget.setItem(row, 1, non_editable_1)
+            current_item = QTableWidgetItem(str(data_dict.get(key, "")))
+            current_item.setFlags(current_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 1, current_item)

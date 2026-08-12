@@ -1,6 +1,6 @@
 import openpyxl
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem, QTableWidget
+from PySide6.QtWidgets import QFileDialog, QTableWidget, QTableWidgetItem, QWidget
 
 from Qt_files.Qt_python.ui_test_plan_widget import Ui_Form
 
@@ -45,9 +45,11 @@ class TestPlanTab(QWidget):
             if not any(row_values):
                 continue
 
-            seconds = float(row_values[0]) if row_values[0] != "" else 0
-            requested_values = tuple(float(v) if v != "" else "" for v in row_values[1:])
-            test_plan.append((seconds, *requested_values))
+            minutes = float(row_values[0]) if row_values[0] != "" else 0
+            seconds = float(row_values[1]) if row_values[1] != "" else 0
+            total_seconds = minutes * 60 + seconds
+            requested_values = tuple(float(v) if v != "" else "" for v in row_values[2:])
+            test_plan.append((total_seconds, *requested_values))
 
         return test_plan
 

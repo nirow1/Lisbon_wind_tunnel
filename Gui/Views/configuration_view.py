@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from threading import Thread
 from time import sleep
 
@@ -73,15 +73,17 @@ class ConfigurationView(QWidget):
                 break
 
             # velocity set → PID regulation (False); frequency set → frequency mode (True)
+            # switch_pid only updates the local control byte; start_engine writes it to the PLC
             use_frequency = row[1] == ""
             self.tunnel_plc.switch_pid(use_frequency)
             if use_frequency:
                 self.tunnel_plc.set_engine_frequency(row[2])
             else:
                 self.tunnel_plc.set_wind_velocity(row[1])
-            # rewrite control byte so the PID bit is applied while engine stays running
-            self.tunnel_plc.start_engine()
 
+        # same main PLC shutdown steps as InfoView.stop_tunnel
+        # (velocity/frequency zeroing is handled inside stop_engine)
+        self.tunnel_plc.switch_pid(False)
         self.tunnel_plc.stop_engine()
         self.test_plan_wg.show_message(False)
         self.TEST_RUNNING.emit(False)
@@ -93,5 +95,5 @@ class ConfigurationView(QWidget):
         self.chart.update_chart([plc_data.get("speed"), plc_data.get("average_temp")])
 
     def _wait_until(self, target_time: datetime):
-        while datetime.now() < target_time and not self.stop_plan:
+        while datetime.now(timezone.utc) < target_time and not self.stop_plan:
             sleep(0.1)

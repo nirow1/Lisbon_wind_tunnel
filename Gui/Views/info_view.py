@@ -75,6 +75,7 @@ class InfoPanel(QWidget):
         self.tunnel_plc.SENSOR_VALUES.connect(self._handle_plc_data)
         self.tunnel_plc.PLC_CONNECTED.connect(self.set_available)
         self.tunnel_plc.PAPAGO_DATA.connect(self._handle_papago_data)
+        self.scales.SCALE_DATA.connect(self._handle_scale_data)
 
     def _handle_plc_data(self, plc_data):
         wind_velocity = plc_data.get("speed")
@@ -92,6 +93,15 @@ class InfoPanel(QWidget):
             self.save_thread.update_key_value("Temp [°C]", temp)
             self.save_thread.update_key_value("pressure [Pa]", pressure)
             self.save_thread.update_key_value("frequency [Hz]", frequency)
+
+    def _handle_scale_data(self, data):
+        if self.save_thread.saving:
+            self.save_thread.update_key_value("FX [N]", data.get("x"))
+            self.save_thread.update_key_value("FY [N]", data.get("y"))
+            self.save_thread.update_key_value("FZ [N]", data.get("z"))
+            self.save_thread.update_key_value("MX [Nm]", data.get("mx"))
+            self.save_thread.update_key_value("MY [Nm]", data.get("my"))
+            self.save_thread.update_key_value("MZ [Nm]", data.get("mz"))
 
     def _handle_papago_data(self, data):
         self.ui.temp_lbl.setText(str(data.get("P_temp")))
@@ -135,8 +145,6 @@ class InfoPanel(QWidget):
     def stop_tunnel(self):
         self.set_check_btn_state(True)
         self.tunnel_plc.switch_pid(False)
-        self.tunnel_plc.set_wind_velocity(0)
-        self.tunnel_plc.set_engine_frequency(0)
         self.tunnel_plc.stop_engine()
         self.set_velocity_control_state(True)
         self.ui.start_tunnel_btn.setEnabled(True)

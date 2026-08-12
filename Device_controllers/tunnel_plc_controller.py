@@ -160,10 +160,17 @@ class TunnelPLCController(PLCController):
         self.control_byte["PID"] = int(state)
 
     def start_engine(self):
-        self.control_byte["start"] = 1
-        self.control_byte["stop"] = 0
+        Thread(target=self.send_ping, args=["start"], daemon=True).start()
+
+    def send_ping(self, key: str):
+        self.send_control_byte(key, 1)
+        time.sleep(0.1)
+        self.send_control_byte(key, 0)
+
+    def send_control_byte(self, key: str, value: int):
+        self.control_byte[key] = value
         data_short = control_dict_to_bytes(self.control_byte, self.control_byte_map, endian="little")
-        self._write_plc_data(self.write_nb, 2, 2,  data_short)
+        self._write_plc_data(self.write_nb, 2, 2, data_short)
 
     def read_parameter_data(self) -> tuple | None:
         return self._read_plc_data(self.param_nb, 0, 84, '>h9fH9f2Hf')
@@ -204,12 +211,9 @@ class TunnelPLCController(PLCController):
             self._write_plc_bool_byte(self.param_nb, 78, int(values[78.0]))
 
     def stop_engine(self):
-        self.control_byte["stop"] = 1
-        self.control_byte["start"] = 0
         self.set_engine_frequency(0.0)
         self.set_wind_velocity(0.0)
-        data_short = list_to_short(list(self.control_byte.values()), msb_first=False)
-        self._write_plc_int(self.write_nb, 2, data_short)
+        Thread(target=self.send_ping, args=["stop"], daemon=True).start()
 
     def _switch_bit(self, attribute: str, state: bool):
         self.control_byte[attribute] = state

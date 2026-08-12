@@ -39,14 +39,18 @@ class TlaskanController(SocketDeviceController):
         self._connect_to_tlaskan()
 
     def _connect_to_tlaskan(self):
-        while self._running and not self.connected:
+        for _ in range(3):
+            if not self._running:
+                return
             if self._connect_socket():
                 self.DEVICE_CONNECTED.emit(True)
                 self._sock.send(b"AT+RAM_RW=5,1\x0d\x0a")
                 self._sock.send(b"\x01")
                 self._start_communication()
-                break
+                return
             time.sleep(2)
+        self._running = False
+        self.DEVICE_CONNECTED.emit(False)
 
     def _start_communication(self):
         self._worker_thread = threading.Thread(target=self._send_measure_request, daemon=True)

@@ -16,8 +16,8 @@ def dict_to_bytearray(dictionary) -> bytearray:
     return bytearray(bytes_list)
 
 def add_sec_to_current_time(seconds: int):
-    from datetime import datetime, timedelta
-    current_time = datetime.now()
+    from datetime import datetime, timedelta, timezone
+    current_time = datetime.now(timezone.utc)
     new_time = current_time + timedelta(seconds=seconds)
     return new_time
 

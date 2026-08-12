@@ -22,10 +22,8 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.current_frequency = 0
-        # todo: when disconnect is clicked while connecting the gui frezzes. disconnect should be able to end all connection threads
-        # todo: add values to default values in configuration view
-        # todo: test staving 
-        # todo: test all test plans
+        # todo: when disconnect is clicked while connecting the gui frezzes
+        # todo: set zero values for scales nad tlaskan
 
         # device communication
         self.tunnel_plc = TunnelPLCController()

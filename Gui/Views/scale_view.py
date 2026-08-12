@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from threading import Thread
 from time import sleep
 
@@ -113,7 +113,7 @@ class ScaleView(QWidget):
         self.test_plan_wg.show_message(False)
 
     def _wait_until(self, target_time: datetime):
-        while datetime.now() < target_time and not self.stop_plan:
+        while datetime.now(timezone.utc) < target_time and not self.stop_plan:
             sleep(0.1)
 
     def _stop_plan(self):
