@@ -1,10 +1,9 @@
 from datetime import datetime
 from threading import Thread
 from time import sleep
-
 from PySide6.QtCore import Signal
+from PySide6.QtGui import QIntValidator
 from PySide6.QtWidgets import QWidget
-
 from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
 from Gui.Custom_functions.test_plan_tab import TestPlanTab
@@ -34,9 +33,9 @@ class TraverserView(QWidget):
                                             400)
         self.ui.field_2d_lo.addWidget(self.field_2d)
 
-        self.field_3d_xy = PositionFieldWidget(1000,1000, 350, 350)
+        self.field_3d_xy = PositionFieldWidget(1050,1040, 350, 350)
         self.ui.field_3d_xy_lo.addWidget(self.field_3d_xy)
-        self.field_3d_xz = PositionFieldWidget(1000,1000, 350, 350)
+        self.field_3d_xz = PositionFieldWidget(1050,605, 350, 350)
         self.ui.field_3d_xz_lo.addWidget(self.field_3d_xz)
 
         self.test_plan_2d = TestPlanTab(["Pos X","Pos Y"])
@@ -48,8 +47,11 @@ class TraverserView(QWidget):
         self._init_graphical_changes()
         self._bind_buttons()
 
-        #self.ui.set_pos_x_2d_le.setValidator(IntValidator(0))
-        #self.ui.set_pos_y_2d_le.setValidator(FloatValidator(0, 483))
+        self.ui.set_pos_x_2d_le.setValidator(QIntValidator(0, 1000))
+        self.ui.set_pos_y_2d_le.setValidator(QIntValidator(0, 1000))
+        self.ui.set_pos_x_3d_le.setValidator(QIntValidator(0, 1050))
+        self.ui.set_pos_y_3d_le.setValidator(QIntValidator(0, 1040))
+        self.ui.set_pos_z_3d_le.setValidator(QIntValidator(0, 605))
 
         self._bind_emits()
 
@@ -72,6 +74,9 @@ class TraverserView(QWidget):
         self.test_plan_2d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
         self.ui.continue_btn.clicked.connect(self._accept_alert_message)
+
+        self.ui.stop_driver_3d_btn.clicked.connect(self.plc_3d.stop_driver)
+        self.ui.stop_driver_2d_btn.clicked.connect(self.plc_2d.stop_driver)
 
         self.test_plan_3d.ui.start_test_plan_btn.clicked.connect(self._start_3d_test_plan)
         self.test_plan_3d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)

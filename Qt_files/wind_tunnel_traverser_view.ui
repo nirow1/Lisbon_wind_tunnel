@@ -147,7 +147,7 @@ QPushButton:pressed {
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="drivers_2d_pg">
       <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -500,6 +500,66 @@ QPushButton:pressed {
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_18" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>44</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>125</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+    border-radius: 5px;
+    border: 1px solid #FF3636;
+}
+
+QPushButton:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+QPushButton:pressed {
+    background-color: #FF2626;
+}</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_11">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="stop_driver_2d_btn">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>124</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Stop</string>
                      </property>
                     </widget>
                    </item>
@@ -1001,6 +1061,66 @@ QPushButton:pressed {
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="widget_17" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>44</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>125</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+    border-radius: 5px;
+    border: 1px solid #FF3636;
+}
+
+QPushButton:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+QPushButton:pressed {
+    background-color: #FF2626;
+}</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_10">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="stop_driver_3d_btn">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>124</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Stop</string>
                      </property>
                     </widget>
                    </item>

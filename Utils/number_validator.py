@@ -1,12 +1,12 @@
-import re
 
 from PySide6.QtGui import QValidator
 
 
 class IntValidator(QValidator):
-    def __init__(self, max_val = 1000000):
+    def __init__(self,min=-1000000, max=1000000):
         super().__init__()
-        self.max = max_val
+        self.max = max
+        self.min = min
 
 
     def validate(self, input_str, pos):
@@ -20,7 +20,7 @@ class IntValidator(QValidator):
 
         try:
             val = int(input_str)
-            if val <= self.max:
+            if self.min <= val <= self.max:
                 return QValidator.State.Acceptable
             else:
                 return QValidator.State.Invalid

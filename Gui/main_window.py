@@ -26,7 +26,6 @@ class MainWindow(QMainWindow):
         # todo: disconnect when setting velocity or frequency of tunnel
         # todo: velocity was not showing
 
-        # todo: stop buttons for drivers and scales
         # todo: hooming logic
         # todo: dissapearing and showing not connected messages (tlaskan left)
         # todo: when disconnected is clicked show disconnect messages

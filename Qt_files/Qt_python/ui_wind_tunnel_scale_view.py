@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewWTVqzW.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewvjdfcK.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -431,6 +431,35 @@ class Ui_Form(object):
 
         self.horizontalLayout_17.addWidget(self.widget_52)
 
+        self.widget_16 = QWidget(self.widget_24)
+        self.widget_16.setObjectName(u"widget_16")
+        self.widget_16.setMinimumSize(QSize(0, 0))
+        self.widget_16.setMaximumSize(QSize(125, 16777215))
+        self.widget_16.setStyleSheet(u"QPushButton {\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid #FF3636;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(230, 230, 230);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #FF2626;\n"
+"}")
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_16)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.stop_scale_btn = QPushButton(self.widget_16)
+        self.stop_scale_btn.setObjectName(u"stop_scale_btn")
+        self.stop_scale_btn.setEnabled(False)
+        self.stop_scale_btn.setMaximumSize(QSize(124, 30))
+
+        self.horizontalLayout_9.addWidget(self.stop_scale_btn)
+
+
+        self.horizontalLayout_17.addWidget(self.widget_16)
+
 
         self.verticalLayout_2.addWidget(self.widget_24)
 
@@ -493,5 +522,6 @@ class Ui_Form(object):
         self.set_roll_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_23.setText(QCoreApplication.translate("Form", u"Yaw:", None))
         self.set_yaw_btn.setText(QCoreApplication.translate("Form", u"Set", None))
+        self.stop_scale_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
     # retranslateUi
 

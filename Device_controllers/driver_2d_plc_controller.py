@@ -19,7 +19,7 @@ class Driver2DPLCController(PollingPLCController):
 
             stats_data = byte_to_bits(((position_data[10] & 0xFF) << 8) | (position_data[10] >> 8), "little")
             return [{"x": position_data[0], "y": position_data[1]},
-                    {"ready": stats_data[0], "moving": stats_data[1]}]
+                    {"ready": stats_data[0], "moving": stats_data[2]}]
 
         except Exception as e:
             print(e)

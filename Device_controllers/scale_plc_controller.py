@@ -27,7 +27,7 @@ class ScalePLCController(PollingPLCController):
             status_data = byte_to_bits(((scale_data[4] & 0xFF) << 8) | (scale_data[4] >> 8), "little")
 
             return [{"roll": scale_data[2], "pitch": scale_data[1], "yaw": scale_data[0], "axis_4": scale_data[3]},
-                    {"ready": status_data[0], "moving": status_data[1]}]
+                    {"ready": status_data[0], "moving": status_data[2], "allhoomed": status_data[10]}]
 
         except Exception as e:
             print(e)
@@ -77,6 +77,9 @@ class ScalePLCController(PollingPLCController):
     def _emit_read_data(self, data) -> None:
         self.POS_DATA.emit(data[0])
         self.STATUS_DATA.emit(data[1])
+
+    def home_scale(self):
+        self.home_driver(18)
 
     def set_pitch_yaw_roll(self, pitch: float, yaw: float, roll: float) -> None:
         self._write_plc_float(self.write_nb, 4, pitch)

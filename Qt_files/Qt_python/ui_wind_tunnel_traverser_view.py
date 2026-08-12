@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_traverser_viewUUITtp.ui'
+## Form generated from reading UI file 'wind_tunnel_traverser_viewvsgSSy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -281,6 +281,35 @@ class Ui_Form(object):
 
         self.horizontalLayout_3.addWidget(self.widget_207)
 
+        self.widget_18 = QWidget(self.widget_5)
+        self.widget_18.setObjectName(u"widget_18")
+        self.widget_18.setMinimumSize(QSize(0, 44))
+        self.widget_18.setMaximumSize(QSize(125, 16777215))
+        self.widget_18.setStyleSheet(u"QPushButton {\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid #FF3636;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(230, 230, 230);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #FF2626;\n"
+"}")
+        self.horizontalLayout_11 = QHBoxLayout(self.widget_18)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.stop_driver_2d_btn = QPushButton(self.widget_18)
+        self.stop_driver_2d_btn.setObjectName(u"stop_driver_2d_btn")
+        self.stop_driver_2d_btn.setEnabled(False)
+        self.stop_driver_2d_btn.setMaximumSize(QSize(124, 40))
+
+        self.horizontalLayout_11.addWidget(self.stop_driver_2d_btn)
+
+
+        self.horizontalLayout_3.addWidget(self.widget_18)
+
 
         self.test_plan_2d_lo.addWidget(self.widget_5)
 
@@ -513,6 +542,35 @@ class Ui_Form(object):
 
         self.horizontalLayout_6.addWidget(self.widget_202)
 
+        self.widget_17 = QWidget(self.widget_20)
+        self.widget_17.setObjectName(u"widget_17")
+        self.widget_17.setMinimumSize(QSize(0, 44))
+        self.widget_17.setMaximumSize(QSize(125, 16777215))
+        self.widget_17.setStyleSheet(u"QPushButton {\n"
+"    border-radius: 5px;\n"
+"    border: 1px solid #FF3636;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(230, 230, 230);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #FF2626;\n"
+"}")
+        self.horizontalLayout_10 = QHBoxLayout(self.widget_17)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.stop_driver_3d_btn = QPushButton(self.widget_17)
+        self.stop_driver_3d_btn.setObjectName(u"stop_driver_3d_btn")
+        self.stop_driver_3d_btn.setEnabled(False)
+        self.stop_driver_3d_btn.setMaximumSize(QSize(124, 40))
+
+        self.horizontalLayout_10.addWidget(self.stop_driver_3d_btn)
+
+
+        self.horizontalLayout_6.addWidget(self.widget_17)
+
 
         self.test_plan_3d_lo.addWidget(self.widget_20)
 
@@ -570,7 +628,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -593,6 +651,7 @@ class Ui_Form(object):
         self.set_pos_x_2d_le.setText("")
         self.label_4.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Pos X:", None))
+        self.stop_driver_2d_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
         self.label_19.setText(QCoreApplication.translate("Form", u"Field X Y:", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"Field X Z:", None))
         self.lbl_3.setText(QCoreApplication.translate("Form", u"Driver 3d not connected", None))
@@ -612,6 +671,7 @@ class Ui_Form(object):
         self.label_14.setText(QCoreApplication.translate("Form", u"Pos Y:", None))
         self.set_pos_z_3d_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label_13.setText(QCoreApplication.translate("Form", u"Pos X:", None))
+        self.stop_driver_3d_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"You are about to set positions for traversers. ", None))
         self.label_8.setText(QCoreApplication.translate("Form", u"Are you sure you want to continue? ", None))
         self.continue_btn.setText(QCoreApplication.translate("Form", u"Yes continue", None))

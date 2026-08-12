@@ -17,7 +17,7 @@ class Driver3DPLCController(PollingPLCController):
 
             stats_data = byte_to_bits(((position_data[11] & 0xFF) << 8) | (position_data[11] >> 8), "little")
             return [{"x": position_data[0], "y": position_data[1], "z": position_data[2]},
-                    {"ready": stats_data[0], "moving": stats_data[1]}]
+                    {"ready": stats_data[0], "moving": stats_data[2], "allhoomed": stats_data[10]}]
 
         except Exception as e:
             print(e)
@@ -26,6 +26,9 @@ class Driver3DPLCController(PollingPLCController):
     def _emit_read_data(self, data):
         self.DRIVERS_POS.emit(data[0])
         self.STATUS_DATA.emit(data[1])
+
+    def home_driver(self):
+        self.home_driver(18)
 
     def set_3d_pos(self, x: float, y: float, z: float):
         self.set_3d_x(x)
