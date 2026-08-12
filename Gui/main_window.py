@@ -4,7 +4,6 @@ from PySide6.QtWidgets import QLabel, QMainWindow
 
 from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
-from Device_controllers.papago_controller import PapagoController
 from Device_controllers.scale_plc_controller import ScalePLCController
 from Device_controllers.tlaskan_controller import TlaskanController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
@@ -23,16 +22,9 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.current_frequency = 0
-        # todo: disconnect when setting velocity or frequency of tunnel
-        # todo: velocity was not showing
-
-        # todo: hooming logic
-        # todo: dissapearing and showing not connected messages (tlaskan left)
-        # todo: when disconnected is clicked show disconnect messages
-        # todo: check if the threads end when gui is turned of while connecting
+        # todo: hooming implementace
         # todo: when disconnect is clicked while connecting the gui frezzes. disconnect should be able to end all connection threads
 
-        # todo: point field is not sinced with real values and orientation
         # todo: add values to default values in configuration view
         
         # todo: test staving 
@@ -44,7 +36,6 @@ class MainWindow(QMainWindow):
         self.driver_2d_plc = Driver2DPLCController()
         self.scale_plc = ScalePLCController()
         self.tlaskans = (TlaskanController("192.168.10.98"), TlaskanController("192.168.10.99")) 
-        self.papago = PapagoController()
 
         self.control_byte = {}
 
@@ -52,12 +43,11 @@ class MainWindow(QMainWindow):
         self.info_panel = InfoPanel(self.tunnel_plc,
          self.driver_3d_plc,
           self.driver_2d_plc,
-          self.papago,
            self.scale_plc,
             self.tlaskans)
         self.ui.control_panel_lo.addWidget(self.info_panel)
 
-        self.config_view = ConfigurationView(self.tunnel_plc, self.papago)
+        self.config_view = ConfigurationView(self.tunnel_plc)
         self.ui.stackedWidget.addWidget(self.config_view)
 
         self.settings_pg = SettingsView(self.tunnel_plc)

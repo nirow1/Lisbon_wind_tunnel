@@ -16,6 +16,7 @@ class PLCController(QThread):
         self.write_nb = write_nb
         self.param_nb = param_nb
         self.connected = False
+        self._active = False
         self.sending = False
 
         self._watchdog_timer = QTimer()
@@ -26,20 +27,34 @@ class PLCController(QThread):
         self._lock = Lock()
 
     def run(self):
+        self._active = True
         self._connect_to_plc()
-        self.exec()  # Qt event loop → QTimer funguje
+        # Only run the event loop if this session is still active and connected.
+        # Avoids staying alive / reconnecting after disconnect during connect.
+        if self._active and self.connected:
+            self.exec()
 
     def _connect_to_plc(self):
-        while not self.connected:
+        while self._active and not self.connected:
             try:
                 self.plc = client.Client()
                 self.plc.connect(self.ip, 0, 1)
+                if not self._active:
+                    try:
+                        self.plc.disconnect()
+                    except Exception:
+                        pass
+                    return
                 self.connected = self.plc.get_connected()
                 self.PLC_CONNECTED.emit(self.connected)
                 break
             except Exception as e:
                 print(e)
-                sleep(5)
+                # Interruptible backoff so disconnect does not wait a full 5s
+                for _ in range(50):
+                    if not self._active:
+                        return
+                    sleep(0.1)
 
     # -------- Write functions ---------
     def _start_watchdog(self):
@@ -126,6 +141,7 @@ class PLCController(QThread):
 
     def disconnect(self):
         was_connected = self.connected
+        self._active = False
         self.connected = False
         try:
             self._stop_timers()

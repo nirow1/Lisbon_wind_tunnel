@@ -47,7 +47,7 @@ class ScaleView(QWidget):
         self.ui.set_roll_btn.clicked.connect(lambda: self.set_roll(self.ui.set_roll_le.text()))
         self.ui.set_yaw_btn.clicked.connect(lambda: self.set_yaw(float(self.ui.set_yaw_le.text())))
 
-        self.ui.stop_driver_btn.clicked.connect(self.scales.stop_driver)
+        self.ui.stop_scale_btn.clicked.connect(self.scales.stop_driver)
 
         self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self.start_test_plan)
         self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)

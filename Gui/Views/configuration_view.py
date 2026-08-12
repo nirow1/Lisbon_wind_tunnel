@@ -1,9 +1,10 @@
 from datetime import datetime
 from threading import Thread
 from time import sleep
+
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget
-from Device_controllers.papago_controller import PapagoController
+
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
 from Gui.Charts.zoomable_chart import ZoomableChart
 from Gui.Custom_functions.test_plan_tab import TestPlanTab
@@ -15,13 +16,12 @@ class ConfigurationView(QWidget):
     RETURN_TO_MAIN = Signal()
     TEST_RUNNING = Signal(bool)
 
-    def __init__(self, plc: TunnelPLCController, papago: PapagoController):
+    def __init__(self, plc: TunnelPLCController):
         QWidget.__init__(self)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
         self.tunnel_plc = plc
-        self.papago = papago
 
         # charts setup block
         self.chart = ZoomableChart(
@@ -55,7 +55,7 @@ class ConfigurationView(QWidget):
         self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_test_plan)
 
     def _bind_emits(self):
-        self.tunnel_plc.PLC_DATA.connect(self._handle_plc_data)
+        self.tunnel_plc.SENSOR_VALUES.connect(self._handle_plc_data)
 
     def _start_test_plan(self):
         Thread(target=self._run_test_plan, daemon=True).start()
@@ -90,7 +90,7 @@ class ConfigurationView(QWidget):
         self.stop_plan = True
 
     def _handle_plc_data(self, plc_data: dict):
-        self.chart.update_chart([plc_data.get("wind_filtered"), plc_data.get("average_temp")])
+        self.chart.update_chart([plc_data.get("speed"), plc_data.get("average_temp")])
 
     def _wait_until(self, target_time: datetime):
         while datetime.now() < target_time and not self.stop_plan:

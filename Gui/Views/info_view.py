@@ -4,7 +4,6 @@ from PySide6.QtWidgets import QFileDialog, QWidget
 
 from Device_controllers.driver_2d_plc_controller import Driver2DPLCController
 from Device_controllers.driver_3d_plc_controller import Driver3DPLCController
-from Device_controllers.papago_controller import PapagoController
 from Device_controllers.scale_plc_controller import ScalePLCController
 from Device_controllers.tlaskan_controller import TlaskanController
 from Device_controllers.tunnel_plc_controller import TunnelPLCController
@@ -19,7 +18,6 @@ class InfoPanel(QWidget):
     def __init__(self, tunnel_plc: TunnelPLCController,
                  driver_3d: Driver3DPLCController,
                  driver_2d: Driver2DPLCController,
-                 papago: PapagoController,
                  scales: ScalePLCController, 
                  tlaskans: tuple[TlaskanController, TlaskanController],
                  ):
@@ -33,7 +31,6 @@ class InfoPanel(QWidget):
         self.tunnel_plc = tunnel_plc
         self.driver_3d = driver_3d
         self.driver_2d = driver_2d
-        self.papago = papago
         self.scales = scales
         self.tlaskans = tlaskans
 
@@ -76,21 +73,10 @@ class InfoPanel(QWidget):
 
     def _bind_emits(self):
         self.tunnel_plc.SENSOR_VALUES.connect(self._handle_plc_data)
-        self.papago.PAPAGO_DATA.connect(self._handle_papago_data)
         self.tunnel_plc.PLC_CONNECTED.connect(self.set_available)
 
-    def _handle_papago_data(self, papago_data):
-        self.ui.humidity_lbl.setText(str(papago_data.get("humidity")))
-        self.ui.atm_pressure_lbl.setText(str(papago_data.get("pressure")))
-        self.ui.temp_lbl.setText(str(papago_data.get("temperature")))
-
-        if self.save_thread.saving:
-            self.save_thread.update_key_value("out temp [°C]", papago_data.get("temperature"))
-            self.save_thread.update_key_value("out hum [%]", papago_data.get("humidity"))
-            self.save_thread.update_key_value("out pressure [Pa]", papago_data.get("pressure"))
-
     def _handle_plc_data(self, plc_data):
-        wind_velocity = plc_data.get("wind_filtered")
+        wind_velocity = plc_data.get("speed")
         frequency = plc_data.get("frequency")
         temp = plc_data.get("average_temp")
         pressure = plc_data.get("pressure_filtered")
@@ -213,7 +199,6 @@ class InfoPanel(QWidget):
 
         #connecting
         self.tunnel_plc.start()
-        self.papago.start()
         self.driver_3d.start()
         self.driver_2d.start()
         self.scales.start()
@@ -225,6 +210,7 @@ class InfoPanel(QWidget):
     def disconnect_tunnel(self):
         try:
             self._change_connect_btns_state(True)
+            self.set_available(False)
 
             self.tlaskans[0].disconnect()
             self.tlaskans[1].disconnect()
@@ -232,7 +218,6 @@ class InfoPanel(QWidget):
             self.tunnel_plc.disconnect()
             self.driver_3d.disconnect()
             self.driver_2d.disconnect()
-            self.papago.disconnect()
 
             self._set_buttons_state(False)
         except Exception as e:

@@ -1,8 +1,10 @@
 import time
 from threading import Thread
+
 from PySide6.QtCore import Signal
-from Utils.helper_functions import list_to_short, byte_to_bits, control_dict_to_bytes
+
 from Device_controllers.plc_controller import PLCController
+from Utils.helper_functions import byte_to_bits, control_dict_to_bytes, list_to_short
 
 
 class TunnelPLCController(PLCController):
@@ -52,7 +54,7 @@ class TunnelPLCController(PLCController):
                 self.read_nb,
                 0,
                 84,
-                '>2H2f3f3f3f3fBB5f2B'
+                '>2H14f2B5f2B'
             )
             self.watchdog_count = plc_data[0]
             status_bits = byte_to_bits(((plc_data[1] & 0xFF) << 8) | (plc_data[1] >> 8), "little")  # 16 bits from 2 bytes
