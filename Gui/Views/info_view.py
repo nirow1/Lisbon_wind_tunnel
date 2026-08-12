@@ -74,6 +74,7 @@ class InfoPanel(QWidget):
     def _bind_emits(self):
         self.tunnel_plc.SENSOR_VALUES.connect(self._handle_plc_data)
         self.tunnel_plc.PLC_CONNECTED.connect(self.set_available)
+        self.tunnel_plc.PAPAGO_DATA.connect(self._handle_papago_data)
 
     def _handle_plc_data(self, plc_data):
         wind_velocity = plc_data.get("speed")
@@ -91,6 +92,16 @@ class InfoPanel(QWidget):
             self.save_thread.update_key_value("Temp [°C]", temp)
             self.save_thread.update_key_value("pressure [Pa]", pressure)
             self.save_thread.update_key_value("frequency [Hz]", frequency)
+
+    def _handle_papago_data(self, data):
+        self.ui.temp_lbl.setText(str(data.get("P_temp")))
+        self.ui.humidity_lbl.setText(str(data.get("P_humidity")))
+        self.ui.atm_pressure_lbl.setText(str(data.get("P_pressure")))
+
+        if self.save_thread.saving:
+            self.save_thread.update_key_value("P Temp [°C]", data.get("P_temp"))
+            self.save_thread.update_key_value("P Humidity [%]", data.get("P_hum"))
+            self.save_thread.update_key_value("P Pressure [Pa]", data.get("P_pressure"))
 
     def _set_velocity_value(self):
         req_velocity = float(self.ui.set_velocity_le.text())
@@ -174,17 +185,23 @@ class InfoPanel(QWidget):
         self.ui.stop_tunnel_btn.setEnabled(False)
 
     def _csv_devices(self):
-        return (*self.tlaskans, *self.scales.tenso_scanners)
+        return *self.tlaskans, *self.scales.tenso_scanners
 
     def _start_saving(self):
         self.save_thread.start_saving()
         for device in self._csv_devices():
             device.start_csv_logging()
+        self._set_saving_buttons_state(False)
 
     def _stop_saving(self):
         self.save_thread.stop_saving()
         for device in self._csv_devices():
             device.stop_csv_logging()
+        self._set_saving_buttons_state(True)
+
+    def _set_saving_buttons_state(self, state: bool):
+        self.ui.start_saving_btn.setVisible(state)
+        self.ui.stop_saving_btn.setVisible(not state)
 
     def _open_dir_dialog(self):
         options = QFileDialog(self).options()

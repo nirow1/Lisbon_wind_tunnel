@@ -14,6 +14,7 @@ class TunnelPLCController(PLCController):
     STATUS_DATA = Signal(dict)
     DRIVER_DATA = Signal(dict)
     SAFETY_DIAGNOSTICS = Signal(dict)
+    PAPAGO_DATA = Signal(dict)
 
     def __init__(self, ip_address="192.168.10.1"):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=102)
@@ -43,6 +44,7 @@ class TunnelPLCController(PLCController):
                 self.SENSOR_VALUES.emit(main_data_dict[1])
                 self.DRIVER_DATA.emit(main_data_dict[2])
                 self.SAFETY_DIAGNOSTICS.emit(main_data_dict[3])
+                self.PAPAGO_DATA.emit(main_data_dict[4])
             except Exception as e:
                 print(e)
 
@@ -56,6 +58,7 @@ class TunnelPLCController(PLCController):
                 84,
                 '>2H14f2B5f2B'
             )
+            papago = self._read_plc_data(self.read_nb, 156, 12, '>3f')
             self.watchdog_count = plc_data[0]
             status_bits = byte_to_bits(((plc_data[1] & 0xFF) << 8) | (plc_data[1] >> 8), "little")  # 16 bits from 2 bytes
 
@@ -126,6 +129,13 @@ class TunnelPLCController(PLCController):
                 # -----------------------------------------------------
                 {
                     "estop_main": safety_data[0], "estop_panel": safety_data[1]
+                },
+
+                # -----------------------------------------------------
+                # papago communication
+                # -----------------------------------------------------
+                {
+                    "P_humidity": round(papago[0], 2), "P_temp": round(papago[1], 2), "P_pressure": round(papago[2], 2)
                 }
             ]
 

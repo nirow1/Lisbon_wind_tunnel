@@ -2,7 +2,7 @@ import csv
 import os
 from datetime import datetime
 
-from PySide6.QtCore import QTimer, QObject
+from PySide6.QtCore import QObject, QTimer
 
 
 class SavingThread(QObject):
@@ -36,7 +36,10 @@ class SavingThread(QObject):
 
     def activate_timer(self, state: bool, duration: str):
         self.timer_state = state
-        self.save_duration = int(duration)
+        try:
+            self.save_duration = int(duration) if duration.strip() else 0
+        except ValueError:
+            self.save_duration = 0
 
     def update_key_value(self, key: str, value):
         self.data_to_save[key] = value
@@ -45,42 +48,39 @@ class SavingThread(QObject):
         self.data_to_save.update(data)
 
     def _save_data(self):
-        if self.timer_state and self.save_duration != "" and self.save_count >= int(self.save_duration) - 1:
+        if self.timer_state and self.save_duration > 0 and self.save_count >= self.save_duration - 1:
             self.stop_saving()
 
-        exists = os.path.exists(self._save_folder_path)
+        if not self._save_path:
+            self._update_save_path()
 
-        time = datetime.now().strftime("%H:%M:%S")[:-5]
-        self.data_to_save["time"] = time
+        self.data_to_save["time"] = datetime.now().strftime("%H:%M:%S")
 
-        if self.reset_save_file:
-            open(self._save_folder_path, "w")
-            exists = False
-            self.reset_save_file = False
+        write_header = self.reset_save_file or not os.path.exists(self._save_path)
+        mode = "w" if self.reset_save_file else "a"
+        self.reset_save_file = False
 
-        with open(self._save_folder_path, 'a', newline="") as f:
+        with open(self._save_path, mode, newline="") as f:
             writer = csv.writer(f)
-            if not exists:
+            if write_header:
                 writer.writerow(self.data_to_save.keys())
             writer.writerow(self.data_to_save.values())
         self.save_count += 1
 
     def set_save_file_name(self, name: str):
-        self._save_file_name = name
+        self._save_file_name = name.strip()
 
     def set_file_path(self, path: str):
-        self._save_folder_path = path
+        self._save_folder_path = path.strip() if path else ""
 
     def _update_save_path(self):
-        file_path = self._save_folder_path
+        folder = self._save_folder_path if self._save_folder_path else os.getcwd()
 
-        if self._save_folder_path == "":
-            file_path = os.getcwd()
-
-        if self._save_file_name == "":
-            name = "Wind_tunnel_" + datetime.now().strftime("%Y-%m-%d_%H%M")
-        else:
+        if self._save_file_name:
             name = self._save_file_name
+            if name.lower().endswith(".csv"):
+                name = name[:-4]
+        else:
+            name = "Wind_tunnel_" + datetime.now().strftime("%Y-%m-%d_%H%M")
 
-        file_path += f"/{name}.csv"
-        self._save_path = file_path
+        self._save_path = os.path.join(folder, f"{name}.csv")

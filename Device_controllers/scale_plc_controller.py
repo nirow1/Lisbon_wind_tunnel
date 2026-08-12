@@ -1,3 +1,6 @@
+from threading import Thread
+from time import sleep
+
 from PySide6.QtCore import Signal
 
 from Device_controllers.polling_plc_controller import PollingPLCController
@@ -16,6 +19,8 @@ class ScalePLCController(PollingPLCController):
                                TensoScannerController("192.168.10.97"))
         self.tenso_data = {"ch1_tso1": 0, "ch2_tso1": 0, "ch3_tso1": 0,
                            "ch1_tso2": 0, "ch2_tso2": 0, "ch3_tso2": 0,}
+
+        self._is_all_homed: bool | None = None
         # TEMP: collect samples for column averages
         self._tenso_samples: list[list] = []
         self.bind_emits()
@@ -25,6 +30,8 @@ class ScalePLCController(PollingPLCController):
             scale_data = self._read_plc_data(self.read_nb, 0, 34, '>4dH')
 
             status_data = byte_to_bits(((scale_data[4] & 0xFF) << 8) | (scale_data[4] >> 8), "little")
+
+            self._is_all_homed = bool(status_data[10])
 
             return [{"roll": scale_data[2], "pitch": scale_data[1], "yaw": scale_data[0], "axis_4": scale_data[3]},
                     {"ready": status_data[0], "moving": status_data[2], "allhoomed": status_data[10]}]
@@ -36,7 +43,21 @@ class ScalePLCController(PollingPLCController):
     def bind_emits(self) -> None:
         self.tenso_scanners[0].TENSO_DATA.connect(lambda data: self._handle_tenso_data(data, 1))
         self.tenso_scanners[1].TENSO_DATA.connect(lambda data: self._handle_tenso_data(data, 2))
-        self.PLC_CONNECTED.connect(self.connect_to_tenso_scanners)
+        self.PLC_CONNECTED.connect(self._on_plc_connected)
+
+    def _on_plc_connected(self, connected: bool = True) -> None:
+        if not connected:
+            self._is_all_homed = None
+            return
+        self._is_all_homed = None
+        self.connect_to_tenso_scanners()
+        Thread(target=self._home_after_status, daemon=True).start()
+
+    def _home_after_status(self) -> None:
+        while self.connected and self._is_all_homed is None:
+            sleep(0.05)
+        if self.connected and not self._is_all_homed:
+            self.home_scale()
 
     def connect_to_tenso_scanners(self, connected: bool = True) -> None:
         if not connected:
@@ -79,7 +100,7 @@ class ScalePLCController(PollingPLCController):
         self.STATUS_DATA.emit(data[1])
 
     def home_scale(self):
-        self.home_driver(18)
+        super().home_driver(18)
 
     def set_pitch_yaw_roll(self, pitch: float, yaw: float, roll: float) -> None:
         self._write_plc_float(self.write_nb, 4, pitch)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_Info_viewVbdZdV.ui'
+## Form generated from reading UI file 'wind_tunnel_Info_viewbuNwIk.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -270,7 +270,7 @@ class Ui_Form(object):
 
         self.temp_lbl = QLabel(self.widget_20)
         self.temp_lbl.setObjectName(u"temp_lbl")
-        self.temp_lbl.setMaximumSize(QSize(35, 16777215))
+        self.temp_lbl.setMaximumSize(QSize(45, 16777215))
 
         self.horizontalLayout_8.addWidget(self.temp_lbl)
 
