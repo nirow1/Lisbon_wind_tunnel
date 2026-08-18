@@ -41,6 +41,9 @@ class PressureView(QWidget):
         self.ui.reset_pressure_chart_btn.clicked.connect(self.pressure_chart_1.reset_axis)
         self.ui.reset_pressure_chart_btn_2.clicked.connect(self.pressure_chart_2.reset_axis)
 
+        self.ui.tare_device_1_btn.clicked.connect(self.tlaskan_1.tare)
+        self.ui.tare_device_2_btn.clicked.connect(self.tlaskan_2.tare)
+
     def _bind_emits(self):
         self.tlaskan_1.PRESSURE_DATA.connect(lambda data: self._handle_pressure_data(data,
          self.ui.widget, 1))

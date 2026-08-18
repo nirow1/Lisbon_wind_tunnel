@@ -23,7 +23,6 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.current_frequency = 0
         # todo: when disconnect is clicked while connecting the gui frezzes
-        # todo: set zero values for scales nad tlaskan
 
         # device communication
         self.tunnel_plc = TunnelPLCController()

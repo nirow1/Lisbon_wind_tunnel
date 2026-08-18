@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_pressure_viewsCriMa.ui'
+## Form generated from reading UI file 'wind_tunnel_pressure_viewBQCfLz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -309,6 +309,22 @@ class Ui_Form(object):
 
         self.verticalLayout_3.addWidget(self.widget_34)
 
+        self.widget_4 = QWidget(self.page)
+        self.widget_4.setObjectName(u"widget_4")
+        self.widget_4.setMinimumSize(QSize(0, 40))
+        self.widget_4.setMaximumSize(QSize(16777215, 40))
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_4)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.tare_device_1_btn = QPushButton(self.widget_4)
+        self.tare_device_1_btn.setObjectName(u"tare_device_1_btn")
+        self.tare_device_1_btn.setMaximumSize(QSize(100, 35))
+
+        self.horizontalLayout_5.addWidget(self.tare_device_1_btn)
+
+
+        self.verticalLayout_3.addWidget(self.widget_4)
+
         self.stackedWidget_3.addWidget(self.page)
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
@@ -509,6 +525,22 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.widget_35)
 
+        self.widget_2 = QWidget(self.page_2)
+        self.widget_2.setObjectName(u"widget_2")
+        self.widget_2.setMinimumSize(QSize(0, 40))
+        self.widget_2.setMaximumSize(QSize(16777215, 40))
+        self.horizontalLayout_4 = QHBoxLayout(self.widget_2)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.tare_device_2_btn = QPushButton(self.widget_2)
+        self.tare_device_2_btn.setObjectName(u"tare_device_2_btn")
+        self.tare_device_2_btn.setMaximumSize(QSize(100, 35))
+
+        self.horizontalLayout_4.addWidget(self.tare_device_2_btn)
+
+
+        self.verticalLayout_2.addWidget(self.widget_2)
+
         self.stackedWidget_3.addWidget(self.page_2)
 
         self.verticalLayout.addWidget(self.stackedWidget_3)
@@ -552,7 +584,8 @@ class Ui_Form(object):
         self.lbl_1_p_8.setText(QCoreApplication.translate("Form", u"0.0", None))
         self.lbl_1_p_4.setText(QCoreApplication.translate("Form", u"0.0", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Device 1", None))
-        self.reset_pressure_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart", None))
+        self.reset_pressure_chart_btn.setText(QCoreApplication.translate("Form", u"Reset axis", None))
+        self.tare_device_1_btn.setText(QCoreApplication.translate("Form", u"Tare", None))
         self.lbl_2.setText(QCoreApplication.translate("Form", u"Device 2 not connected", None))
         self.label_15.setText(QCoreApplication.translate("Form", u"P5:", None))
         self.lbl_2_p_10.setText(QCoreApplication.translate("Form", u"0.0", None))
@@ -579,6 +612,7 @@ class Ui_Form(object):
         self.label_30.setText(QCoreApplication.translate("Form", u"P2:", None))
         self.label_20.setText(QCoreApplication.translate("Form", u"P12:", None))
         self.label_14.setText(QCoreApplication.translate("Form", u"Device 2", None))
-        self.reset_pressure_chart_btn_2.setText(QCoreApplication.translate("Form", u"Reset chart", None))
+        self.reset_pressure_chart_btn_2.setText(QCoreApplication.translate("Form", u"Reset axis", None))
+        self.tare_device_2_btn.setText(QCoreApplication.translate("Form", u"Tare", None))
     # retranslateUi
 

@@ -21,7 +21,8 @@ class TlaskanController(SocketDeviceController):
 
     def __init__(self, ip="192.168.10.98"):
         super().__init__(ip)
-        self.zero_values = [0.0 for _ in range(12)]
+        self._tare_offsets = [0.0] * 12
+        self._last_raw_pressures = [0.0] * 12
         self.processed_pressure = []
         self._running = False
 
@@ -102,8 +103,9 @@ class TlaskanController(SocketDeviceController):
                     row.extend([f"{press:.4f}", status])
                     pressures.append(press)
                 self._write_csv_row(row)
+                self._last_raw_pressures = [round(p, 3) for p in pressures]
                 self.processed_pressure = [
-                    round(pressures[i], 3) - self.zero_values[i]
+                    self._last_raw_pressures[i] - self._tare_offsets[i]
                     for i in range(len(pressures))
                 ]
                 self._print_data_line(self.processed_pressure)
@@ -127,13 +129,12 @@ class TlaskanController(SocketDeviceController):
             self.DEVICE_CONNECTED.emit(False)
         self.wait(3000)
 
-    def set_zero_values(self):
-        if not self.connected or len(self.processed_pressure) != len(self.zero_values):
+    def tare(self):
+        if not self.connected or not self.processed_pressure:
             return
-        self.zero_values = [
-            self.zero_values[i] + self.processed_pressure[i]
-            for i in range(len(self.zero_values))
-        ]
+        self._tare_offsets = self._last_raw_pressures[:]
+        self.processed_pressure = [0.0] * len(self._tare_offsets)
+        self.PRESSURE_DATA.emit(self.processed_pressure)
 
 
 if __name__ == "__main__":

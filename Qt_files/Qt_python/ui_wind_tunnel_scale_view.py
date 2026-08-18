@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewuIdTGP.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewggZubY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -460,12 +460,18 @@ class Ui_Form(object):
         self.stop_scale_btn = QPushButton(self.widget_16)
         self.stop_scale_btn.setObjectName(u"stop_scale_btn")
         self.stop_scale_btn.setEnabled(False)
-        self.stop_scale_btn.setMaximumSize(QSize(124, 30))
+        self.stop_scale_btn.setMaximumSize(QSize(100, 30))
 
         self.horizontalLayout_9.addWidget(self.stop_scale_btn)
 
 
         self.horizontalLayout_17.addWidget(self.widget_16)
+
+        self.tare_btn = QPushButton(self.widget_24)
+        self.tare_btn.setObjectName(u"tare_btn")
+        self.tare_btn.setMaximumSize(QSize(100, 30))
+
+        self.horizontalLayout_17.addWidget(self.tare_btn)
 
 
         self.verticalLayout_2.addWidget(self.widget_24)
@@ -636,7 +642,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -660,7 +666,7 @@ class Ui_Form(object):
         self.my_lbl.setText(QCoreApplication.translate("Form", u"00.0", None))
         self.label_22.setText(QCoreApplication.translate("Form", u"Mz:", None))
         self.mz_lbl.setText(QCoreApplication.translate("Form", u"00.0", None))
-        self.reset_scale_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart", None))
+        self.reset_scale_chart_btn.setText(QCoreApplication.translate("Form", u"Reset axis", None))
         self.label_24.setText(QCoreApplication.translate("Form", u"Current Pitch:", None))
         self.current_pitch_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
         self.label_26.setText(QCoreApplication.translate("Form", u"Current Roll:", None))
@@ -674,6 +680,7 @@ class Ui_Form(object):
         self.label_23.setText(QCoreApplication.translate("Form", u"Yaw:", None))
         self.set_yaw_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.stop_scale_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
+        self.tare_btn.setText(QCoreApplication.translate("Form", u"Tare", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Fx", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)

@@ -53,6 +53,7 @@ class ScaleView(QWidget):
         self.ui.set_yaw_btn.clicked.connect(lambda: self.set_yaw(float(self.ui.set_yaw_le.text())))
 
         self.ui.stop_scale_btn.clicked.connect(self.scales.stop_driver)
+        self.ui.tare_btn.clicked.connect(self.scales.tare)
         self.ui.save_settings_btn.clicked.connect(self._save_coefficients)
         self.ui.default_settings_btn.clicked.connect(self._load_default_coefficients)
 

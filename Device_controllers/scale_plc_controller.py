@@ -35,6 +35,8 @@ class ScalePLCController(PollingPLCController):
         self._is_all_homed: bool | None = None
         # TEMP: collect samples for column averages
         self._tenso_samples: list[list] = []
+        self._tare_offsets = [0.0] * 6
+        self._last_raw_values = [0.0] * 6
         self.reset_coefficients()
         self.bind_emits()
 
@@ -101,6 +103,9 @@ class ScalePLCController(PollingPLCController):
     def reset_coefficients(self) -> None:
         self.set_coefficients(self.DEFAULT_COEFFS, self.DEFAULT_OFFSETS)
 
+    def tare(self) -> None:
+        self._tare_offsets = self._last_raw_values[:]
+
     def _make_calculations(self) -> None:
         sensors = [
             self.tenso_data["ch1_tso1"],
@@ -111,10 +116,12 @@ class ScalePLCController(PollingPLCController):
             self.tenso_data["ch3_tso2"],
         ]
         coeffs, offsets = self._coeffs, self._offsets
-        values = [
+        raw = [
             sum(sensors[i] * coeffs[i][j] for i in range(6)) + offsets[j]
             for j in range(6)
         ]
+        self._last_raw_values = raw
+        values = [raw[j] - self._tare_offsets[j] for j in range(6)]
         self.SCALE_DATA.emit({"x": values[0], "y": values[1], "z": values[2],
                               "mx": values[3], "my": values[4], "mz": values[5]})
 
