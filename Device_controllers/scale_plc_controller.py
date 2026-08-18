@@ -13,6 +13,18 @@ class ScalePLCController(PollingPLCController):
     POS_DATA = Signal(dict)
     STATUS_DATA = Signal(dict)
 
+    # Rows S1–S6 (ch1/2/3 tso1, ch1/2/3 tso2), columns Fx, Fy, Fz, Mx, My, Mz
+    DEFAULT_COEFFS = [
+        [-0.0000040934, 0.0000244077, 0.0001735134, -0.0000106209, -0.0000174044, -0.0000015874],
+        [0.0000103008, -0.0000069629, 0.0005021131, -0.0000196786, 0.0000707668, -0.0000071138],
+        [-0.0000077890, -0.0000051808, 0.0004471496, 0.0000265507, -0.000032043, 0.000033506],
+        [0.0000235612, 0.0001158091, 0.0002450960, -0.0000072199, 0.0000658358, -0.000046326],
+        [0.0001517056, -0.0000116837, -0.0000567972, -0.0000312812, 0.0000262472, -0.0000360606],
+        [0.0001514674, -0.0000054757, -0.0001257411, -0.0000281642, 0.0000221171, 0.0000244908],
+    ]
+    DEFAULT_OFFSETS = [-2861.3773566694, -1011.2072954020, -9700.7692685649,
+                       623.5219933303, -1436.6778343669, 193.3865058669]
+
     def __init__(self, ip_address="192.168.10.12"):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=4)
         self.tenso_scanners = (TensoScannerController("192.168.10.96"),
@@ -23,6 +35,7 @@ class ScalePLCController(PollingPLCController):
         self._is_all_homed: bool | None = None
         # TEMP: collect samples for column averages
         self._tenso_samples: list[list] = []
+        self.reset_coefficients()
         self.bind_emits()
 
     def _read_main_data(self) -> list | None:
@@ -78,22 +91,32 @@ class ScalePLCController(PollingPLCController):
         if id == 1:
             self._make_calculations()
 
+    def get_coefficients(self) -> tuple[list[list[float]], list[float]]:
+        return [row[:] for row in self._coeffs], self._offsets[:]
+
+    def set_coefficients(self, coeffs: list[list[float]], offsets: list[float]) -> None:
+        self._coeffs = [row[:] for row in coeffs]
+        self._offsets = offsets[:]
+
+    def reset_coefficients(self) -> None:
+        self.set_coefficients(self.DEFAULT_COEFFS, self.DEFAULT_OFFSETS)
+
     def _make_calculations(self) -> None:
-        ch1_tso1 = self.tenso_data["ch1_tso1"]
-        ch2_tso1 = self.tenso_data["ch2_tso1"]
-        ch3_tso1 = self.tenso_data["ch3_tso1"]
-        ch1_tso2 = self.tenso_data["ch1_tso2"]
-        ch2_tso2 = self.tenso_data["ch2_tso2"]
-        ch3_tso2 = self.tenso_data["ch3_tso2"]
-
-        x = ch1_tso1 * -0.0000040934 + ch2_tso1 * 0.0000103008 + ch3_tso1 * -0.0000077890 + ch1_tso2 * 0.0000235612 + ch2_tso2 * 0.0001517056 + ch3_tso2 * 0.0001514674 - 2861.3773566694
-        y = ch1_tso1 * 0.0000244077 + ch2_tso1 * -0.0000069629 + ch3_tso1 * -0.0000051808 + ch1_tso2 * 0.0001158091 + ch2_tso2 * -0.0000116837 + ch3_tso2 * -0.0000054757 - 1011.2072954020
-        z = ch1_tso1 * 0.0001735134 + ch2_tso1 * 0.0005021131 + ch3_tso1 * 0.0004471496 + ch1_tso2 * 0.0002450960 + ch2_tso2 * -0.0000567972 + ch3_tso2 * -0.0001257411 - 9700.7692685649
-        mx = ch1_tso1 * -0.0000106209 + ch2_tso1 * -0.0000196786 + ch3_tso1 * 0.0000265507 + ch1_tso2 * -0.0000072199 + ch2_tso2 * -0.0000312812 + ch3_tso2 * -0.0000281642 + 623.5219933303
-        my = ch1_tso1 * -0.0000174044 + ch2_tso1 * 0.0000707668 + ch3_tso1 * -0.000032043 + ch1_tso2 * 0.0000658358 + ch2_tso2 * 0.0000262472 + ch3_tso2 * 0.0000221171 - 1436.6778343669
-        mz = ch1_tso1 * -0.0000015874 + ch2_tso1 * -0.0000071138 + ch3_tso1 * 0.000033506 + ch1_tso2 * -0.000046326 + ch2_tso2 * -0.0000360606 + ch3_tso2 * 0.0000244908 + 193.3865058669
-
-        self.SCALE_DATA.emit({"x": x, "y": y, "z": z, "mx": mx, "my": my, "mz": mz})
+        sensors = [
+            self.tenso_data["ch1_tso1"],
+            self.tenso_data["ch2_tso1"],
+            self.tenso_data["ch3_tso1"],
+            self.tenso_data["ch1_tso2"],
+            self.tenso_data["ch2_tso2"],
+            self.tenso_data["ch3_tso2"],
+        ]
+        coeffs, offsets = self._coeffs, self._offsets
+        values = [
+            sum(sensors[i] * coeffs[i][j] for i in range(6)) + offsets[j]
+            for j in range(6)
+        ]
+        self.SCALE_DATA.emit({"x": values[0], "y": values[1], "z": values[2],
+                              "mx": values[3], "my": values[4], "mz": values[5]})
 
     def _emit_read_data(self, data) -> None:
         self.POS_DATA.emit(data[0])

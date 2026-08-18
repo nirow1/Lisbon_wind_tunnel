@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.config_view)
         self.ui.j4_logo_lbl.setPixmap(QPixmap('./App_data/4j_logo_150x50.png'))
 
-        for i in range(1,4):
+        for i in range(1,5):
             led: QLabel = self.ui.widget_203.findChild(QLabel, "led_" + str(i))
             led.setPixmap(QPixmap('./App_data/grey_led_15.png'))
 
