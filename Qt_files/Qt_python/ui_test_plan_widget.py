@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_plan_widgetbaKozu.ui'
+## Form generated from reading UI file 'test_plan_widgeteelaRP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -205,7 +205,7 @@ class Ui_Form(object):
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Min", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sek", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sec", None));
         self.add_3d_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
         self.start_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
         self.stop_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))

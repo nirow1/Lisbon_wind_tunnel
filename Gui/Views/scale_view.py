@@ -10,7 +10,6 @@ from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Qt_files.Qt_python.ui_wind_tunnel_scale_view import Ui_Form
 from Utils.static_methods import add_sec_to_current_time
 
-
 class ScaleView(QWidget):
     def __init__(self, scale_controller: ScalePLCController):
         QWidget.__init__(self)
@@ -18,6 +17,10 @@ class ScaleView(QWidget):
         self.ui.setupUi(self)
 
         self.stop_plan = False
+
+        self.current_pitch = 0.0
+        self.current_roll = 0.0
+        self.current_yaw = 0.0
 
         self.scale_chart = ZoomableChart("Balances",
                                               x_axis_seconds=600,
@@ -48,9 +51,9 @@ class ScaleView(QWidget):
         self.ui.log_in_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.log_in_pg))
         self.ui.settings_cont_btn.clicked.connect(self._check_login)
 
-        self.ui.set_pitch_btn.clicked.connect(lambda: self.set_pitch(self.ui.set_pitch_le.text()))
-        self.ui.set_roll_btn.clicked.connect(lambda: self.set_roll(self.ui.set_roll_le.text()))
-        self.ui.set_yaw_btn.clicked.connect(lambda: self.set_yaw(float(self.ui.set_yaw_le.text())))
+        self.ui.set_pitch_btn.clicked.connect(self.set_pitch)
+        self.ui.set_roll_btn.clicked.connect(self.set_roll)
+        self.ui.set_yaw_btn.clicked.connect(self.set_yaw)
 
         self.ui.stop_scale_btn.clicked.connect(self.scales.stop_driver)
         self.ui.tare_btn.clicked.connect(self.scales.tare)
@@ -71,9 +74,12 @@ class ScaleView(QWidget):
         self.ui.connected_message_wg.setVisible(not connected)
 
     def _handle_pos_data(self, data: dict):
-        self.ui.current_pitch_lbl.setText(f"{data.get('pitch'):.2f}")
-        self.ui.current_roll_lbl.setText(f"{data.get('roll'):.2f}")
-        self.ui.current_yaw_lbl.setText(f"{data.get('yaw'):.2f}")
+        self.current_pitch = data.get("pitch", 0)
+        self.current_roll = data.get("roll", 0)
+        self.current_yaw = data.get("yaw", 0)
+        self.ui.current_pitch_lbl.setText(f"{self.current_pitch:.2f}")
+        self.ui.current_roll_lbl.setText(f"{self.current_roll:.2f}")
+        self.ui.current_yaw_lbl.setText(f"{self.current_yaw:.2f}")
 
     def _handle_scale_data(self, data: dict):
         self.ui.fx_lbl.setText(f"{data['x']:.2f}")
@@ -87,18 +93,18 @@ class ScaleView(QWidget):
     def _handle_status_data(self, data: dict):
         self.ready = data.get('ready')
         self.moving = data.get('moving')
-    
-    def set_pitch(self, value: float):
-        self.scales.set_pitch(value)
-        self.scales.start_driver()
 
-    def set_yaw(self, value: float):
-        self.scales.set_yaw(value)
-        self.scales.start_driver()
+    def set_pitch(self):
+        pitch = float(self.ui.set_pitch_le.text())
+        self.set_parameters(pitch, self.current_roll, self.current_yaw)
 
-    def set_roll(self, value: float):
-        self.scales.set_roll(value)
-        self.scales.start_driver()
+    def set_roll(self):
+        roll = float(self.ui.set_roll_le.text())
+        self.set_parameters(self.current_pitch, roll, self.current_yaw)
+
+    def set_yaw(self):
+        yaw = float(self.ui.set_yaw_le.text())
+        self.set_parameters(self.current_pitch, self.current_roll, yaw)
 
     def set_parameters(self, pitch: float, roll: float, yaw: float):
         self.scales.set_pitch_yaw_roll(pitch, yaw, roll)

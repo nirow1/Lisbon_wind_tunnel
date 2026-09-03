@@ -133,9 +133,9 @@ class ScalePLCController(PollingPLCController):
         super().home_driver(18)
 
     def set_pitch_yaw_roll(self, pitch: float, yaw: float, roll: float) -> None:
-        self._write_plc_float(self.write_nb, 4, pitch)
-        self._write_plc_float(self.write_nb, 8, yaw)
-        self._write_plc_float(self.write_nb, 12, roll)
+        self.set_pitch(pitch)
+        self.set_yaw(yaw)
+        self.set_roll(roll)
         self.start_driver()
 
     def set_yaw(self, yaw: float):

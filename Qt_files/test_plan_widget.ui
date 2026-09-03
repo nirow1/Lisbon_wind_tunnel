@@ -207,7 +207,7 @@ QPushButton:pressed {
         </column>
         <column>
          <property name="text">
-          <string>Sek</string>
+          <string>Sec</string>
          </property>
         </column>
        </widget>
