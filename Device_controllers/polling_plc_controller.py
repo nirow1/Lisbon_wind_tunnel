@@ -62,17 +62,21 @@ class PollingPLCController(PLCController):
         Thread(target=self.send_ping, args=["confirm"], daemon=True).start()
 
     def home_driver(self, pos: int):
-        Thread(target=self.send_ping, args=[pos, b'\x08'], daemon=True).start()
+        # Pulse a specific "home" bit by writing a single byte at PLC offset `pos`.
+        # This should mirror the behavior of `send_ping()` (set -> short wait -> clear).
+        Thread(target=self.send_ping_byte, args=[pos, b'\x08'], daemon=True).start()
 
     def send_ping(self, key: str):
         self.send_control_byte(key, 1)
         sleep(0.1)
         self.send_control_byte(key, 0)
 
-    def send_ping_byte(self,pos: int, byte: bytes):
-        self._write_plc_data(self.write_nb, 0, 1, byte)
+    def send_ping_byte(self, pos: int, byte: bytes):
+        # Write the provided byte, then clear it to create a rising/falling edge.
+        # `pos` is the PLC byte offset inside the DB (not the control-key).
+        self._write_plc_data(self.write_nb, pos, 1, byte)
         sleep(0.1)
-        self._write_plc_data(self.write_nb, 0, 1, byte)
+        self._write_plc_data(self.write_nb, pos, 1, b'\x00')
 
     def send_control_byte(self, key: str, value: int):
         self.control_byte[key] = value
