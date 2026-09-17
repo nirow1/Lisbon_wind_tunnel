@@ -114,8 +114,10 @@ class ScaleView(QWidget):
 
     def _run_test_plan(self):
         test_plan = self.test_plan_wg.get_test_plan()
+        self.test_plan_wg.reset_highlight()
         self.test_plan_wg.show_message(True)
         for row in test_plan:
+            self.test_plan_wg.highlight_next_row()
             self._wait_until(add_sec_to_current_time(row[0]))
 
             if self.stop_plan:

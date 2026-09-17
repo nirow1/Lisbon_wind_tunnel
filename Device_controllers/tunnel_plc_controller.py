@@ -157,7 +157,8 @@ class TunnelPLCController(PLCController):
 
     def switch_pid(self, state: bool):
         # TRUE -> Frequency, FALSE -> PID regulation
-        self.control_byte["PID"] = int(state)
+        # Must write the control word; updating the local dict alone never reaches the PLC.
+        self.send_control_byte("PID", int(state))
 
     def start_engine(self):
         Thread(target=self.send_ping, args=["start"], daemon=True).start()

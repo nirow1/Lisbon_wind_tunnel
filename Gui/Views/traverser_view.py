@@ -198,9 +198,11 @@ class TraverserView(QWidget):
 
     def _run_test_plan(self, test_plan: list, set_positions, plan_tab: TestPlanTab):
         self.TEST_RUNNING.emit(True)
+        plan_tab.reset_highlight()
         plan_tab.show_message(True)
         try:
             for row in test_plan:
+                plan_tab.highlight_next_row()
                 self._wait_until(add_sec_to_current_time(row[0]))
 
                 if self.stop_plan:

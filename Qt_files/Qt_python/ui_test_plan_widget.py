@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_plan_widgeteelaRP.ui'
+## Form generated from reading UI file 'test_plan_widgetJrrSrC.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.11.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -78,7 +78,69 @@ class Ui_Form(object):
 "\n"
 "#widget_200, #widget_201, #widget_202, #widget_203, #widget_204, #tableWidget{\n"
 "	border: 1px solid #ccc;\n"
-"}")
+"}\n"
+"QTableWidget QScrollBar:vertical {\n"
+"    background-color: rgb(180, 180, 180);\n"
+"    width: 15px;\n"
+"    margin: 0px 3px 0px 3px;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QTableWidget QScrollBar::handle:vertical {\n"
+"    background-color: #4CAF50;\n"
+"    min-height: 20px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QTableWidget QScrollBar::add-line:vertical,\n"
+"QTableWidget QScrollBar::sub-line:vertical {\n"
+"    height: 0px;\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"    background: transparent;\n"
+"}\n"
+"QTableWidget QScrollBar::up-arrow:vertical,\n"
+"QTableWidget QScrollBar::down-arrow:vertical {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"QTableWidget QScrollBar::add-page:vertical,\n"
+"QTableWidget QScrollBar::sub-page:verti"
+                        "cal {\n"
+"    background: transparent;\n"
+"}\n"
+"QTableWidget QScrollBar:horizontal {\n"
+"    background-color: rgb(180, 180, 180);\n"
+"    height: 15px;\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QTableWidget QScrollBar::handle:horizontal {\n"
+"    background-color: #4CAF50;\n"
+"    min-width: 20px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QTableWidget QScrollBar::add-line:horizontal,\n"
+"QTableWidget QScrollBar::sub-line:horizontal {\n"
+"    height: 0px;\n"
+"    width: 0px;\n"
+"    border: none;\n"
+"    background: transparent;\n"
+"}\n"
+"QTableWidget QScrollBar::left-arrow:horizontal,\n"
+"QTableWidget QScrollBar::right-arrow:horizontal {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"}\n"
+"QTableWidget QScrollBar::add-page:horizontal,\n"
+"QTableWidget QScrollBar::sub-page:horizontal {\n"
+"    background: transparent;\n"
+"}\n"
+"")
         self.verticalLayout = QVBoxLayout(Form)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.widget_205 = QWidget(Form)
@@ -203,9 +265,9 @@ class Ui_Form(object):
         self.xml_file_dir_btn.setText("")
         self.label_8.setText(QCoreApplication.translate("Form", u"test running", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Min", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Min", None))
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sec", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Sec", None))
         self.add_3d_row_btn.setText(QCoreApplication.translate("Form", u"+", None))
         self.start_test_plan_btn.setText(QCoreApplication.translate("Form", u"Start plan", None))
         self.stop_test_plan_btn.setText(QCoreApplication.translate("Form", u"End plan", None))

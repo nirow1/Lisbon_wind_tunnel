@@ -63,9 +63,11 @@ class ConfigurationView(QWidget):
     def _run_test_plan(self):
         test_plan = self.test_plan_wg.get_test_plan()
         self.TEST_RUNNING.emit(True)
+        self.test_plan_wg.reset_highlight()
         self.test_plan_wg.show_message(True)
         self.tunnel_plc.start_engine()
         for row in test_plan:
+            self.test_plan_wg.highlight_next_row()
             self._wait_until(add_sec_to_current_time(row[0]))
 
             if self.stop_plan:
@@ -73,7 +75,6 @@ class ConfigurationView(QWidget):
                 break
 
             # velocity set → PID regulation (False); frequency set → frequency mode (True)
-            # switch_pid only updates the local control byte; start_engine writes it to the PLC
             use_frequency = row[1] == ""
             self.tunnel_plc.switch_pid(use_frequency)
             if use_frequency:

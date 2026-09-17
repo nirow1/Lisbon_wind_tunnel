@@ -1,8 +1,10 @@
 import openpyxl
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QBrush, QColor, QIcon
 from PySide6.QtWidgets import QFileDialog, QTableWidget, QTableWidgetItem, QWidget
 
 from Qt_files.Qt_python.ui_test_plan_widget import Ui_Form
+
+_HIGHLIGHT_COLOR = QColor("#BBDEFB")
 
 
 class TestPlanTab(QWidget):
@@ -10,6 +12,7 @@ class TestPlanTab(QWidget):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self._highlighted_row = -1
         self._init_ui()
         self.bind_buttons()
         self.add_columns(columns)
@@ -55,6 +58,35 @@ class TestPlanTab(QWidget):
 
     def show_message(self, state: bool):
         self.ui.test_running_wg.setVisible(state)
+
+    def highlight_next_row(self) -> bool:
+        """Highlight the next plan row. First call highlights row 0, then advances each call."""
+        next_row = self._highlighted_row + 1
+        if next_row >= self.ui.tableWidget.rowCount():
+            return False
+
+        self._set_row_highlight(self._highlighted_row, False)
+        self._set_row_highlight(next_row, True)
+        self._highlighted_row = next_row
+        return True
+
+    def reset_highlight(self):
+        """Clear the current highlight and reset progress to before the first row."""
+        self._set_row_highlight(self._highlighted_row, False)
+        self._highlighted_row = -1
+
+    def _set_row_highlight(self, row: int, highlighted: bool):
+        if row < 0:
+            return
+
+        table = self.ui.tableWidget
+        brush = QBrush(_HIGHLIGHT_COLOR) if highlighted else QBrush()
+        for col in range(table.columnCount()):
+            item = table.item(row, col)
+            if item is None:
+                item = QTableWidgetItem("")
+                table.setItem(row, col, item)
+            item.setBackground(brush)
 
     def _open_file_dialog(self):
         options = QFileDialog(self).options()

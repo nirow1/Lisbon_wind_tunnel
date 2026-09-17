@@ -67,7 +67,68 @@ QPushButton:pressed {
 
 #widget_200, #widget_201, #widget_202, #widget_203, #widget_204, #tableWidget{
 	border: 1px solid #ccc;
-}</string>
+}
+QTableWidget QScrollBar:vertical {
+    background-color: rgb(180, 180, 180);
+    width: 15px;
+    margin: 0px 3px 0px 3px;
+    border: none;
+    border-radius: 4px;
+}
+QTableWidget QScrollBar::handle:vertical {
+    background-color: #4CAF50;
+    min-height: 20px;
+    border-radius: 4px;
+}
+QTableWidget QScrollBar::add-line:vertical,
+QTableWidget QScrollBar::sub-line:vertical {
+    height: 0px;
+    width: 0px;
+    border: none;
+    background: transparent;
+}
+QTableWidget QScrollBar::up-arrow:vertical,
+QTableWidget QScrollBar::down-arrow:vertical {
+    background: transparent;
+    border: none;
+    width: 0px;
+    height: 0px;
+}
+QTableWidget QScrollBar::add-page:vertical,
+QTableWidget QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+QTableWidget QScrollBar:horizontal {
+    background-color: rgb(180, 180, 180);
+    height: 15px;
+    margin: 3px 0px 3px 0px;
+    border: none;
+    border-radius: 4px;
+}
+QTableWidget QScrollBar::handle:horizontal {
+    background-color: #4CAF50;
+    min-width: 20px;
+    border-radius: 4px;
+}
+QTableWidget QScrollBar::add-line:horizontal,
+QTableWidget QScrollBar::sub-line:horizontal {
+    height: 0px;
+    width: 0px;
+    border: none;
+    background: transparent;
+}
+QTableWidget QScrollBar::left-arrow:horizontal,
+QTableWidget QScrollBar::right-arrow:horizontal {
+    background: transparent;
+    border: none;
+    width: 0px;
+    height: 0px;
+}
+QTableWidget QScrollBar::add-page:horizontal,
+QTableWidget QScrollBar::sub-page:horizontal {
+    background: transparent;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

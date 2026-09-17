@@ -1,3 +1,4 @@
+
 from PySide6.QtCore import QSize, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QFileDialog, QWidget
@@ -49,6 +50,7 @@ class InfoPanel(QWidget):
     def _initial_graphical_changes(self):
         self.ui.disconnect_tunnel_btn.hide()
         self.set_buttons_state(False)
+        self.ui.set_velocity_rb.setChecked(True)
         self.ui.change_dir_btn.setIcon(QIcon("./App_data/dir_icon.png"))
         self.ui.change_dir_btn.setIconSize(QSize(54, 30))
         self.ui.stop_saving_btn.setVisible(False)
@@ -129,18 +131,34 @@ class InfoPanel(QWidget):
 
     def start_tunnel(self):
         self.set_check_btn_state(False)
-        config = self.configuration_data
-        self.tunnel_plc.switch_pid(config.get("pid"))
-        if not config.get("pid"):
-            self.tunnel_plc.set_wind_velocity(config.get("velocity"))
-        else:
-            self.tunnel_plc.set_engine_frequency(config.get("frequency"))
 
-        self.tunnel_plc.start_engine()
+        # Read mode/setpoint from the UI at start time (not stale configuration_data).
+        # Order must match the working test plan: start engine, then write setpoints.
+        use_frequency = self.ui.set_frequency_rb.isChecked()
+        if use_frequency:
+            text = self.ui.set_frequency_le.text().strip()
+            value = float(text) if text else 0.0
+            self.configuration_data["frequency"] = value
+            self.configuration_data["pid"] = True
+        else:
+            text = self.ui.set_velocity_le.text().strip()
+            value = float(text) if text else 0.0
+            self.configuration_data["velocity"] = value
+            self.configuration_data["pid"] = False
+
+        self.tunnel_plc.switch_pid(use_frequency)
+        self._start_engine_then_setpoint(use_frequency, value)
 
         self.set_velocity_control_state(False)
         self.ui.start_tunnel_btn.setEnabled(False)
         self.ui.stop_tunnel_btn.setEnabled(True)
+
+    def _start_engine_then_setpoint(self, use_frequency: bool, value: float):
+        self.tunnel_plc.send_ping("start")
+        if use_frequency:
+            self.tunnel_plc.set_engine_frequency(value)
+        else:
+            self.tunnel_plc.set_wind_velocity(value)
 
     def stop_tunnel(self):
         self.set_check_btn_state(True)
