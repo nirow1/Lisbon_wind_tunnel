@@ -972,7 +972,7 @@ QPushButton:pressed {
                <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
               <property name="placeholderText">
-               <string>0-100</string>
+               <string>0-50</string>
               </property>
              </widget>
             </item>
@@ -1016,7 +1016,7 @@ QPushButton:pressed {
                <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
               <property name="placeholderText">
-               <string>0-100</string>
+               <string>0-50</string>
               </property>
              </widget>
             </item>

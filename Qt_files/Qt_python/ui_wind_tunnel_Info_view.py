@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_Info_viewbuNwIk.ui'
+## Form generated from reading UI file 'wind_tunnel_Info_viewuSYbJV.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.11.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -624,11 +624,11 @@ class Ui_Form(object):
         self.label_10.setText(QCoreApplication.translate("Form", u"Average:", None))
         self.pressure_lbl.setText(QCoreApplication.translate("Form", u"0.00", None))
         self.set_velocity_rb.setText(QCoreApplication.translate("Form", u"Imposed velocity (m/s):", None))
-        self.set_velocity_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-100", None))
+        self.set_velocity_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-50", None))
         self.set_frequency_rb.setText(QCoreApplication.translate("Form", u"Imposed frequency (Hz):", None))
         self.set_frequency_le.setInputMask("")
         self.set_frequency_le.setText("")
-        self.set_frequency_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-100", None))
+        self.set_frequency_le.setPlaceholderText(QCoreApplication.translate("Form", u"0-50", None))
         self.start_tunnel_btn.setText(QCoreApplication.translate("Form", u"Start", None))
         self.stop_tunnel_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
     # retranslateUi

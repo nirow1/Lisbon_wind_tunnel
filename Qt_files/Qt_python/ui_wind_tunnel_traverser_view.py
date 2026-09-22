@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_traverser_viewvsgSSy.ui'
+## Form generated from reading UI file 'wind_tunnel_traverser_viewJFdMkl.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.11.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -165,17 +165,17 @@ class Ui_Form(object):
 "    color: white; /* Optional: makes the text readable on red */\n"
 "}\n"
 "")
-        self.verticalLayout_11 = QVBoxLayout(self.connected_message_wg)
-        self.verticalLayout_11.setSpacing(3)
-        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
-        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_12 = QHBoxLayout(self.connected_message_wg)
+        self.horizontalLayout_12.setSpacing(3)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.lbl_2 = QLabel(self.connected_message_wg)
         self.lbl_2.setObjectName(u"lbl_2")
         self.lbl_2.setMinimumSize(QSize(0, 25))
-        self.lbl_2.setMaximumSize(QSize(16777215, 25))
+        self.lbl_2.setMaximumSize(QSize(250, 25))
         self.lbl_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.verticalLayout_11.addWidget(self.lbl_2)
+        self.horizontalLayout_12.addWidget(self.lbl_2)
 
 
         self.test_plan_2d_lo.addWidget(self.connected_message_wg)
@@ -394,17 +394,17 @@ class Ui_Form(object):
 "    color: white; /* Optional: makes the text readable on red */\n"
 "}\n"
 "")
-        self.verticalLayout_12 = QVBoxLayout(self.connected_message_wg_2)
-        self.verticalLayout_12.setSpacing(3)
-        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_13 = QHBoxLayout(self.connected_message_wg_2)
+        self.horizontalLayout_13.setSpacing(3)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.lbl_3 = QLabel(self.connected_message_wg_2)
         self.lbl_3.setObjectName(u"lbl_3")
         self.lbl_3.setMinimumSize(QSize(0, 25))
-        self.lbl_3.setMaximumSize(QSize(16777215, 25))
+        self.lbl_3.setMaximumSize(QSize(250, 25))
         self.lbl_3.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.verticalLayout_12.addWidget(self.lbl_3)
+        self.horizontalLayout_13.addWidget(self.lbl_3)
 
 
         self.test_plan_3d_lo.addWidget(self.connected_message_wg_2)
@@ -628,7 +628,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)

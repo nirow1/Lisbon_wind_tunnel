@@ -1,3 +1,5 @@
+import csv
+from pathlib import Path
 from threading import Thread
 from time import sleep
 
@@ -13,17 +15,7 @@ class ScalePLCController(PollingPLCController):
     POS_DATA = Signal(dict)
     STATUS_DATA = Signal(dict)
 
-    # Rows S1–S6 (ch1/2/3 tso1, ch1/2/3 tso2), columns Fx, Fy, Fz, Mx, My, Mz
-    DEFAULT_COEFFS = [
-        [-0.0000040934, 0.0000244077, 0.0001735134, -0.0000106209, -0.0000174044, -0.0000015874],
-        [0.0000103008, -0.0000069629, 0.0005021131, -0.0000196786, 0.0000707668, -0.0000071138],
-        [-0.0000077890, -0.0000051808, 0.0004471496, 0.0000265507, -0.000032043, 0.000033506],
-        [0.0000235612, 0.0001158091, 0.0002450960, -0.0000072199, 0.0000658358, -0.000046326],
-        [0.0001517056, -0.0000116837, -0.0000567972, -0.0000312812, 0.0000262472, -0.0000360606],
-        [0.0001514674, -0.0000054757, -0.0001257411, -0.0000281642, 0.0000221171, 0.0000244908],
-    ]
-    DEFAULT_OFFSETS = [-2861.3773566694, -1011.2072954020, -9700.7692685649,
-                       623.5219933303, -1436.6778343669, 193.3865058669]
+    COEFFS_PATH = Path("./App_data/scale_plc_coefficients.csv")
 
     def __init__(self, ip_address="192.168.10.12"):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=4)
@@ -37,7 +29,9 @@ class ScalePLCController(PollingPLCController):
         self._tenso_samples: list[list] = []
         self._tare_offsets = [0.0] * 6
         self._last_raw_values = [0.0] * 6
-        self.reset_coefficients()
+        self._coeffs: list[list[float]] = []
+        self._offsets: list[float] = []
+        self.load_coefficients()
         self.bind_emits()
 
     def _read_main_data(self) -> list | None:
@@ -89,8 +83,6 @@ class ScalePLCController(PollingPLCController):
             self.tenso_data["ch1_tso2"] = data[0]
             self.tenso_data["ch2_tso2"] = data[1]
             self.tenso_data["ch3_tso2"] = data[2]
-        
-        if id == 1:
             self._make_calculations()
 
     def get_coefficients(self) -> tuple[list[list[float]], list[float]]:
@@ -99,9 +91,32 @@ class ScalePLCController(PollingPLCController):
     def set_coefficients(self, coeffs: list[list[float]], offsets: list[float]) -> None:
         self._coeffs = [row[:] for row in coeffs]
         self._offsets = offsets[:]
+        self.save_coefficients()
 
     def reset_coefficients(self) -> None:
-        self.set_coefficients(self.DEFAULT_COEFFS, self.DEFAULT_OFFSETS)
+        self.load_coefficients()
+
+    def load_coefficients(self) -> None:
+        if not self.COEFFS_PATH.exists():
+            self._coeffs = [[0.0] * 6 for _ in range(6)]
+            self._offsets = [0.0] * 6
+            self.save_coefficients()
+            return
+        with self.COEFFS_PATH.open(newline="") as f:
+            rows = list(csv.reader(f))
+        # Excel-like: header + S1..S6 + Offset row, columns Fx..Mz
+        body = rows[1:] if rows and rows[0] and rows[0][0] == "" else rows
+        self._coeffs = [[float(v) for v in row[1:7]] for row in body[:6]]
+        self._offsets = [float(v) for v in body[6][1:7]]
+
+    def save_coefficients(self) -> None:
+        self.COEFFS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with self.COEFFS_PATH.open("w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["", "Fx", "Fy", "Fz", "Mx", "My", "Mz"])
+            for i, row in enumerate(self._coeffs):
+                writer.writerow([f"S{i + 1}", *row])
+            writer.writerow(["Offset", *self._offsets])
 
     def tare(self) -> None:
         self._tare_offsets = self._last_raw_values[:]

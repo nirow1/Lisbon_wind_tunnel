@@ -2,7 +2,9 @@ from datetime import datetime, timezone
 from threading import Thread
 from time import sleep
 
-from PySide6.QtWidgets import QHeaderView, QTableWidgetItem, QWidget
+from openpyxl import load_workbook
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QFileDialog, QHeaderView, QTableWidgetItem, QWidget
 
 from Device_controllers.scale_plc_controller import ScalePLCController
 from Gui.Charts.zoomable_chart import ZoomableChart
@@ -35,36 +37,11 @@ class ScaleView(QWidget):
         self.test_plan_wg = TestPlanTab(["Pitch", "Roll", "Yaw"])
         self.ui.test_plan_lo.addWidget(self.test_plan_wg)
 
-        self._bind_buttons()
         self._bind_emits()
+        self._bind_buttons()
         self._initial_graphical_changes()
 
-    def _initial_graphical_changes(self):
-        self.ui.stackedWidget.setCurrentWidget(self.scale_chart)
-        self.test_plan_wg.show_message(False)
-        self.ui.password_le.setEchoMode(self.ui.password_le.EchoMode.Password)
-        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        self._load_coeff_table(*self.scales.get_coefficients())
-
-    def _bind_buttons(self):
-        self.ui.test_plan_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.test_plan_pg))
-        self.ui.chart_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chart_pg))
-        self.ui.log_in_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.log_in_pg))
-        self.ui.settings_cont_btn.clicked.connect(self._check_login)
-
-        self.ui.set_pitch_btn.clicked.connect(self.set_pitch)
-        self.ui.set_roll_btn.clicked.connect(self.set_roll)
-        self.ui.set_yaw_btn.clicked.connect(self.set_yaw)
-
-        self.ui.stop_scale_btn.clicked.connect(self.scales.stop_driver)
-        self.ui.tare_btn.clicked.connect(self.scales.tare)
-        self.ui.save_settings_btn.clicked.connect(self._save_coefficients)
-        self.ui.default_settings_btn.clicked.connect(self._load_default_coefficients)
-        self.ui.reset_scale_chart_btn.clicked.connect(self.scale_chart.reset_axis)
-
-        self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self.start_test_plan)
-        self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
-
+    #______________________________ bind emits ______________________________
     def _bind_emits(self):
         self.scales.POS_DATA.connect(self._handle_pos_data)
         self.scales.SCALE_DATA.connect(self._handle_scale_data)
@@ -95,6 +72,28 @@ class ScaleView(QWidget):
     def _handle_status_data(self, data: dict):
         self.ready = data.get('ready')
         self.moving = data.get('moving')
+
+    #______________________________ bind buttons ______________________________
+    def _bind_buttons(self):
+        self.ui.test_plan_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.test_plan_pg))
+        self.ui.chart_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chart_pg))
+        self.ui.log_in_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.log_in_pg))
+        self.ui.settings_cont_btn.clicked.connect(self._check_login)
+
+        self.ui.set_pitch_btn.clicked.connect(self.set_pitch)
+        self.ui.set_roll_btn.clicked.connect(self.set_roll)
+        self.ui.set_yaw_btn.clicked.connect(self.set_yaw)
+
+        self.ui.stop_scale_btn.clicked.connect(self.scales.stop_driver)
+        self.ui.tare_btn.clicked.connect(self.scales.tare)
+        self.ui.save_settings_btn.clicked.connect(self._save_coefficients)
+        self.ui.default_settings_btn.clicked.connect(self._load_default_coefficients)
+        self.ui.load_coefs_btn.clicked.connect(self._load_coefficients)
+
+        self.ui.reset_scale_chart_btn.clicked.connect(self.scale_chart.reset_axis)
+
+        self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self.start_test_plan)
+        self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
     def set_pitch(self):
         pitch = float(self.ui.set_pitch_le.text())
@@ -143,27 +142,6 @@ class ScaleView(QWidget):
             self._load_coeff_table(*self.scales.get_coefficients())
             self.ui.stackedWidget.setCurrentWidget(self.ui.settings_pg)
 
-    @staticmethod
-    def _format_coeff(value: float) -> str:
-        return f"{value:.10f}".rstrip("0").rstrip(".")
-
-    def _load_coeff_table(self, coeffs: list[list[float]], offsets: list[float]) -> None:
-        for row in range(6):
-            for col in range(6):
-                self.ui.tableWidget.setItem(row, col, QTableWidgetItem(self._format_coeff(coeffs[row][col])))
-            self.ui.tableWidget.setItem(row, 6, QTableWidgetItem(self._format_coeff(offsets[row])))
-
-    def _read_coeff_table(self) -> tuple[list[list[float]], list[float]] | None:
-        coeffs = []
-        offsets = []
-        try:
-            for row in range(6):
-                coeffs.append([float(self.ui.tableWidget.item(row, col).text()) for col in range(6)])
-                offsets.append(float(self.ui.tableWidget.item(row, 6).text()))
-        except (AttributeError, ValueError):
-            return None
-        return coeffs, offsets
-
     def _save_coefficients(self):
         values = self._read_coeff_table()
         if values is None:
@@ -174,3 +152,54 @@ class ScaleView(QWidget):
     def _load_default_coefficients(self):
         self.scales.reset_coefficients()
         self._load_coeff_table(*self.scales.get_coefficients())
+
+    def _load_coefficients(self):
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Select Excel file",
+            "",
+            "Excel Files (*.xlsx *.xlmx);;All Files (*)",
+        )
+        if not file_path:
+            return
+
+        self.ui.load_coefs_le.setText(file_path)
+        workbook = load_workbook(file_path, data_only=True, read_only=True)
+        sheet = workbook.active
+        coeffs = [
+            [float(sheet.cell(row=row, column=col).value) for col in range(1, 7)]
+            for row in range(1, 7)
+        ]
+        offsets = [float(sheet.cell(row=7, column=col).value) for col in range(1, 7)]
+        workbook.close()
+        self._load_coeff_table(coeffs, offsets)
+
+    #______________________________ helpers ______________________________
+    def _initial_graphical_changes(self):
+        self.ui.stackedWidget.setCurrentWidget(self.scale_chart)
+        self.ui.load_coefs_btn.setIcon(QIcon("./App_data/dir_icon.png"))
+        self.test_plan_wg.show_message(False)
+        self.ui.password_le.setEchoMode(self.ui.password_le.EchoMode.Password)
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self._load_coeff_table(*self.scales.get_coefficients())
+
+    @staticmethod
+    def _format_coeff(value: float) -> str:
+        return f"{value:.10f}".rstrip("0").rstrip(".")
+
+    def _load_coeff_table(self, coeffs: list[list[float]], offsets: list[float]) -> None:
+        for row in range(6):
+            for col in range(6):
+                self.ui.tableWidget.setItem(row, col, QTableWidgetItem(self._format_coeff(coeffs[row][col])))
+        for col in range(6):
+            self.ui.tableWidget.setItem(6, col, QTableWidgetItem(self._format_coeff(offsets[col])))
+
+    def _read_coeff_table(self) -> tuple[list[list[float]], list[float]] | None:
+        coeffs = []
+        try:
+            for row in range(6):
+                coeffs.append([float(self.ui.tableWidget.item(row, col).text()) for col in range(6)])
+            offsets = [float(self.ui.tableWidget.item(6, col).text()) for col in range(6)]
+        except (AttributeError, ValueError):
+            return None
+        return coeffs, offsets

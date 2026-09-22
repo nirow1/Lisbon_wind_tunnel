@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewggZubY.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewBcsOWm.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.11.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -109,17 +109,17 @@ class Ui_Form(object):
 "    color: white; /* Optional: makes the text readable on red */\n"
 "}\n"
 "")
-        self.verticalLayout_10 = QVBoxLayout(self.connected_message_wg)
-        self.verticalLayout_10.setSpacing(3)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_7 = QHBoxLayout(self.connected_message_wg)
+        self.horizontalLayout_7.setSpacing(3)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.lbl = QLabel(self.connected_message_wg)
         self.lbl.setObjectName(u"lbl")
         self.lbl.setMinimumSize(QSize(0, 25))
-        self.lbl.setMaximumSize(QSize(16777215, 25))
+        self.lbl.setMaximumSize(QSize(250, 25))
         self.lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.verticalLayout_10.addWidget(self.lbl)
+        self.horizontalLayout_7.addWidget(self.lbl)
 
 
         self.verticalLayout_6.addWidget(self.connected_message_wg)
@@ -494,9 +494,36 @@ class Ui_Form(object):
         self.settings_pg.setObjectName(u"settings_pg")
         self.verticalLayout_5 = QVBoxLayout(self.settings_pg)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.widget_8 = QWidget(self.settings_pg)
+        self.widget_8.setObjectName(u"widget_8")
+        self.widget_8.setMaximumSize(QSize(16777215, 50))
+        self.horizontalLayout_8 = QHBoxLayout(self.widget_8)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.label_4 = QLabel(self.widget_8)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout_8.addWidget(self.label_4)
+
+        self.load_coefs_le = QLineEdit(self.widget_8)
+        self.load_coefs_le.setObjectName(u"load_coefs_le")
+        self.load_coefs_le.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_8.addWidget(self.load_coefs_le)
+
+        self.load_coefs_btn = QPushButton(self.widget_8)
+        self.load_coefs_btn.setObjectName(u"load_coefs_btn")
+        self.load_coefs_btn.setMinimumSize(QSize(30, 30))
+        self.load_coefs_btn.setMaximumSize(QSize(30, 30))
+        self.load_coefs_btn.setIconSize(QSize(30, 30))
+
+        self.horizontalLayout_8.addWidget(self.load_coefs_btn)
+
+
+        self.verticalLayout_5.addWidget(self.widget_8)
+
         self.tableWidget = QTableWidget(self.settings_pg)
-        if (self.tableWidget.columnCount() < 7):
-            self.tableWidget.setColumnCount(7)
+        if (self.tableWidget.columnCount() < 6):
+            self.tableWidget.setColumnCount(6)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -509,24 +536,24 @@ class Ui_Form(object):
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        if (self.tableWidget.rowCount() < 7):
+            self.tableWidget.setRowCount(7)
         __qtablewidgetitem6 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(6, __qtablewidgetitem6)
-        if (self.tableWidget.rowCount() < 6):
-            self.tableWidget.setRowCount(6)
+        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem7)
+        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem8)
+        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem8)
         __qtablewidgetitem9 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem9)
+        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem10)
+        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem10)
         __qtablewidgetitem11 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem11)
+        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem11)
         __qtablewidgetitem12 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem12)
+        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem12)
         self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setMaximumSize(QSize(16777215, 210))
+        self.tableWidget.setMaximumSize(QSize(16777215, 245))
 
         self.verticalLayout_5.addWidget(self.tableWidget)
 
@@ -681,32 +708,34 @@ class Ui_Form(object):
         self.set_yaw_btn.setText(QCoreApplication.translate("Form", u"Set", None))
         self.stop_scale_btn.setText(QCoreApplication.translate("Form", u"Stop", None))
         self.tare_btn.setText(QCoreApplication.translate("Form", u"Tare", None))
+        self.label_4.setText(QCoreApplication.translate("Form", u"Load from excel:", None))
+        self.load_coefs_btn.setText("")
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Fx", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"Fx", None))
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Fy", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Fy", None))
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Fz", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Fz", None))
         ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Mx", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Mx", None))
         ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"My", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"My", None))
         ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Mz", None));
-        ___qtablewidgetitem6 = self.tableWidget.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Offset", None));
-        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"S1", None));
-        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(1)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"S2", None));
-        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(2)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"S3", None));
-        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(3)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"S4", None));
-        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(4)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"S5", None));
-        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(5)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"S6", None));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Mz", None))
+        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(0)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"S1", None))
+        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(1)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"S2", None))
+        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"S3", None))
+        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(3)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("Form", u"S4", None))
+        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(4)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"S5", None))
+        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(5)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("Form", u"S6", None))
+        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(6)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"offset", None))
         self.default_settings_btn.setText(QCoreApplication.translate("Form", u"Default", None))
         self.save_settings_btn.setText(QCoreApplication.translate("Form", u"Save", None))
         self.label.setText(QCoreApplication.translate("Form", u"User name:", None))
