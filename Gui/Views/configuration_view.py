@@ -68,11 +68,6 @@ class ConfigurationView(QWidget):
         self.tunnel_plc.start_engine()
         for row in test_plan:
             self.test_plan_wg.highlight_next_row()
-            self._wait_until(add_sec_to_current_time(row[0]))
-
-            if self.stop_plan:
-                self.stop_plan = False
-                break
 
             # velocity set → PID regulation (False); frequency set → frequency mode (True)
             use_frequency = row[1] == ""
@@ -81,6 +76,12 @@ class ConfigurationView(QWidget):
                 self.tunnel_plc.set_engine_frequency(row[2])
             else:
                 self.tunnel_plc.set_wind_velocity(row[1])
+
+            self._wait_until(add_sec_to_current_time(row[0]))
+
+            if self.stop_plan:
+                self.stop_plan = False
+                break
 
         # same main PLC shutdown steps as InfoView.stop_tunnel
         # (velocity/frequency zeroing is handled inside stop_engine)

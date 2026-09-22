@@ -78,6 +78,7 @@ class InfoPanel(QWidget):
         self.tunnel_plc.PLC_CONNECTED.connect(self.set_available)
         self.tunnel_plc.PAPAGO_DATA.connect(self._handle_papago_data)
         self.scales.SCALE_DATA.connect(self._handle_scale_data)
+        self.scales.POS_DATA.connect(self._handle_pos_data)
 
     def _handle_plc_data(self, plc_data):
         wind_velocity = plc_data.get("speed")
@@ -114,6 +115,12 @@ class InfoPanel(QWidget):
             self.save_thread.update_key_value("P Temp [°C]", data.get("P_temp"))
             self.save_thread.update_key_value("P Humidity [%]", data.get("P_hum"))
             self.save_thread.update_key_value("P Pressure [Pa]", data.get("P_pressure"))
+
+    def _handle_pos_data(self, data):
+        if self.save_thread.saving:
+            self.save_thread.update_key_value("Pitch [°]", data.get("pitch"))
+            self.save_thread.update_key_value("Roll [°]", data.get("roll"))
+            self.save_thread.update_key_value("Yaw [°]", data.get("yaw"))
 
     def _set_velocity_value(self):
         req_velocity = float(self.ui.set_velocity_le.text())

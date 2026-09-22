@@ -28,9 +28,8 @@ class TestPlanTab(QWidget):
         self.ui.delete_3d_row_btn.clicked.connect(self._delete_row)
 
     def add_columns(self, columns: list):
-        current_count = self.ui.tableWidget.columnCount()
-        self.ui.tableWidget.setColumnCount(current_count + len(columns))
-        for index, column in enumerate(columns, start=current_count):
+        for index, column in enumerate(columns):
+            self.ui.tableWidget.insertColumn(index)
             self.ui.tableWidget.setHorizontalHeaderItem(index, QTableWidgetItem(column))
 
     def get_test_plan(self) -> list:
@@ -48,10 +47,10 @@ class TestPlanTab(QWidget):
             if not any(row_values):
                 continue
 
-            minutes = float(row_values[0]) if row_values[0] != "" else 0
-            seconds = float(row_values[1]) if row_values[1] != "" else 0
+            minutes = float(row_values[-2]) if row_values[-2] != "" else 0
+            seconds = float(row_values[-1]) if row_values[-1] != "" else 0
             total_seconds = minutes * 60 + seconds
-            requested_values = tuple(float(v) if v != "" else "" for v in row_values[2:])
+            requested_values = tuple(float(v) if v != "" else "" for v in row_values[:-2])
             test_plan.append((total_seconds, *requested_values))
 
         return test_plan
@@ -101,11 +100,17 @@ class TestPlanTab(QWidget):
 
         rows = sheet.max_row - 1
         self.ui.tableWidget.setRowCount(rows)
+        col_count = self.ui.tableWidget.columnCount()
 
         for i, row in enumerate(sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=sheet.max_column)):
-            for j, cell in enumerate(row):
-                cell = cell.value if cell.value is not None else ""
-                self.ui.tableWidget.setItem(i, j, QTableWidgetItem(str(cell)))
+            # Excel keeps [Min, Sec, values...]; table is [values..., Min, Sec]
+            cell_values = [cell.value if cell.value is not None else "" for cell in row]
+            remapped = cell_values[2:] + cell_values[:2] if len(cell_values) >= 2 else cell_values
+
+            for j, value in enumerate(remapped):
+                if j >= col_count:
+                    break
+                self.ui.tableWidget.setItem(i, j, QTableWidgetItem(str(value)))
 
         workbook.close()
 

@@ -65,7 +65,7 @@ QPushButton:pressed {
     background-color: #729D1F;
 }
 
-#widget, #widget_5, #widget_3, #widget_4{
+#widget_200, #widget_201, #widget_202, #widget_203, #widget_204{
 	border: 1px solid #ccc;
 }</string>
   </property>
@@ -83,7 +83,7 @@ QPushButton:pressed {
     <number>1</number>
    </property>
    <item>
-    <widget class="QWidget" name="widget_2" native="true">
+    <widget class="QWidget" name="widget_201" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QWidget" name="widget_4" native="true">
@@ -101,7 +101,7 @@ QPushButton:pressed {
           <number>3</number>
          </property>
          <item>
-          <widget class="QWidget" name="widget" native="true">
+          <widget class="QWidget" name="widget_200" native="true">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -159,7 +159,7 @@ QPushButton:pressed {
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="chart_pg">
             <layout class="QVBoxLayout" name="scale_chart">
@@ -180,13 +180,13 @@ QPushButton:pressed {
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>35</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>40</height>
+                 <height>35</height>
                 </size>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -203,15 +203,18 @@ QPushButton:pressed {
                  <number>0</number>
                 </property>
                 <item>
+                 <widget class="QWidget" name="widget_3" native="true"/>
+                </item>
+                <item>
                  <widget class="QPushButton" name="restart_chart_btn">
                   <property name="maximumSize">
                    <size>
-                    <width>150</width>
-                    <height>35</height>
+                    <width>100</width>
+                    <height>30</height>
                    </size>
                   </property>
                   <property name="text">
-                   <string>Reset chart axis</string>
+                   <string>Reset axis</string>
                   </property>
                  </widget>
                 </item>

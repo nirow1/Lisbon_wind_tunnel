@@ -10,6 +10,7 @@ from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Qt_files.Qt_python.ui_wind_tunnel_scale_view import Ui_Form
 from Utils.static_methods import add_sec_to_current_time
 
+
 class ScaleView(QWidget):
     def __init__(self, scale_controller: ScalePLCController):
         QWidget.__init__(self)
@@ -59,6 +60,7 @@ class ScaleView(QWidget):
         self.ui.tare_btn.clicked.connect(self.scales.tare)
         self.ui.save_settings_btn.clicked.connect(self._save_coefficients)
         self.ui.default_settings_btn.clicked.connect(self._load_default_coefficients)
+        self.ui.reset_scale_chart_btn.clicked.connect(self.scale_chart.reset_axis)
 
         self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self.start_test_plan)
         self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
@@ -118,13 +120,12 @@ class ScaleView(QWidget):
         self.test_plan_wg.show_message(True)
         for row in test_plan:
             self.test_plan_wg.highlight_next_row()
+            self.set_parameters(row[1], row[2], row[3])
             self._wait_until(add_sec_to_current_time(row[0]))
 
             if self.stop_plan:
                 self.stop_plan = False
                 break
-
-            self.set_parameters(row[1], row[2], row[3])
 
         self.test_plan_wg.show_message(False)
 

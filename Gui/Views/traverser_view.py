@@ -203,11 +203,6 @@ class TraverserView(QWidget):
         try:
             for row in test_plan:
                 plan_tab.highlight_next_row()
-                self._wait_until(add_sec_to_current_time(row[0]))
-
-                if self.stop_plan:
-                    self.stop_plan = False
-                    break
 
                 positions = [
                     float(pos) if pos != "" else 0
@@ -216,6 +211,11 @@ class TraverserView(QWidget):
 
                 set_positions(*positions)
                 self._wait_until_correct_pos()
+                self._wait_until(add_sec_to_current_time(row[0]))
+
+                if self.stop_plan:
+                    self.stop_plan = False
+                    break
         except Exception as e:
             print(f"Test plan error: {e}")
         finally:

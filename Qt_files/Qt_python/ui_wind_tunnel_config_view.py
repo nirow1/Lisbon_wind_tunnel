@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_config_viewUoIFjr.ui'
+## Form generated from reading UI file 'wind_tunnel_config_viewZHgVAi.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.11.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -75,42 +75,42 @@ class Ui_Form(object):
 "    background-color: #729D1F;\n"
 "}\n"
 "\n"
-"#widget, #widget_5, #widget_3, #widget_4{\n"
+"#widget_200, #widget_201, #widget_202, #widget_203, #widget_204{\n"
 "	border: 1px solid #ccc;\n"
 "}")
         self.verticalLayout = QVBoxLayout(Form)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(1, 1, 1, 1)
-        self.widget_2 = QWidget(Form)
-        self.widget_2.setObjectName(u"widget_2")
-        self.verticalLayout_2 = QVBoxLayout(self.widget_2)
+        self.widget_201 = QWidget(Form)
+        self.widget_201.setObjectName(u"widget_201")
+        self.verticalLayout_2 = QVBoxLayout(self.widget_201)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.widget_4 = QWidget(self.widget_2)
+        self.widget_4 = QWidget(self.widget_201)
         self.widget_4.setObjectName(u"widget_4")
         self.vertical_shit = QVBoxLayout(self.widget_4)
         self.vertical_shit.setObjectName(u"vertical_shit")
         self.vertical_shit.setContentsMargins(3, 3, 3, 3)
-        self.widget = QWidget(self.widget_4)
-        self.widget.setObjectName(u"widget")
-        self.widget.setMinimumSize(QSize(0, 40))
-        self.widget.setMaximumSize(QSize(16777215, 40))
-        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.widget_200 = QWidget(self.widget_4)
+        self.widget_200.setObjectName(u"widget_200")
+        self.widget_200.setMinimumSize(QSize(0, 40))
+        self.widget_200.setMaximumSize(QSize(16777215, 40))
+        self.horizontalLayout = QHBoxLayout(self.widget_200)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.chart_pg_btn = QPushButton(self.widget)
+        self.chart_pg_btn = QPushButton(self.widget_200)
         self.chart_pg_btn.setObjectName(u"chart_pg_btn")
         self.chart_pg_btn.setMaximumSize(QSize(100, 35))
 
         self.horizontalLayout.addWidget(self.chart_pg_btn)
 
-        self.test_plan_pg_btn = QPushButton(self.widget)
+        self.test_plan_pg_btn = QPushButton(self.widget_200)
         self.test_plan_pg_btn.setObjectName(u"test_plan_pg_btn")
         self.test_plan_pg_btn.setMaximumSize(QSize(100, 35))
 
         self.horizontalLayout.addWidget(self.test_plan_pg_btn)
 
 
-        self.vertical_shit.addWidget(self.widget)
+        self.vertical_shit.addWidget(self.widget_200)
 
         self.stackedWidget = QStackedWidget(self.widget_4)
         self.stackedWidget.setObjectName(u"stackedWidget")
@@ -121,14 +121,19 @@ class Ui_Form(object):
         self.scale_chart.setContentsMargins(3, 3, 3, 3)
         self.widget_5 = QWidget(self.chart_pg)
         self.widget_5.setObjectName(u"widget_5")
-        self.widget_5.setMinimumSize(QSize(0, 40))
-        self.widget_5.setMaximumSize(QSize(16777215, 40))
+        self.widget_5.setMinimumSize(QSize(0, 35))
+        self.widget_5.setMaximumSize(QSize(16777215, 35))
         self.horizontalLayout_2 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.widget_3 = QWidget(self.widget_5)
+        self.widget_3.setObjectName(u"widget_3")
+
+        self.horizontalLayout_2.addWidget(self.widget_3)
+
         self.restart_chart_btn = QPushButton(self.widget_5)
         self.restart_chart_btn.setObjectName(u"restart_chart_btn")
-        self.restart_chart_btn.setMaximumSize(QSize(150, 35))
+        self.restart_chart_btn.setMaximumSize(QSize(100, 30))
 
         self.horizontalLayout_2.addWidget(self.restart_chart_btn)
 
@@ -156,12 +161,12 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.widget_4)
 
 
-        self.verticalLayout.addWidget(self.widget_2)
+        self.verticalLayout.addWidget(self.widget_201)
 
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -171,6 +176,6 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.chart_pg_btn.setText(QCoreApplication.translate("Form", u"Chart", None))
         self.test_plan_pg_btn.setText(QCoreApplication.translate("Form", u"Test Plan", None))
-        self.restart_chart_btn.setText(QCoreApplication.translate("Form", u"Reset chart axis", None))
+        self.restart_chart_btn.setText(QCoreApplication.translate("Form", u"Reset axis", None))
     # retranslateUi
 
