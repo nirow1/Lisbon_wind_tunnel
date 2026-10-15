@@ -16,6 +16,7 @@ class ScalePLCController(PollingPLCController):
     STATUS_DATA = Signal(dict)
 
     COEFFS_PATH = Path("./App_data/scale_plc_coefficients.csv")
+    DEFAULT_COEFFS_PATH = Path("./App_data/default_scale_plc_coefficients.csv")
 
     def __init__(self, ip_address="192.168.10.12"):
         super().__init__(ip_address, read_nb=101, write_nb=100, param_nb=4)
@@ -74,6 +75,10 @@ class ScalePLCController(PollingPLCController):
         self.tenso_scanners[0].start()
         self.tenso_scanners[1].start()
 
+    def set_tenso_save_frequency(self, hz: int) -> None:
+        for scanner in self.tenso_scanners:
+            scanner.set_csv_save_frequency(hz)
+
     def _handle_tenso_data(self, data: list, id: int) -> None:
         if id == 1:
             self.tenso_data["ch1_tso1"] = data[0]
@@ -94,15 +99,17 @@ class ScalePLCController(PollingPLCController):
         self.save_coefficients()
 
     def reset_coefficients(self) -> None:
-        self.load_coefficients()
+        self.load_coefficients(self.DEFAULT_COEFFS_PATH)
+        self.save_coefficients()
 
-    def load_coefficients(self) -> None:
-        if not self.COEFFS_PATH.exists():
+    def load_coefficients(self, path: Path | None = None) -> None:
+        coeffs_path = path or self.COEFFS_PATH
+        if not coeffs_path.exists():
             self._coeffs = [[0.0] * 6 for _ in range(6)]
             self._offsets = [0.0] * 6
             self.save_coefficients()
             return
-        with self.COEFFS_PATH.open(newline="") as f:
+        with coeffs_path.open(newline="") as f:
             rows = list(csv.reader(f))
         # Excel-like: header + S1..S6 + Offset row, columns Fx..Mz
         body = rows[1:] if rows and rows[0] and rows[0][0] == "" else rows

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_scale_viewBcsOWm.ui'
+## Form generated from reading UI file 'wind_tunnel_scale_viewusGGJd.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.2
 ##
@@ -557,11 +557,6 @@ class Ui_Form(object):
 
         self.verticalLayout_5.addWidget(self.tableWidget)
 
-        self.widget_7 = QWidget(self.settings_pg)
-        self.widget_7.setObjectName(u"widget_7")
-
-        self.verticalLayout_5.addWidget(self.widget_7)
-
         self.widget_5 = QWidget(self.settings_pg)
         self.widget_5.setObjectName(u"widget_5")
         self.widget_5.setMaximumSize(QSize(16777215, 50))
@@ -586,6 +581,39 @@ class Ui_Form(object):
 
 
         self.verticalLayout_5.addWidget(self.widget_5)
+
+        self.widget_7 = QWidget(self.settings_pg)
+        self.widget_7.setObjectName(u"widget_7")
+        self.verticalLayout_7 = QVBoxLayout(self.widget_7)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.widget_9 = QWidget(self.widget_7)
+        self.widget_9.setObjectName(u"widget_9")
+        self.widget_9.setMaximumSize(QSize(400, 50))
+        self.horizontalLayout_10 = QHBoxLayout(self.widget_9)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_5 = QLabel(self.widget_9)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_5)
+
+        self.tenso_frequency_le = QLineEdit(self.widget_9)
+        self.tenso_frequency_le.setObjectName(u"tenso_frequency_le")
+        self.tenso_frequency_le.setMaximumSize(QSize(70, 30))
+
+        self.horizontalLayout_10.addWidget(self.tenso_frequency_le)
+
+        self.tenso_frequency_bnt = QPushButton(self.widget_9)
+        self.tenso_frequency_bnt.setObjectName(u"tenso_frequency_bnt")
+        self.tenso_frequency_bnt.setMaximumSize(QSize(70, 30))
+
+        self.horizontalLayout_10.addWidget(self.tenso_frequency_bnt)
+
+
+        self.verticalLayout_7.addWidget(self.widget_9)
+
+
+        self.verticalLayout_5.addWidget(self.widget_7)
 
         self.stackedWidget.addWidget(self.settings_pg)
         self.log_in_pg = QWidget()
@@ -738,6 +766,8 @@ class Ui_Form(object):
         ___qtablewidgetitem12.setText(QCoreApplication.translate("Form", u"offset", None))
         self.default_settings_btn.setText(QCoreApplication.translate("Form", u"Default", None))
         self.save_settings_btn.setText(QCoreApplication.translate("Form", u"Save", None))
+        self.label_5.setText(QCoreApplication.translate("Form", u"Tenso scan saving frequency:", None))
+        self.tenso_frequency_bnt.setText(QCoreApplication.translate("Form", u"Set", None))
         self.label.setText(QCoreApplication.translate("Form", u"User name:", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Password:", None))
         self.settings_cont_btn.setText(QCoreApplication.translate("Form", u"Log in", None))

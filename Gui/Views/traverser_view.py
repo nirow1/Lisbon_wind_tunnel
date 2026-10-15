@@ -38,7 +38,8 @@ class TraverserView(QWidget):
         self.field_2d = PositionFieldWidget(1000,
                                             1000,
                                             400,
-                                            400)
+                                            400,
+                                            invert_y=True)
         self.ui.field_2d_lo.addWidget(self.field_2d)
 
         self.field_3d_xy = PositionFieldWidget(1470,1470, 350, 350)
@@ -52,15 +53,14 @@ class TraverserView(QWidget):
         self.test_plan_3d = TestPlanTab(["Pos X","Pos Y","Pos Z"])
         self.ui.test_plan_3d_lo.addWidget(self.test_plan_3d)
 
-        self._init_graphical_changes()
-        self._bind_buttons()
-
         self.ui.set_pos_x_2d_le.setValidator(QIntValidator(0, 1000))
         self.ui.set_pos_y_2d_le.setValidator(QIntValidator(0, 1000))
         self.ui.set_pos_x_3d_le.setValidator(QIntValidator(0, 1050))
         self.ui.set_pos_y_3d_le.setValidator(QIntValidator(0, 1040))
         self.ui.set_pos_z_3d_le.setValidator(QIntValidator(0, 605))
 
+        self._init_graphical_changes()
+        self._bind_buttons()
         self._bind_emits()
 
     def _init_graphical_changes(self):
@@ -71,12 +71,12 @@ class TraverserView(QWidget):
         self.ui.pg_2d_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_2d_pg))
         self.ui.pg_3d_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.drivers_3d_pg))
 
-        self.ui.set_pos_x_2d_btn.clicked.connect(self.set_x_pos_2d)
-        self.ui.set_pos_y_2d_btn.clicked.connect(self.set_y_pos_2d)
+        self.ui.set_pos_x_2d_btn.clicked.connect(lambda: self.set_all_positions_2d(x_pos=float(self.ui.set_pos_x_2d_le.text())))
+        self.ui.set_pos_y_2d_btn.clicked.connect(lambda: self.set_all_positions_2d(y_pos=float(self.ui.set_pos_y_2d_le.text())))
 
-        self.ui.set_pos_x_3d_btn.clicked.connect(self.set_x_pos_3d)
-        self.ui.set_pos_y_3d_btn.clicked.connect(self.set_y_pos_3d)
-        self.ui.set_pos_z_3d_btn.clicked.connect(self.set_z_pos_3d)
+        self.ui.set_pos_x_3d_btn.clicked.connect(lambda: self.set_all_positions_3d(x_pos=float(self.ui.set_pos_x_3d_le.text())))
+        self.ui.set_pos_y_3d_btn.clicked.connect(lambda: self.set_all_positions_3d(y_pos=float(self.ui.set_pos_y_3d_le.text())))
+        self.ui.set_pos_z_3d_btn.clicked.connect(lambda: self.set_all_positions_3d(z_pos=float(self.ui.set_pos_z_3d_le.text())))
 
         self.test_plan_2d.ui.start_test_plan_btn.clicked.connect(self._start_test_plan)
         self.test_plan_2d.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
@@ -129,6 +129,8 @@ class TraverserView(QWidget):
         self.current_x_2d = pos.get("x", 0)
         self.current_y_2d = pos.get("y", 0)
         self.field_2d.update_position(self.current_x_2d, self.current_y_2d)
+        self.ui.pos_x_2d_lbl.setText(str(round(self.current_x_2d, 2)))
+        self.ui.pos_y_2d_lbl.setText(str(round(self.current_y_2d, 2)))
 
     def _show_3d_drivers_pos(self, pos: dict):
         self.current_x_3d = pos.get("x", 0)
@@ -142,31 +144,11 @@ class TraverserView(QWidget):
         self.ui.set_pos_y_3d_lbl.setText(str(round(self.current_y_3d, 2)))
         self.ui.set_pos_z_3d_lbl.setText(str(round(self.current_z_3d, 2)))
 
-    def set_x_pos_2d(self):
-        x_pos = float(self.ui.set_pos_x_2d_le.text())
-        self.set_all_positions_2d(x_pos, self.current_y_2d)
+    def set_all_positions_2d(self, x_pos: float | None = None, y_pos: float | None = None):
+        self.plc_2d.set_2d_pos(x_pos if x_pos is not None else self.current_x_2d, y_pos if y_pos is not None else self.current_y_2d)
 
-    def set_y_pos_2d(self):
-        y_pos = float(self.ui.set_pos_y_2d_le.text())
-        self.set_all_positions_2d(self.current_x_2d, y_pos)
-
-    def set_x_pos_3d(self):
-        x_pos = float(self.ui.set_pos_x_3d_le.text())
-        self.set_all_positions_3d(x_pos, self.current_y_3d, self.current_z_3d)
-
-    def set_y_pos_3d(self):
-        y_pos = float(self.ui.set_pos_y_3d_le.text())
-        self.set_all_positions_3d(self.current_x_3d, y_pos, self.current_z_3d)
-
-    def set_z_pos_3d(self):
-        z_pos = float(self.ui.set_pos_z_3d_le.text())
-        self.set_all_positions_3d(self.current_x_3d, self.current_y_3d, z_pos)
-
-    def set_all_positions_2d(self, x_pos: float, y_pos: float):
-        self.plc_2d.set_2d_pos(x_pos, y_pos)
-
-    def set_all_positions_3d(self, x_pos: float, y_pos: float, z_pos: float):
-        self.plc_3d.set_3d_pos(x_pos, y_pos, z_pos)
+    def set_all_positions_3d(self, x_pos: float | None = None, y_pos: float | None = None, z_pos: float | None = None):
+        self.plc_3d.set_3d_pos(x_pos if x_pos is not None else self.current_x_3d, y_pos if y_pos is not None else self.current_y_3d, z_pos if z_pos is not None else self.current_z_3d)
 
     def test_ver_pos(self, ver_pos):
         self.ui.set_pos_x_2d_le.setText(str(ver_pos))

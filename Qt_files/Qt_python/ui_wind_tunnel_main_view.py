@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_main_viewmLUUbt.ui'
+## Form generated from reading UI file 'wind_tunnel_main_viewisRADE.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.11.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -816,8 +816,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.config_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.drivers_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Drivers", None))
+        self.config_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Run tab", None))
+        self.drivers_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Traversers", None))
         self.scales_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Balances", None))
         self.pressures_pg_btn.setText(QCoreApplication.translate("MainWindow", u"Pressures", None))
         self.next_params_pg_btn.setText(QCoreApplication.translate("MainWindow", u"System params", None))

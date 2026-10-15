@@ -3,10 +3,11 @@ from threading import Thread
 from time import sleep
 
 from openpyxl import load_workbook
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QIntValidator
 from PySide6.QtWidgets import QFileDialog, QHeaderView, QTableWidgetItem, QWidget
 
 from Device_controllers.scale_plc_controller import ScalePLCController
+from Device_controllers.tenso_scanner_controller import TensoScannerController
 from Gui.Charts.zoomable_chart import ZoomableChart
 from Gui.Custom_functions.test_plan_tab import TestPlanTab
 from Qt_files.Qt_python.ui_wind_tunnel_scale_view import Ui_Form
@@ -80,9 +81,9 @@ class ScaleView(QWidget):
         self.ui.log_in_pg_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.log_in_pg))
         self.ui.settings_cont_btn.clicked.connect(self._check_login)
 
-        self.ui.set_pitch_btn.clicked.connect(self.set_pitch)
-        self.ui.set_roll_btn.clicked.connect(self.set_roll)
-        self.ui.set_yaw_btn.clicked.connect(self.set_yaw)
+        self.ui.set_pitch_btn.clicked.connect(lambda: self.set_parameters(pitch=float(self.ui.set_pitch_le.text())))
+        self.ui.set_roll_btn.clicked.connect(lambda: self.set_parameters(roll=float(self.ui.set_roll_le.text())))
+        self.ui.set_yaw_btn.clicked.connect(lambda: self.set_parameters(yaw=float(self.ui.set_yaw_le.text())))
 
         self.ui.stop_scale_btn.clicked.connect(self.scales.stop_driver)
         self.ui.tare_btn.clicked.connect(self.scales.tare)
@@ -95,20 +96,24 @@ class ScaleView(QWidget):
         self.test_plan_wg.ui.start_test_plan_btn.clicked.connect(self.start_test_plan)
         self.test_plan_wg.ui.stop_test_plan_btn.clicked.connect(self._stop_plan)
 
-    def set_pitch(self):
-        pitch = float(self.ui.set_pitch_le.text())
-        self.set_parameters(pitch, self.current_roll, self.current_yaw)
+        self.ui.tenso_frequency_bnt.clicked.connect(self._set_tenso_save_frequency)
 
-    def set_roll(self):
-        roll = float(self.ui.set_roll_le.text())
-        self.set_parameters(self.current_pitch, roll, self.current_yaw)
+    def set_parameters(self, pitch: float | None = None, roll: float | None = None, yaw: float | None = None):
+        self.scales.set_pitch_yaw_roll(
+            pitch if pitch is not None else self.current_pitch,
+            yaw if yaw is not None else self.current_yaw,
+            roll if roll is not None else self.current_roll,
+        )
 
-    def set_yaw(self):
-        yaw = float(self.ui.set_yaw_le.text())
-        self.set_parameters(self.current_pitch, self.current_roll, yaw)
-
-    def set_parameters(self, pitch: float, roll: float, yaw: float):
-        self.scales.set_pitch_yaw_roll(pitch, yaw, roll)
+    def _set_tenso_save_frequency(self):
+        text = self.ui.tenso_frequency_le.text().strip()
+        if not text:
+            return
+        hz = int(text)
+        if not (TensoScannerController.CSV_HZ_MIN <= hz <= TensoScannerController.CSV_HZ_MAX):
+            return
+        self.scales.set_tenso_save_frequency(hz)
+        self.ui.tenso_frequency_le.setText(str(hz))
 
     def start_test_plan(self):
         Thread(target=self._run_test_plan, daemon=True).start()
@@ -182,6 +187,13 @@ class ScaleView(QWidget):
         self.ui.password_le.setEchoMode(self.ui.password_le.EchoMode.Password)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self._load_coeff_table(*self.scales.get_coefficients())
+        self.ui.tenso_frequency_le.setValidator(
+            QIntValidator(TensoScannerController.CSV_HZ_MIN, TensoScannerController.CSV_HZ_MAX, self)
+        )
+        self.ui.tenso_frequency_le.setPlaceholderText(
+            f"{TensoScannerController.CSV_HZ_MIN}-{TensoScannerController.CSV_HZ_MAX}"
+        )
+        self.ui.tenso_frequency_le.setText(str(TensoScannerController.DEFAULT_CSV_HZ))
 
     @staticmethod
     def _format_coeff(value: float) -> str:

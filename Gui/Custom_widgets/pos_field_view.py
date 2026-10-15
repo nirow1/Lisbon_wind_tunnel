@@ -10,6 +10,7 @@ class PositionFieldWidget(QWidget):
                  field_width_px=300,
                  field_height_px=300,
                  point_radius=6,
+                 invert_y=False,
                  parent=None):
         super().__init__(parent)
 
@@ -18,6 +19,7 @@ class PositionFieldWidget(QWidget):
         self.field_width_px = float(field_width_px-3)
         self.field_height_px = float(field_height_px-3)
         self.point_radius = float(point_radius)
+        self.invert_y = invert_y
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -59,9 +61,10 @@ class PositionFieldWidget(QWidget):
         w = float(self.width())
         h = float(self.height())
 
-        # Convert device → pixel coordinates
+        # Convert device → pixel coordinates (Qt Y grows downward)
         x_px = (x_cm / self.device_width) * w
-        y_px = (y_cm / self.device_height) * h
+        y_ratio = y_cm / self.device_height
+        y_px = (1.0 - y_ratio) * h if self.invert_y else y_ratio * h
 
         # Update graphics item
         self.point_item.setPos(x_px, y_px)

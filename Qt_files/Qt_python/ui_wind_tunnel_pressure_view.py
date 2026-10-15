@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'wind_tunnel_pressure_viewUFbrCQ.ui'
+## Form generated from reading UI file 'wind_tunnel_pressure_viewyjdpoj.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.2
 ##
@@ -558,7 +558,7 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.page_1_btn.setText(QCoreApplication.translate("Form", u"Device 1", None))
         self.page_2_btn.setText(QCoreApplication.translate("Form", u"Device 2", None))
-        self.lbl_4.setText(QCoreApplication.translate("Form", u"Devise 1 not connected", None))
+        self.lbl_4.setText(QCoreApplication.translate("Form", u"Device 1 not connected", None))
         self.label_12.setText(QCoreApplication.translate("Form", u"P10:", None))
         self.label_11.setText(QCoreApplication.translate("Form", u"P12:", None))
         self.lbl_1_p_11.setText(QCoreApplication.translate("Form", u"0.0", None))

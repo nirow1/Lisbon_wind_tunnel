@@ -60,7 +60,9 @@ class PressureView(QWidget):
 
     def _handle_pressure_data(self, pressure_data: list, widget: QWidget, id : int):
         for i, value in enumerate(pressure_data):
-            widget.findChild(QLabel, f"lbl_{id}_{i}").setText(f"{value:.2f}")
+            label = widget.findChild(QLabel, f"lbl_{id}_p_{i + 1}")
+            if label is not None:
+                label.setText(f"{value:.2f}")
 
         if id == 1:
             self.pressure_chart_1.update_chart(pressure_data)

@@ -207,7 +207,7 @@ QPushButton:pressed {
              </size>
             </property>
             <property name="text">
-             <string>Devise 1 not connected</string>
+             <string>Device 1 not connected</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>

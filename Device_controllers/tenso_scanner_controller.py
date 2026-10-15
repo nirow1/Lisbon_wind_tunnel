@@ -10,6 +10,11 @@ from Device_controllers.fjtech_socket_controller import SocketDeviceController
 class TensoScannerController(SocketDeviceController):
     TENSO_DATA = Signal(list)
 
+    CSV_HZ_MIN = 10
+    CSV_HZ_MAX = 200
+    DEFAULT_CSV_HZ = 200
+    _GUI_EMIT_PERIOD_S = 0.1
+
     _csv_basename = "tenzoscan_data"
     _csv_delimiter = ","
     _csv_header = ["Packet_ID", "Timestamp_us", "CH1", "CH2", "CH3"]
@@ -17,6 +22,13 @@ class TensoScannerController(SocketDeviceController):
     def __init__(self, ip="192.168.10.96"):
         super().__init__(ip)
         self._rx_buffer = bytearray()
+        self._csv_period_s = 1.0 / self.DEFAULT_CSV_HZ
+        self._next_csv_t = 0.0
+        self._next_gui_t = 0.0
+
+    def set_csv_save_frequency(self, hz: int) -> None:
+        hz = max(self.CSV_HZ_MIN, min(self.CSV_HZ_MAX, int(hz)))
+        self._csv_period_s = 1.0 / hz
 
     def run(self):
         while not self.connected:
@@ -130,7 +142,8 @@ class TensoScannerController(SocketDeviceController):
     def _receive_stream(self):
         header_format = "<HIHB"
         header_size = struct.calcsize(header_format)
-        sample_n = 0
+        self._next_csv_t = 0.0
+        self._next_gui_t = 0.0
 
         while self.connected:
             try:
@@ -146,10 +159,13 @@ class TensoScannerController(SocketDeviceController):
                 for _ in range(sample_count):
                     unpacked = struct.unpack(sample_format, payload[offset: offset + sample_size])
                     channels = self._channels_from_sample(unpacked, active_mask)
-                    self._write_csv_row([packet_id, unpacked[0], *channels[:3]])
-                    sample_n += 1
-                    if sample_n % 100 == 0:
+                    now = time.perf_counter()
+                    if now >= self._next_csv_t:
+                        self._write_csv_row([packet_id, unpacked[0], *channels[:3]])
+                        self._next_csv_t = now + self._csv_period_s
+                    if now >= self._next_gui_t:
                         self.TENSO_DATA.emit(channels[:3])
+                        self._next_gui_t = now + self._GUI_EMIT_PERIOD_S
 
                     offset += sample_size
 
